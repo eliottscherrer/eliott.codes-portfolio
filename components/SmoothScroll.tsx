@@ -18,8 +18,26 @@ const SmoothScroll = () => {
 
     requestAnimationFrame(raf);
 
+    // Handle anchor link clicks
+    const handleAnchorClick = (e: Event) => {
+      const target = e.target as HTMLAnchorElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const href = target.getAttribute('href');
+        if (href) {
+          const targetElement = document.querySelector(href) as HTMLElement;
+          if (targetElement) {
+            lenis.scrollTo(targetElement, { offset: -80 }); // Offset for header
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
+
     return () => {
       lenis.destroy();
+      document.removeEventListener('click', handleAnchorClick);
     };
   }, []);
 
