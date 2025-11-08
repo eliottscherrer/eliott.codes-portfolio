@@ -34,7 +34,7 @@ export default function Home() {
       }}>
         <Plasma 
           color="#a4d3ff"
-          speed={0.2}
+          speed={0.4}
           direction="forward"
           scale={2}
           opacity={0.2}
@@ -131,7 +131,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="space-y-4 pb-16">
+      <section id="contact" className="space-y-4 pb-16 mt-16">
         <h2 className="text-3xl font-semibold">Contact</h2>
         <p className="text-muted-foreground text-lg leading-relaxed">
           Email me at <a className="underline" href="mailto:contact@eliott.codes">contact@eliott.codes</a>
