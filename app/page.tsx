@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Mail, Github, Linkedin, MapPin } from "lucide-react";
 import SpotlightCard from "@/components/SpotlightCard";
+import Plasma from "@/components/Plasma";
 
 const projects = [
   {
@@ -21,7 +22,27 @@ const projects = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen mx-auto max-w-4xl px-6 py-16">
+    <>
+      {/* Background */}
+      <div style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        width: '100%', 
+        height: '100vh', 
+        zIndex: -1 
+      }}>
+        <Plasma 
+          color="#a4d3ff"
+          speed={0.2}
+          direction="forward"
+          scale={2}
+          opacity={0.2}
+          mouseInteractive={false}
+        />
+      </div>
+
+      <main className="min-h-screen mx-auto max-w-4xl px-6 py-16 relative">
       {/* Navigation */}
       <header className="flex items-center justify-between mb-16">
         <div className="flex items-center gap-2">
@@ -117,6 +138,7 @@ export default function Home() {
         </p>
       </section>
     </main>
+    </>
   );
 }
 
