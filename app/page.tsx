@@ -56,6 +56,14 @@ export default function Home() {
         <p className="max-w-2xl text-lg leading-relaxed">
           Student at ETML studying software and web development, with an interest in cybersecurity.
         </p>
+        <div className="flex gap-4">
+          <Button asChild size="lg">
+            <a href="#projects">View projects</a>
+          </Button>
+          <Button variant="outline" asChild size="lg">
+            <a href="#contact">Get in touch</a>
+          </Button>
+        </div>
       </section>
     </main>
   );
