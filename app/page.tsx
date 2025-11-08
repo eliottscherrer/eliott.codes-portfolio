@@ -33,12 +33,13 @@ export default function Home() {
         height: '100vh', 
         zIndex: -1 
       }}>
+        { /* a4d3ff */}
         <Plasma 
-          color="#a4d3ff"
+          color="#0e64b4" 
           speed={0.4}
           direction="forward"
           scale={2}
-          opacity={0.2}
+          opacity={0.3}
           mouseInteractive={false}
         />
       </div>
@@ -126,7 +127,7 @@ export default function Home() {
             <SpotlightCard 
               key={project.title} 
               className="flex flex-col justify-between min-h-[200px]"
-              spotlightColor="rgba(164, 211, 255, 0.15)"
+              spotlightColor="rgba(14, 100, 180, 0.1)"
             >
               <div>
                 <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
