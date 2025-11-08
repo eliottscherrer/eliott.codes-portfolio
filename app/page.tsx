@@ -66,7 +66,7 @@ export default function Home() {
         <div className="flex items-center justify-between">
           { /* Animated Title */}
           <div id="title" className="flex items-baseline">
-            <span className="text-5xl font-bold">👋</span>
+            <span className="text-5xl font-bold wave-emoji">👋</span>
             <SplitText
               text=" Eliott Scherrer"
               className="text-5xl font-bold"
