@@ -134,7 +134,7 @@ export default function Home() {
           Lausanne, Switzerland
         </p>
         <p className="max-w-2xl text-lg leading-relaxed">
-          Student at ETML studying software and web development, with an interest in cybersecurity.
+           { new Date(Date.now() - new Date('2006-11-20').getTime()).getUTCFullYear() - 1970 }yo student at ETML studying software and web development, with an interest in cybersecurity.
         </p>
         <div className="flex gap-4">
           <Button asChild size="lg">
