@@ -7,6 +7,7 @@ import { Mail, Github, Linkedin, MapPin } from "lucide-react";
 import SpotlightCard from "@/components/SpotlightCard";
 import SplitText from "@/components/SplitText";
 import Plasma from "@/components/Plasma";
+import { useEffect, useRef } from "react";
 
 const projects = [
   {
@@ -22,6 +23,14 @@ const projects = [
 ];
 
 export default function Home() {
+  const waveRef = useRef<HTMLSpanElement | null>(null);
+  // Trigger initial wave once on mount
+  useEffect(() => {
+    const el = waveRef.current;
+    if (el && !el.classList.contains("is-waving")) {
+      el.classList.add("is-waving");
+    }
+  }, []);
   return (
     <>
       {/* Background */}
@@ -66,7 +75,24 @@ export default function Home() {
         <div className="flex items-center justify-between">
           { /* Animated Title */}
           <div id="title" className="flex items-baseline">
-            <span className="text-5xl font-bold wave-emoji">👋</span>
+            <span
+              className="text-5xl font-bold wave-emoji"
+              ref={waveRef}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget;
+                if (!el.classList.contains("is-waving")) {
+                  el.classList.add("is-waving");
+                }
+              }}
+              onAnimationEnd={(e) => {
+                // Only react to the wave animation on this element
+                if (e.animationName === "wave") {
+                  (e.currentTarget as HTMLElement).classList.remove("is-waving");
+                }
+              }}
+            >
+              👋
+            </span>
             <SplitText
               text=" Eliott Scherrer"
               className="text-5xl font-bold"
@@ -83,19 +109,19 @@ export default function Home() {
           </div>
           {/* Social Links */}
           <div className="flex flex-row gap-3">
-            <Button variant="secondary" size="icon" aria-label="LinkedIn" asChild>
+            <Button variant="secondary" size="icon" aria-label="LinkedIn" className="bg-background/10 dark:bg-input/30 backdrop-blur-sm border !border-border dark:!border-input" asChild>
               <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="size-4" />
                 <span className="sr-only">LinkedIn</span>
               </a>
             </Button>
-            <Button variant="secondary" size="icon" aria-label="GitHub" asChild>
+            <Button variant="secondary" size="icon" aria-label="GitHub" className="bg-background/10 dark:bg-input/30 backdrop-blur-sm border !border-border dark:!border-input" asChild>
               <a href="https://github.com/eliottscherrer" target="_blank" rel="noopener noreferrer">
                 <Github className="size-4" />
                 <span className="sr-only">GitHub</span>
               </a>
             </Button>
-            <Button variant="secondary" size="icon" aria-label="Email" asChild>
+            <Button variant="secondary" size="icon" aria-label="Email" className="bg-background/10 dark:bg-input/30 backdrop-blur-sm border !border-border dark:!border-input" asChild>
               <a href="mailto:contact@eliott.codes">
                 <Mail className="size-4" />
                 <span className="sr-only">Email</span>
@@ -129,7 +155,7 @@ export default function Home() {
           {projects.map((project) => (
             <SpotlightCard 
               key={project.title} 
-              className="flex flex-col justify-between min-h-[200px]"
+              className="flex flex-col justify-between min-h-[200px] bg-white/30 dark:bg-input/30 backdrop-blur-sm border border-border"
               spotlightColor="rgba(14, 100, 180, 0.1)"
             >
               <div>
