@@ -108,6 +108,14 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="space-y-4 pb-16">
+        <h2 className="text-3xl font-semibold">Contact</h2>
+        <p className="text-muted-foreground text-lg leading-relaxed">
+          Email me at <a className="underline" href="mailto:contact@eliott.codes">contact@eliott.codes</a>
+        </p>
+      </section>
     </main>
   );
 }
