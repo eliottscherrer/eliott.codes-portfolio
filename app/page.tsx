@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin } from "lucide-react";
 
 export default function Home() {
   return (
@@ -49,6 +49,10 @@ export default function Home() {
             </Button>
           </div>
         </div>
+        <p className="text-muted-foreground max-w-2xl flex items-center gap-1.5">
+          <MapPin className="size-4" />
+          Lausanne, Switzerland
+        </p>
         <p className="max-w-2xl text-lg leading-relaxed">
           Student at ETML studying software and web development, with an interest in cybersecurity.
         </p>
