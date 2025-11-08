@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Mail, Github, Linkedin } from "lucide-react";
 
 export default function Home() {
   return (
@@ -24,7 +25,30 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="space-y-6">
-        <h1 className="text-5xl font-bold">👋 Eliott Scherrer</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-5xl font-bold">👋 Eliott Scherrer</h1>
+          {/* Social Links */}
+          <div className="flex flex-row gap-3">
+            <Button variant="secondary" size="icon" aria-label="LinkedIn" asChild>
+              <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
+                <Linkedin className="size-4" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+            </Button>
+            <Button variant="secondary" size="icon" aria-label="GitHub" asChild>
+              <a href="https://github.com/eliottscherrer" target="_blank" rel="noopener noreferrer">
+                <Github className="size-4" />
+                <span className="sr-only">GitHub</span>
+              </a>
+            </Button>
+            <Button variant="secondary" size="icon" aria-label="Email" asChild>
+              <a href="mailto:contact@eliott.codes">
+                <Mail className="size-4" />
+                <span className="sr-only">Email</span>
+              </a>
+            </Button>
+          </div>
+        </div>
         <p className="max-w-2xl text-lg leading-relaxed">
           Student at ETML studying software and web development, with an interest in cybersecurity.
         </p>
