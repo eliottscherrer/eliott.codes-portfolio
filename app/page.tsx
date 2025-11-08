@@ -65,19 +65,22 @@ export default function Home() {
       <section className="space-y-6">
         <div className="flex items-center justify-between">
           { /* Animated Title */}
-          <SplitText
-            text="👋 Eliott Scherrer"
-            className="text-5xl font-bold"
-            delay={70}
-            duration={2}
-            ease="elastic.out(1, 0.3)"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-100px"
-            textAlign="center"
-          />
+          <div id="title" className="flex items-baseline">
+            <span className="text-5xl font-bold">👋</span>
+            <SplitText
+              text=" Eliott Scherrer"
+              className="text-5xl font-bold"
+              delay={70}
+              duration={2}
+              ease="elastic.out(1, 0.3)"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="center"
+            />
+          </div>
           {/* Social Links */}
           <div className="flex flex-row gap-3">
             <Button variant="secondary" size="icon" aria-label="LinkedIn" asChild>
