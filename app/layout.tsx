@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider, noFlashScript } from "@/components/ThemeProvider";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       </head>
       <body className={cn(inter.className, "bg-background text-foreground")}>
         <ThemeProvider>
+          <SmoothScroll />
           {children}
         </ThemeProvider>
       </body>
