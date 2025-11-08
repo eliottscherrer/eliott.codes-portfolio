@@ -109,19 +109,19 @@ export default function Home() {
           </div>
           {/* Social Links */}
           <div className="flex flex-row gap-3">
-            <Button variant="secondary" size="icon" aria-label="LinkedIn" className="bg-background/10 dark:bg-input/30 backdrop-blur-sm border !border-border dark:!border-input" asChild>
+            <Button variant="secondary" size="icon" aria-label="LinkedIn" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
               <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="size-4" />
                 <span className="sr-only">LinkedIn</span>
               </a>
             </Button>
-            <Button variant="secondary" size="icon" aria-label="GitHub" className="bg-background/10 dark:bg-input/30 backdrop-blur-sm border !border-border dark:!border-input" asChild>
+            <Button variant="secondary" size="icon" aria-label="GitHub" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
               <a href="https://github.com/eliottscherrer" target="_blank" rel="noopener noreferrer">
                 <Github className="size-4" />
                 <span className="sr-only">GitHub</span>
               </a>
             </Button>
-            <Button variant="secondary" size="icon" aria-label="Email" className="bg-background/10 dark:bg-input/30 backdrop-blur-sm border !border-border dark:!border-input" asChild>
+            <Button variant="secondary" size="icon" aria-label="Email" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
               <a href="mailto:contact@eliott.codes">
                 <Mail className="size-4" />
                 <span className="sr-only">Email</span>
