@@ -21,6 +21,14 @@ export default function Home() {
           </Button>
         </div>
       </header>
+
+      {/* Hero Section */}
+      <section className="space-y-6">
+        <h1 className="text-5xl font-bold">👋 Eliott Scherrer</h1>
+        <p className="max-w-2xl text-lg leading-relaxed">
+          Student at ETML studying software and web development, with an interest in cybersecurity.
+        </p>
+      </section>
     </main>
   );
 }
