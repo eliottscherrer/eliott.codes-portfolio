@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Mail, Github, Linkedin, MapPin } from "lucide-react";
 import SpotlightCard from "@/components/SpotlightCard";
+import SplitText from "@/components/SplitText";
 import Plasma from "@/components/Plasma";
 
 const projects = [
@@ -62,7 +63,20 @@ export default function Home() {
       {/* Hero Section */}
       <section className="space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-5xl font-bold">👋 Eliott Scherrer</h1>
+          { /* Animated Title */}
+          <SplitText
+            text="👋 Eliott Scherrer"
+            className="text-5xl font-bold"
+            delay={70}
+            duration={2}
+            ease="elastic.out(1, 0.3)"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+          />
           {/* Social Links */}
           <div className="flex flex-row gap-3">
             <Button variant="secondary" size="icon" aria-label="LinkedIn" asChild>
