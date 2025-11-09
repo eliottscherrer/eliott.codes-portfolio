@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider, noFlashScript } from "@/components/ThemeProvider";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,14 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Prevent theme flash before React hydration */}
-        <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
       </head>
       <body className={cn(inter.className, "bg-background text-foreground")}>
-        <ThemeProvider>
-          <SmoothScroll />
-          {children}
-        </ThemeProvider>
+        <SmoothScroll />
+        {children}
       </body>
     </html>
   );

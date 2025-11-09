@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Mail, Github, Linkedin, MapPin } from "lucide-react";
 import SpotlightCard from "@/components/SpotlightCard";
 import SplitText from "@/components/SplitText";
@@ -10,10 +9,62 @@ import Plasma from "@/components/Plasma";
 import GradualBlur from "@/components/GradualBlur";
 import { useEffect, useRef } from "react";
 
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
+
 const projects = [
   {
     title: "Portfolio Website",
     description: "Personal site built with Next.js and shadcn/ui.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
+    link: "#",
+  },
+  {
+    title: "UI Experiments",
+    description: "Small UI prototypes and animations.",
     link: "#",
   },
   {
@@ -50,7 +101,7 @@ export default function Home() {
           direction="forward"
           scale={2}
           opacity={0.3}
-          mouseInteractive={false}
+          mouseInteractive={true}
         />
       </div>
 
@@ -61,7 +112,7 @@ export default function Home() {
             <a href="/" className="text-sm font-medium">eliott.codes</a>
           </div>
           <div className="flex gap-3">
-            <ThemeToggle />
+            <AnimatedThemeToggler className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
             <Button variant="ghost" asChild>
               <a href="#projects">Projects</a>
             </Button>
