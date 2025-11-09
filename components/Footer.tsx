@@ -17,7 +17,8 @@ export default function Footer() {
           <div className="space-y-3">
             <h3 className="font-semibold text-lg">eliott.codes</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Building digital experiences with passion and precision.
+              Software and full-stack<br />
+              web developer.
             </p>
           </div>
 
