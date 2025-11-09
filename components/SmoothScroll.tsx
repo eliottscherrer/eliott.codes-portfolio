@@ -24,10 +24,15 @@ const SmoothScroll = () => {
       if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
         e.preventDefault();
         const href = target.getAttribute('href');
-        if (href) {
-          const targetElement = document.querySelector(href) as HTMLElement;
-          if (targetElement) {
-            lenis.scrollTo(targetElement, { offset: -80 }); // Offset for header
+        // Only attempt to scroll if href is not just '#' and is a valid selector
+        if (href && href.length > 1) {
+          try {
+            const targetElement = document.querySelector(href) as HTMLElement;
+            if (targetElement) {
+              lenis.scrollTo(targetElement, { offset: -80 }); // Offset for header
+            }
+          } catch (error) {
+            console.warn(`Invalid selector: ${href}`);
           }
         }
       }
