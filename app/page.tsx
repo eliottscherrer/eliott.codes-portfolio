@@ -143,30 +143,30 @@ export default function Home() {
         />
       </div>
 
-      <main className="min-h-screen mx-auto max-w-4xl px-6 py-16 relative">
+      <main className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 md:py-16 relative">
         {/* Navigation */}
-        <header className="flex items-center justify-between mb-16">
+        <header className="flex items-center justify-between mb-8 sm:mb-12 md:mb-16">
           <div className="flex items-center gap-2">
             <a href="/" className="text-sm font-medium">eliott.codes</a>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <AnimatedThemeToggler className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
-            <Button variant="ghost" asChild>
+            <Button variant="ghost" asChild className="hidden sm:inline-flex">
               <a href="#projects">Projects</a>
             </Button>
-            <Button asChild>
+            <Button asChild className="text-xs sm:text-sm px-3 sm:px-4">
               <a href="#contact">Contact</a>
             </Button>
           </div>
         </header>
 
         {/* Hero Section */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between">
+        <section className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
             { /* Animated Title */}
             <div id="title" className="flex items-baseline">
               <span
-                className="text-5xl font-bold wave-emoji"
+                className="text-4xl md:text-5xl font-bold wave-emoji"
                 ref={waveRef}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget;
@@ -185,7 +185,7 @@ export default function Home() {
               </span>
               <SplitText
                 text=" Eliott Scherrer"
-                className="text-5xl font-bold"
+                className="text-4xl md:text-5xl font-bold"
                 delay={70}
                 duration={2}
                 ease="elastic.out(1, 0.3)"
@@ -198,7 +198,7 @@ export default function Home() {
               />
             </div>
             {/* Social Links */}
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row gap-2 sm:gap-3">
               <Button variant="secondary" size="icon" aria-label="LinkedIn" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
                 <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="size-4" />
@@ -219,24 +219,24 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <p className="text-muted-foreground max-w-2xl flex items-center gap-1.5">
-            <MapPin className="size-4" />
+          <p className="text-muted-foreground max-w-2xl flex items-center gap-1.5 text-sm sm:text-base">
+            <MapPin className="size-4 flex-shrink-0" />
             Lausanne, Switzerland
           </p>
-          <p className="max-w-2xl text-lg leading-relaxed">
+          <p className="max-w-2xl text-base sm:text-lg leading-relaxed">
             { new Date(Date.now() - new Date('2006-11-20').getTime()).getUTCFullYear() - 1970 }yo student at ETML studying software and web development, with an interest in cybersecurity.
           </p>
-          <div className="flex gap-4">
-            <Button asChild size="lg">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <a href="#projects">View projects</a>
             </Button>
-            <Button variant="outline" asChild size="lg">
+            <Button variant="outline" asChild size="lg" className="w-full sm:w-auto">
               <a href="#contact">Get in touch</a>
             </Button>
           </div>
         </section>
 
-        <div className="mt-16 space-y-6">
+        <div className="mt-12 sm:mt-16 space-y-4 sm:space-y-6">
           { /* Fade out using alpha mask */ }
           <div style={{
             WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black clamp(24px, 8%, 120px), black calc(100% - clamp(24px, 8%, 120px)), transparent 100%)',
@@ -271,11 +271,11 @@ export default function Home() {
           </div>
         </div>
 
-        <Separator className="my-16" />
+        <Separator className="my-12 sm:my-16" />
 
         {/* Projects Section */}
-        <section id="projects" className="space-y-8">
-          <h2 className="text-3xl font-semibold">Projects</h2>
+        <section id="projects" className="space-y-6 sm:space-y-8">
+          <h2 className="text-2xl sm:text-3xl font-semibold">Projects</h2>
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((project) => (
               <SpotlightCard 
@@ -300,9 +300,9 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="space-y-4 mt-16">
-          <h2 className="text-3xl font-semibold">Contact</h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+        <section id="contact" className="space-y-4 mt-12 sm:mt-16">
+          <h2 className="text-2xl sm:text-3xl font-semibold">Contact</h2>
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Email me at <a className="underline" href="mailto:contact@eliott.codes">contact@eliott.codes</a>
           </p>
         </section>
