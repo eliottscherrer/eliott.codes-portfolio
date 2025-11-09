@@ -21,13 +21,13 @@ import {
   SiNodedotjs, 
   SiVuedotjs, 
   SiAdonisjs,
-  SiSharp,
   SiMariadb,
   SiMongodb,
   SiRedis,
   SiFigma,
-  SiDocker
+  SiDocker,
 } from 'react-icons/si';
+import { DiDotnet } from "react-icons/di";
 
 // Frontend & Languages
 const frontendTech = [
@@ -35,7 +35,7 @@ const frontendTech = [
   { node: <TechLogo icon={<SiCss3 />} label="CSS" />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
   { node: <TechLogo icon={<SiJavascript />} label="JavaScript" />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
   { node: <TechLogo icon={<SiVuedotjs />} label="Vue.js" />, title: "Vue.js", href: "https://vuejs.org" },
-  { node: <TechLogo icon={<SiSharp />} label="C#" />, title: "C#", href: "https://docs.microsoft.com/en-us/dotnet/csharp/" },
+  { node: <TechLogo icon={<DiDotnet />} label="C# .NET" />, title: "C# .NET", href: "https://docs.microsoft.com/en-us/dotnet/csharp/" },
   { node: <TechLogo icon={<SiFigma />} label="Figma" />, title: "Figma", href: "https://www.figma.com" },
 ];
 
