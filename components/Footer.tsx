@@ -3,6 +3,7 @@
 import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -94,9 +95,15 @@ export default function Footer() {
             <p className="flex items-center gap-1.5">
               © {currentYear} Eliott Scherrer. All rights reserved.
             </p>
-            <p className="flex items-center gap-1.5">
-              Made with <Heart className="size-3.5 fill-current text-blue-500" /> in Switzerland
-            </p>
+            <div className="flex items-center gap-3">
+              <AnimatedThemeToggler
+                className="p-2 rounded-md bg-background/10 dark:bg-input/30"
+                aria-label="Toggle theme"
+              />
+              <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                Made with <Heart className="size-3.5 fill-current text-blue-500" /> in Switzerland
+              </p>
+            </div>
           </div>
         </div>
       </div>
