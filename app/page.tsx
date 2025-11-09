@@ -237,30 +237,38 @@ export default function Home() {
         </section>
 
         <div className="mt-16 space-y-6">
-          <LogoLoop
-            logos={frontendTech}
-            speed={30}
-            direction="right"
-            logoHeight={32}
-            gap={40}
-            pauseOnHover
-            scaleOnHover
-            fadeOut
-            fadeOutColor="rgba(255, 255, 255, 0)"
-            ariaLabel="Frontend technologies"
-          />
-          <LogoLoop
-            logos={backendTech}
-            speed={30}
-            direction="left"
-            logoHeight={32}
-            gap={40}
-            pauseOnHover
-            scaleOnHover
-            fadeOut
-            fadeOutColor="rgba(255, 255, 255, 0)"
-            ariaLabel="Backend technologies and tools"
-          />
+          { /* Fade out using alpha mask */ }
+          <div style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black clamp(24px, 8%, 120px), black calc(100% - clamp(24px, 8%, 120px)), transparent 100%)',
+            maskImage: 'linear-gradient(to right, transparent 0%, black clamp(24px, 8%, 120px), black calc(100% - clamp(24px, 8%, 120px)), transparent 100%)'
+          }}>
+            <LogoLoop
+              logos={frontendTech}
+              speed={30}
+              direction="right"
+              logoHeight={32}
+              gap={40}
+              pauseOnHover
+              scaleOnHover
+              ariaLabel="Frontend technologies"
+            />
+          </div>
+          { /* Fade out using alpha mask */ }
+          <div style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black clamp(24px, 8%, 120px), black calc(100% - clamp(24px, 8%, 120px)), transparent 100%)',
+            maskImage: 'linear-gradient(to right, transparent 0%, black clamp(24px, 8%, 120px), black calc(100% - clamp(24px, 8%, 120px)), transparent 100%)'
+          }}>
+            <LogoLoop
+              logos={backendTech}
+              speed={30}
+              direction="left"
+              logoHeight={32}
+              gap={40}
+              pauseOnHover
+              scaleOnHover
+              ariaLabel="Backend technologies and tools"
+            />
+          </div>
         </div>
 
         <Separator className="my-16" />
