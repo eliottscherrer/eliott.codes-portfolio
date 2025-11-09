@@ -10,6 +10,7 @@ import GradualBlur from "@/components/GradualBlur";
 import { useEffect, useRef } from "react";
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
+import Footer from "@/components/Footer"
 
 const projects = [
   {
@@ -227,7 +228,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="space-y-4 pb-16 mt-16">
+        <section id="contact" className="space-y-4 mt-16">
           <h2 className="text-3xl font-semibold">Contact</h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             Email me at <a className="underline" href="mailto:contact@eliott.codes">contact@eliott.codes</a>
@@ -245,6 +246,8 @@ export default function Home() {
           opacity={1}
         />
       </main>
+
+      <Footer />
     </>
   );
 }
