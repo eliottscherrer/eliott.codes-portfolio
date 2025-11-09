@@ -12,6 +12,43 @@ import { useEffect, useRef } from "react";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import Footer from "@/components/Footer"
 
+import LogoLoop from '@/components/LogoLoop';
+import TechLogo from '@/components/TechLogo';
+import { 
+  SiHtml5, 
+  SiCss3, 
+  SiJavascript, 
+  SiNodedotjs, 
+  SiVuedotjs, 
+  SiAdonisjs,
+  SiSharp,
+  SiMariadb,
+  SiMongodb,
+  SiRedis,
+  SiFigma,
+  SiDocker
+} from 'react-icons/si';
+
+// Frontend & Languages
+const frontendTech = [
+  { node: <TechLogo icon={<SiHtml5 />} label="HTML" />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { node: <TechLogo icon={<SiCss3 />} label="CSS" />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { node: <TechLogo icon={<SiJavascript />} label="JavaScript" />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { node: <TechLogo icon={<SiVuedotjs />} label="Vue.js" />, title: "Vue.js", href: "https://vuejs.org" },
+  { node: <TechLogo icon={<SiSharp />} label="C#" />, title: "C#", href: "https://docs.microsoft.com/en-us/dotnet/csharp/" },
+  { node: <TechLogo icon={<SiFigma />} label="Figma" />, title: "Figma", href: "https://www.figma.com" },
+];
+
+// Backend & Tools
+const backendTech = [
+  { node: <TechLogo icon={<SiNodedotjs />} label="Node.js" />, title: "Node.js", href: "https://nodejs.org" },
+  { node: <TechLogo icon={<SiAdonisjs />} label="AdonisJS" />, title: "AdonisJS", href: "https://adonisjs.com" },
+  { node: <TechLogo icon={<SiMariadb />} label="MariaDB" />, title: "MariaDB", href: "https://mariadb.org" },
+  { node: <TechLogo icon={<SiMongodb />} label="MongoDB" />, title: "MongoDB", href: "https://www.mongodb.com" },
+  { node: <TechLogo icon={<SiRedis />} label="Redis" />, title: "Redis", href: "https://redis.io" },
+  { node: <TechLogo icon={<SiDocker />} label="Docker" />, title: "Docker", href: "https://www.docker.com" },
+];
+
 const projects = [
   {
     title: "Portfolio Website",
@@ -198,6 +235,33 @@ export default function Home() {
             </Button>
           </div>
         </section>
+
+        <div className="mt-16 space-y-6">
+          <LogoLoop
+            logos={frontendTech}
+            speed={30}
+            direction="right"
+            logoHeight={32}
+            gap={40}
+            pauseOnHover
+            scaleOnHover
+            fadeOut
+            fadeOutColor="rgba(255, 255, 255, 0)"
+            ariaLabel="Frontend technologies"
+          />
+          <LogoLoop
+            logos={backendTech}
+            speed={30}
+            direction="left"
+            logoHeight={32}
+            gap={40}
+            pauseOnHover
+            scaleOnHover
+            fadeOut
+            fadeOutColor="rgba(255, 255, 255, 0)"
+            ariaLabel="Backend technologies and tools"
+          />
+        </div>
 
         <Separator className="my-16" />
 
