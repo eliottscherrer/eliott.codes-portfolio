@@ -8,7 +8,7 @@ interface TechLogoProps {
   labelSize?: 'sm' | 'md' | 'lg';
 }
 
-export default function TechLogo({ icon, label, brandColor, size = 'md', labelSize }: TechLogoProps) {
+export default function TechLogo({ icon, label, brandColor, size, labelSize }: TechLogoProps) {
   const iconRef = useRef<SVGSVGElement | null>(null);
   
   // Brand colors from Simple Icons (https://simpleicons.org/)
