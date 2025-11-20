@@ -1,0 +1,45 @@
+{
+  "LanguageSwitcher": {
+    "label": "Change language",
+    "en": "English",
+    "fr": "French"
+  },
+  "Navigation": {
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "location": "Lausanne, Switzerland",
+    "description": "{age}yo student at ETML studying software and web development, with an interest in cybersecurity.",
+    "viewProjects": "View projects",
+    "getInTouch": "Get in touch"
+  },
+  "Projects": {
+    "title": "Projects",
+    "items": {
+      "PlotThoseLines": {
+        "description": "C# .NET MAUI + Blazor Hybrid + TokenInsight API + ApexCharts - Visualizing time series for cryptocurrencies."
+      },
+      "PassionLectureFrontend": {
+        "description": "Library UI built using Vue.js with an Express.js backend for CRUD operations."
+      },
+      "DockerSwarmWordpress": {
+        "description": "Docker Swarm + WordPress + MariaDB + Nginx + Swarmpit - High availability CMS deployment."
+      },
+      "PassionLectureBackend": {
+        "description": "Node.js REST API with MySQL, Docker and Cloudinary for file storage."
+      }
+    }
+  },
+  "Contact": {
+    "title": "Contact",
+    "emailText": "Email me at <email>contact@eliott.codes</email>"
+  },
+  "Footer": {
+    "role": "Software and full-stack<br />web developer.",
+    "quickLinks": "Quick Links",
+    "projects": "Projects",
+    "contact": "Contact",
+    "email": "Email"
+  }
+}

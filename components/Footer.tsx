@@ -4,8 +4,11 @@ import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer className="relative mt-auto mb-20 sm:mb-12 pt-8">
       <Separator className="mb-8" />
@@ -17,32 +20,29 @@ export default function Footer() {
               {/* Brand */}
               <div className="space-y-3 min-w-[160px] flex-grow">
                 <h3 className="font-semibold text-lg">eliott.codes</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Software and full-stack<br />
-                  web developer.
-                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw("role") }} />
               </div>
               {/* Quick Links */}
               <div className="space-y-3 ml-auto flex flex-col items-end text-right sm:items-start sm:text-left">
-                <h4 className="font-semibold text-sm self-end sm:self-start">Quick Links</h4>
+                <h4 className="font-semibold text-sm self-end sm:self-start">{t("quickLinks")}</h4>
                 <nav className="flex flex-col gap-2 items-end text-right sm:items-start sm:text-left">
                   <a 
                     href="#projects" 
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit text-right sm:text-left"
                   >
-                    Projects
+                    {t("projects")}
                   </a>
                   <a 
                     href="#contact" 
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit text-right sm:text-left"
                   >
-                    Contact
+                    {t("contact")}
                   </a>
                   <a 
                     href="mailto:contact@eliott.codes" 
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit text-right sm:text-left"
                   >
-                    Email
+                    {t("email")}
                   </a>
                 </nav>
               </div>
@@ -93,33 +93,30 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-3">
             <h3 className="font-semibold text-lg">eliott.codes</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Software and full-stack<br />
-              web developer.
-            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t.raw("role") }} />
           </div>
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-sm">Quick Links</h4>
+            <h4 className="font-semibold text-sm">{t("quickLinks")}</h4>
             <nav className="flex flex-col gap-2">
               <a 
                 href="#projects" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
               >
-                Projects
+                {t("projects")}
               </a>
               <a 
                 href="#contact" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
               >
-                Contact
+                {t("contact")}
               </a>
               <a 
                 href="mailto:contact@eliott.codes" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
               >
-                Email
+                {t("email")}
               </a>
             </nav>
           </div>

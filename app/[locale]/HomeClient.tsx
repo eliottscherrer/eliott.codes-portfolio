@@ -34,6 +34,8 @@ import {
   SiMysql,
 } from 'react-icons/si';
 import { DiDotnet } from "react-icons/di";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 // Frontend & Languages
 const frontendTech = [
@@ -55,61 +57,10 @@ const backendTech = [
   { node: <TechLogo icon={<SiDocker />} label="Docker" />, title: "Docker", href: "https://www.docker.com" },
 ];
 
-const projects = [
-  {
-    title: "PlotThoseLines",
-    description:
-      "C# .NET MAUI + Blazor Hybride + TokenInsight API + ApexCharts - Visualiser des séries temporelles pour des crypto-monnaies.",
-    link: "https://github.com/eliottscherrer/PlotThoseLines",
-    cover: "/projects/PlotThoseLines.webp",
-    stack: [
-      { node: <TechLogo icon={<SiBlazor />} label="C# .NET Blazor" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<ChartCandlestick />} label="ApexCharts" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<Coins />} label="TokenInsight" size="lg" labelSize="sm" /> },
-    ],
-  },
-  {
-    title: "PassionLecture - Frontend",
-    description:
-      "Library UI built using Vue.js with an Express.js backend for CRUD operations.",
-    link: "https://github.com/Eliott-Mathis/PassionLecture-Frontend",
-    cover: "/projects/PassionLecture-Frontend.webp",
-    stack: [
-      { node: <TechLogo icon={<SiVuedotjs />} label="Vue.js" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiExpress />} label="Express.js" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiJavascript />} label="JavaScript" size="lg" labelSize="sm" /> },
-    ],
-  },
-  {
-    title: "DockerSwarm-Wordpress",
-    description:
-      "Docker Swarm + WordPress + MariaDB + Nginx + Swarmpit - High availability CMS deployment.",
-    link: "https://github.com/eliottscherrer/DockerSwarm-Wordpress",
-    cover: "/projects/DockerSwarm-Wordpress.webp",
-    stack: [
-      { node: <TechLogo icon={<SiDocker />} label="Docker Swarm" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiWordpress />} label="WordPress" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiMariadb />} label="MariaDB" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiNginx />} label="Nginx" size="lg" labelSize="sm" /> },
-    ],
-  },
-  {
-    title: "PassionLecture - Backend",
-    description:
-      "Node.js REST API with MySQL, Docker and Cloudinary for file storage.",
-    link: "https://github.com/Eliott-Mathis/PassionLecture-Backend",
-    cover: "/projects/PassionLecture-Backend.webp",
-    stack: [
-      { node: <TechLogo icon={<SiNodedotjs />} label="Node.js" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiMysql />} label="MySQL" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiDocker />} label="Docker" size="lg" labelSize="sm" /> },
-      { node: <TechLogo icon={<SiCloudinary />} label="Cloudinary" size="lg" labelSize="sm" /> },
-    ],
-  },
-];
-
-export default function Home() {
+export default function HomeClient({ locale }: { locale?: string }) {
+  const t = useTranslations();
   const waveRef = useRef<HTMLSpanElement | null>(null);
+
   // Trigger initial wave once on mount
   useEffect(() => {
     const el = waveRef.current;
@@ -117,6 +68,58 @@ export default function Home() {
       el.classList.add("is-waving");
     }
   }, []);
+
+  const projects = [
+    {
+      title: "PlotThoseLines",
+      description: t("Projects.items.PlotThoseLines.description"),
+      link: "https://github.com/eliottscherrer/PlotThoseLines",
+      cover: "/projects/PlotThoseLines.webp",
+      stack: [
+        { node: <TechLogo icon={<SiBlazor />} label="C# .NET Blazor" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<ChartCandlestick />} label="ApexCharts" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<Coins />} label="TokenInsight" size="lg" labelSize="sm" /> },
+      ],
+    },
+    {
+      title: "PassionLecture - Frontend",
+      description: t("Projects.items.PassionLectureFrontend.description"),
+      link: "https://github.com/Eliott-Mathis/PassionLecture-Frontend",
+      cover: "/projects/PassionLecture-Frontend.webp",
+      stack: [
+        { node: <TechLogo icon={<SiVuedotjs />} label="Vue.js" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiExpress />} label="Express.js" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiJavascript />} label="JavaScript" size="lg" labelSize="sm" /> },
+      ],
+    },
+    {
+      title: "DockerSwarm-Wordpress",
+      description: t("Projects.items.DockerSwarmWordpress.description"),
+      link: "https://github.com/eliottscherrer/DockerSwarm-Wordpress",
+      cover: "/projects/DockerSwarm-Wordpress.webp",
+      stack: [
+        { node: <TechLogo icon={<SiDocker />} label="Docker Swarm" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiWordpress />} label="WordPress" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiMariadb />} label="MariaDB" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiNginx />} label="Nginx" size="lg" labelSize="sm" /> },
+      ],
+    },
+    {
+      title: "PassionLecture - Backend",
+      description: t("Projects.items.PassionLectureBackend.description"),
+      link: "https://github.com/Eliott-Mathis/PassionLecture-Backend",
+      cover: "/projects/PassionLecture-Backend.webp",
+      stack: [
+        { node: <TechLogo icon={<SiNodedotjs />} label="Node.js" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiMysql />} label="MySQL" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiDocker />} label="Docker" size="lg" labelSize="sm" /> },
+        { node: <TechLogo icon={<SiCloudinary />} label="Cloudinary" size="lg" labelSize="sm" /> },
+      ],
+    },
+  ];
+
+  const age = new Date(Date.now() - new Date('2006-11-20').getTime()).getUTCFullYear() - 1970;
+
   return (
     <>
       {/* Background */}
@@ -129,14 +132,14 @@ export default function Home() {
         zIndex: -1 
       }}>
         { /* a4d3ff */}
-        <Plasma 
+        {/* <Plasma 
           color="#0e64b4" 
           speed={0.4}
           direction="forward"
           scale={2}
           opacity={0.3}
           mouseInteractive={true}
-        />
+        /> */}
       </div>
 
       <main className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 md:py-16 relative">
@@ -147,11 +150,12 @@ export default function Home() {
           </div>
           <div className="flex gap-2 sm:gap-3">
             <AnimatedThemeToggler className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
+            <LanguageSwitcher />
             <Button variant="ghost" asChild className="hidden sm:inline-flex">
-              <a href="#projects">Projects</a>
+              <a href="#projects">{t("Navigation.projects")}</a>
             </Button>
             <Button asChild className="text-xs sm:text-sm px-3 sm:px-4">
-              <a href="#contact">Contact</a>
+              <a href="#contact">{t("Navigation.contact")}</a>
             </Button>
           </div>
         </header>
@@ -217,17 +221,17 @@ export default function Home() {
           </div>
           <p className="text-muted-foreground max-w-2xl flex items-center gap-1.5 text-sm sm:text-base">
             <MapPin className="size-4 flex-shrink-0" />
-            Lausanne, Switzerland
+            {t("Hero.location")}
           </p>
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed">
-            { new Date(Date.now() - new Date('2006-11-20').getTime()).getUTCFullYear() - 1970 }yo student at ETML studying software and web development, with an interest in cybersecurity.
+            {t("Hero.description", { age })}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href="#projects">View projects</a>
+              <a href="#projects">{t("Hero.viewProjects")}</a>
             </Button>
             <Button variant="outline" asChild size="lg" className="w-full sm:w-auto">
-              <a href="#contact">Get in touch</a>
+              <a href="#contact">{t("Hero.getInTouch")}</a>
             </Button>
           </div>
         </section>
@@ -271,7 +275,7 @@ export default function Home() {
 
         {/* Projects Section */}
         <section id="projects" className="space-y-6 sm:space-y-8">
-          <h2 className="text-2xl sm:text-3xl font-semibold">Projects</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold">{t("Projects.title")}</h2>
           <div className="flex flex-col gap-8">
             {projects.map((project) => (
               <ProjectCard
@@ -284,9 +288,11 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="space-y-4 mt-20 sm:mt-24">
-          <h2 className="text-2xl sm:text-3xl font-semibold">Contact</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold">{t("Contact.title")}</h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
-            Email me at <a className="underline" href="mailto:contact@eliott.codes">contact@eliott.codes</a>
+            {t.rich("Contact.emailText", {
+              email: (chunks) => <a className="underline" href="mailto:contact@eliott.codes">{chunks}</a>
+            })}
           </p>
         </section>
 
@@ -306,5 +312,4 @@ export default function Home() {
     </>
   );
 }
-
 
