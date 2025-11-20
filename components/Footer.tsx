@@ -7,7 +7,7 @@ import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 export default function Footer() {
   return (
-    <footer className="relative mt-auto mb-14">
+    <footer className="relative mt-auto mb-20 sm:mb-12 pt-8">
       <Separator className="mb-8" />
       
       <div className="max-w-4xl mx-auto px-6 pb-8">
