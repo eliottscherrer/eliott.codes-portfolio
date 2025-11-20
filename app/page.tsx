@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Mail, Github, Linkedin, MapPin, ExternalLink } from "lucide-react";
-import SpotlightCard from "@/components/SpotlightCard";
+import { Mail, Github, Linkedin, MapPin, Coins, ChartCandlestick } from "lucide-react";
 import SplitText from "@/components/SplitText";
 import Plasma from "@/components/Plasma";
 import GradualBlur from "@/components/GradualBlur";
@@ -14,18 +13,25 @@ import Footer from "@/components/Footer"
 
 import LogoLoop from '@/components/LogoLoop';
 import TechLogo from '@/components/TechLogo';
-import { 
-  SiHtml5, 
-  SiCss3, 
-  SiJavascript, 
-  SiNodedotjs, 
-  SiVuedotjs, 
+import ProjectCard from '@/components/ProjectCard';
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiNodedotjs,
+  SiVuedotjs,
   SiAdonisjs,
   SiMariadb,
   SiMongodb,
   SiRedis,
   SiFigma,
   SiDocker,
+  SiExpress,
+  SiWordpress,
+  SiNginx,
+  SiCloudinary,
+  SiBlazor,
+  SiMysql,
 } from 'react-icons/si';
 import { DiDotnet } from "react-icons/di";
 
@@ -51,64 +57,54 @@ const backendTech = [
 
 const projects = [
   {
-    title: "Portfolio Website",
-    description: "Personal site built with Next.js and shadcn/ui.",
-    link: "#",
+    title: "PlotThoseLines",
+    description:
+      "C# .NET MAUI + Blazor Hybride + TokenInsight API + ApexCharts - Visualiser des séries temporelles pour des crypto-monnaies.",
+    link: "https://github.com/eliottscherrer/PlotThoseLines",
+    cover: "/projects/PlotThoseLines.webp",
+    stack: [
+      { node: <TechLogo icon={<SiBlazor />} label="C# .NET Blazor" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<ChartCandlestick />} label="ApexCharts" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<Coins />} label="TokenInsight" size="md" labelSize="sm" /> },
+    ],
   },
   {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
+    title: "PassionLecture - Frontend",
+    description:
+      "Library UI built using Vue.js with an Express.js backend for CRUD operations.",
+    link: "https://github.com/Eliott-Mathis/PassionLecture-Frontend",
+    cover: "/projects/PassionLecture-Frontend.webp",
+    stack: [
+      { node: <TechLogo icon={<SiVuedotjs />} label="Vue.js" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiExpress />} label="Express.js" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiJavascript />} label="JavaScript" size="md" labelSize="sm" /> },
+    ],
   },
   {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
+    title: "DockerSwarm-Wordpress",
+    description:
+      "Docker Swarm + WordPress + MariaDB + Nginx + Swarmpit - High availability CMS deployment.",
+    link: "https://github.com/eliottscherrer/DockerSwarm-Wordpress",
+    cover: "/projects/DockerSwarm-Wordpress.webp",
+    stack: [
+      { node: <TechLogo icon={<SiDocker />} label="Docker Swarm" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiWordpress />} label="WordPress" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiMariadb />} label="MariaDB" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiNginx />} label="Nginx" size="md" labelSize="sm" /> },
+    ],
   },
   {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
-  },
-  {
-    title: "UI Experiments",
-    description: "Small UI prototypes and animations.",
-    link: "#",
+    title: "PassionLecture - Backend",
+    description:
+      "Node.js REST API with MySQL, Docker and Cloudinary for file storage.",
+    link: "https://github.com/Eliott-Mathis/PassionLecture-Backend",
+    cover: "/projects/PassionLecture-Backend.webp",
+    stack: [
+      { node: <TechLogo icon={<SiNodedotjs />} label="Node.js" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiMysql />} label="MySQL" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiDocker />} label="Docker" size="md" labelSize="sm" /> },
+      { node: <TechLogo icon={<SiCloudinary />} label="Cloudinary" size="md" labelSize="sm" /> },
+    ],
   },
 ];
 
@@ -276,31 +272,18 @@ export default function Home() {
         {/* Projects Section */}
         <section id="projects" className="space-y-6 sm:space-y-8">
           <h2 className="text-2xl sm:text-3xl font-semibold">Projects</h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="flex flex-col gap-8">
             {projects.map((project) => (
-              <SpotlightCard 
-                key={project.title} 
-                className="flex flex-col justify-between min-h-[200px] bg-white/30 dark:bg-input/30 backdrop-blur-sm border border-border"
-                spotlightColor="rgba(14, 100, 180, 0.1)"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
-                </div>
-                <div className="space-y-6">
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                  <Button variant="ghost" className="px-0" asChild>
-                    <a href={project.link}>View <ExternalLink /></a>
-                  </Button>
-                </div>
-              </SpotlightCard>
+              <ProjectCard
+                key={project.title}
+                {...project}
+              />
             ))}
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="space-y-4 mt-12 sm:mt-16">
+        <section id="contact" className="space-y-4 mt-20 sm:mt-24">
           <h2 className="text-2xl sm:text-3xl font-semibold">Contact</h2>
           <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
             Email me at <a className="underline" href="mailto:contact@eliott.codes">contact@eliott.codes</a>
