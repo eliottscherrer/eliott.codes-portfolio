@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Mail, Github, Linkedin, MapPin } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin, ExternalLink } from "lucide-react";
 import SpotlightCard from "@/components/SpotlightCard";
 import SplitText from "@/components/SplitText";
 import Plasma from "@/components/Plasma";
@@ -291,7 +291,7 @@ export default function Home() {
                     {project.description}
                   </p>
                   <Button variant="ghost" className="px-0" asChild>
-                    <a href={project.link}>View →</a>
+                    <a href={project.link}>View <ExternalLink /></a>
                   </Button>
                 </div>
               </SpotlightCard>
