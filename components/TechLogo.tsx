@@ -4,9 +4,11 @@ interface TechLogoProps {
   icon: ReactNode;
   label?: string;
   brandColor?: string;
+  size?: 'sm' | 'md' | 'lg';
+  labelSize?: 'sm' | 'md' | 'lg';
 }
 
-export default function TechLogo({ icon, label, brandColor }: TechLogoProps) {
+export default function TechLogo({ icon, label, brandColor, size = 'md', labelSize }: TechLogoProps) {
   const iconRef = useRef<SVGSVGElement | null>(null);
   
   // Brand colors from Simple Icons (https://simpleicons.org/)
@@ -20,9 +22,18 @@ export default function TechLogo({ icon, label, brandColor }: TechLogoProps) {
     'Node.js': '#339933',
     'AdonisJS': '#5A45FF',
     'MariaDB': '#003545',
+    'MySQL': '#f29111',
     'MongoDB': '#47A248',
     'Redis': '#DC382D',
     'Docker': '#2496ED',
+    'Docker Swarm': '#2496ED',
+    'WordPress': '#21759B',
+    'Express.js': '#000000',
+    'Nginx': '#009639',
+    'Cloudinary': '#FF5C00',
+    'C# .NET Blazor': '#512BD4',
+    'ApexCharts': '#5a9f68',
+    'TokenInsight': '#5334ab',
   };
 
   const color = brandColor || (label && brandColors[label]);
@@ -47,12 +58,24 @@ export default function TechLogo({ icon, label, brandColor }: TechLogoProps) {
     const existingClassName = iconElement.props.className || '';
     const existingStyle = iconElement.props.style || {};
     
-    enhancedIcon = cloneElement(iconElement, {
-      ref: iconRef,
-      className: `${existingClassName} transition-colors duration-300`.trim(),
-      style: existingStyle,
-    });
+      const sizeClass = size === 'sm' ? 'size-3' : size === 'md' ? 'size-4' : size === 'lg' ? 'size-5' : '';
+
+      enhancedIcon = cloneElement(iconElement, {
+        ref: iconRef,
+        className: `${existingClassName} ${sizeClass} transition-colors duration-300`.trim(),
+        style: existingStyle,
+      });
   }
+
+  const labelClass = labelSize
+    ? labelSize === 'sm'
+      ? 'text-sm'
+      : labelSize === 'lg'
+      ? 'text-2xl'
+      : 'text-base'
+    : size === 'sm'
+    ? 'text-sm'
+    : 'text-xl';
 
   if (label) {
     return (
@@ -62,7 +85,7 @@ export default function TechLogo({ icon, label, brandColor }: TechLogoProps) {
         onMouseLeave={handleMouseLeave}
       >
         {enhancedIcon}
-        <span className="text-xl">{label}</span>
+        <span className={labelClass}>{label}</span>
       </div>
     );
   }
