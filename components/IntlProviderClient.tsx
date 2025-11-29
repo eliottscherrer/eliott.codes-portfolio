@@ -7,7 +7,11 @@ export default function IntlProviderClient(props: {
   children: React.ReactNode;
 }) {
   return (
-    <NextIntlClientProvider locale={props.locale} messages={props.messages}>
+    <NextIntlClientProvider 
+      locale={props.locale} 
+      messages={props.messages}
+      timeZone="Europe/Zurich"
+    >
       {props.children}
     </NextIntlClientProvider>
   );
