@@ -32,6 +32,7 @@ import {
   SiCloudinary,
   SiBlazor,
   SiMysql,
+  SiNextdotjs,
 } from 'react-icons/si';
 import { DiDotnet } from "react-icons/di";
 import { useTranslations } from "next-intl";
@@ -44,17 +45,17 @@ const frontendTech = [
   { node: <TechLogo icon={<SiJavascript />} label="JavaScript" />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
   { node: <TechLogo icon={<SiVuedotjs />} label="Vue.js" />, title: "Vue.js", href: "https://vuejs.org" },
   { node: <TechLogo icon={<DiDotnet />} label="C# .NET" />, title: "C# .NET", href: "https://docs.microsoft.com/en-us/dotnet/csharp/" },
-  { node: <TechLogo icon={<SiFigma />} label="Figma" />, title: "Figma", href: "https://www.figma.com" },
+  { node: <TechLogo icon={<SiNextdotjs />} label="Next.js" />, title: "Next.js", href: "https://nextjs.org" },
 ];
 
 // Backend & Tools
 const backendTech = [
   { node: <TechLogo icon={<SiNodedotjs />} label="Node.js" />, title: "Node.js", href: "https://nodejs.org" },
-  { node: <TechLogo icon={<SiAdonisjs />} label="AdonisJS" />, title: "AdonisJS", href: "https://adonisjs.com" },
   { node: <TechLogo icon={<SiMariadb />} label="MariaDB" />, title: "MariaDB", href: "https://mariadb.org" },
   { node: <TechLogo icon={<SiMongodb />} label="MongoDB" />, title: "MongoDB", href: "https://www.mongodb.com" },
   { node: <TechLogo icon={<SiRedis />} label="Redis" />, title: "Redis", href: "https://redis.io" },
   { node: <TechLogo icon={<SiDocker />} label="Docker" />, title: "Docker", href: "https://www.docker.com" },
+  { node: <TechLogo icon={<SiFigma />} label="Figma" />, title: "Figma", href: "https://www.figma.com" },
 ];
 
 export default function HomeClient({ locale }: { locale?: string }) {
