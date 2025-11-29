@@ -1,13 +1,14 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from 'next-intl/plugin';
 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+const isProjectPages = process.env.GITHUB_PAGES === 'true';
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
 
 const nextConfig: NextConfig = {
-  output: 'export',
   images: {
     unoptimized: true,
   },
+  basePath: isProjectPages && repoName ? `/${repoName}` : '',
+  assetPrefix: isProjectPages && repoName ? `/${repoName}/` : undefined,
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;
