@@ -1,4 +1,7 @@
-import { ReactNode, cloneElement, isValidElement, SVGProps, ReactElement, useRef } from 'react';
+"use client";
+
+import { ReactNode, cloneElement, isValidElement, SVGProps, ReactElement, useRef, useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 interface TechLogoProps {
   icon: ReactNode;
@@ -6,10 +9,17 @@ interface TechLogoProps {
   brandColor?: string;
   size?: 'sm' | 'md' | 'lg';
   labelSize?: 'sm' | 'md' | 'lg';
+  forcedTheme?: 'light' | 'dark';
 }
 
-export default function TechLogo({ icon, label, brandColor, size, labelSize }: TechLogoProps) {
+export default function TechLogo({ icon, label, brandColor, size, labelSize, forcedTheme }: TechLogoProps) {
   const iconRef = useRef<SVGSVGElement | null>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   // Brand colors from Simple Icons (https://simpleicons.org/)
   const brandColors: Record<string, string> = {
@@ -38,7 +48,37 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize }: T
     'Next.js': '#000000',
   };
 
-  const color = brandColor || (label && brandColors[label]);
+  const originalColor = brandColor || (label && brandColors[label]);
+
+  const getAdjustedColor = (c: string | undefined, theme: string | undefined) => {
+    if (!c || !theme) return c;
+    
+    let hex = c.replace('#', '');
+    
+    if (hex.length === 3) {
+      hex = hex.split('').map(char => char + char).join('');
+    }
+
+    if (hex.length !== 6) return c;
+    
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    if (theme === 'dark') {
+      // If color is too dark on dark background, make it white
+      if (luminance < 0.2) return '#FFFFFF';
+    } else if (theme === 'light') {
+      // If color is too light on light background, make it black
+      if (luminance > 0.85) return '#000000';
+    }
+    
+    return c;
+  };
+
+  const color = mounted ? getAdjustedColor(originalColor, forcedTheme || resolvedTheme) : originalColor;
   
   const handleMouseEnter = () => {
     if (color && iconRef.current) {
