@@ -26,7 +26,7 @@ export default function ProjectCard({ title, description, link, cover, stack = [
       className="block w-full group outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
     >
       <SpotlightCard
-        className="flex flex-col w-full h-full p-0 bg-card/40 hover:bg-card/60 transition-all duration-500 border border-black dark:border-white/10 hover:border-black/60 dark:hover:border-white/20 overflow-hidden"
+        className="flex flex-col w-full h-full p-0 bg-card/40 hover:bg-card/60 transition-all duration-500 border border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 overflow-hidden"
         spotlightColor="rgba(14, 100, 180, 0.15)"
       >
         {/* Image Section */}
