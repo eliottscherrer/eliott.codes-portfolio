@@ -34,6 +34,8 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize }: T
     'C# .NET Blazor': '#512BD4',
     'ApexCharts': '#5a9f68',
     'TokenInsight': '#5334ab',
+    'React': '#61DAFB',
+    'Next.js': '#000000',
   };
 
   const color = brandColor || (label && brandColors[label]);
