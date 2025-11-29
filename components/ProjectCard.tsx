@@ -51,14 +51,14 @@ export default function ProjectCard({ title, description, link, cover, stack = [
               {stack.map((item, i) => {
                 if (typeof item === 'object' && item.node) {
                   return (
-                    <div key={i} className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full px-3 py-2 text-xs text-white/90 flex items-center gap-1.5 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/60 dark:group-hover:border-white/20">
+                    <div key={i} className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full px-3 py-2 text-xs text-white/90 flex items-center gap-1.5 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20">
                       {item.node}
                     </div>
                   );
                 }
                 const label = typeof item === 'string' ? item : item.label;
                 return (
-                  <Badge key={i} variant="secondary" className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 text-white/90 rounded-full px-3 py-1 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/60 dark:group-hover:border-white/20">
+                  <Badge key={i} variant="secondary" className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 text-white/90 rounded-full px-3 py-1 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20">
                     {label}
                   </Badge>
                 );
