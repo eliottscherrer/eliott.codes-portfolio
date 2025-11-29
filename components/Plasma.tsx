@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 
 interface PlasmaProps {
@@ -53,7 +53,8 @@ void mainImage(out vec4 o, vec2 C) {
   float i, d, z, T = iTime * uSpeed * uDirection;
   vec3 O, p, S;
 
-  for (vec2 r = iResolution.xy, Q; ++i < 60.; O += o.w/d*o.xyz) {
+  // Reduced iterations from 60 to 40 for better mobile performance
+  for (vec2 r = iResolution.xy, Q; ++i < 40.; O += o.w/d*o.xyz) {
     p = z*normalize(vec3(C-.5*r,r.y)); 
     p.z -= 4.; 
     S = p;
@@ -100,6 +101,8 @@ export const Plasma: React.FC<PlasmaProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mousePos = useRef({ x: 0, y: 0 });
+  const rafRef = useRef<number>(0);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -109,11 +112,15 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     const directionMultiplier = direction === 'reverse' ? -1.0 : 1.0;
 
+    // Use lower DPR on mobile for better performance
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
+
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      dpr: dpr
     });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
@@ -143,22 +150,28 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    let mouseMoveTimeout: NodeJS.Timeout;
     const handleMouseMove = (e: MouseEvent) => {
       if (!mouseInteractive) return;
-      const rect = containerRef.current!.getBoundingClientRect();
-      mousePos.current.x = e.clientX - rect.left;
-      mousePos.current.y = e.clientY - rect.top;
-      const mouseUniform = program.uniforms.uMouse.value as Float32Array;
-      mouseUniform[0] = mousePos.current.x;
-      mouseUniform[1] = mousePos.current.y;
+      clearTimeout(mouseMoveTimeout);
+      mouseMoveTimeout = setTimeout(() => {
+        const rect = containerRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        mousePos.current.x = e.clientX - rect.left;
+        mousePos.current.y = e.clientY - rect.top;
+        const mouseUniform = program.uniforms.uMouse.value as Float32Array;
+        mouseUniform[0] = mousePos.current.x;
+        mouseUniform[1] = mousePos.current.y;
+      }, 16); // Throttle to ~60fps
     };
 
     if (mouseInteractive) {
-      containerRef.current.addEventListener('mousemove', handleMouseMove);
+      containerRef.current.addEventListener('mousemove', handleMouseMove, { passive: true });
     }
 
     const setSize = () => {
-      const rect = containerRef.current!.getBoundingClientRect();
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect) return;
       const width = Math.max(1, Math.floor(rect.width));
       const height = Math.max(1, Math.floor(rect.height));
       renderer.setSize(width, height);
@@ -167,13 +180,29 @@ export const Plasma: React.FC<PlasmaProps> = ({
       res[1] = gl.drawingBufferHeight;
     };
 
-    const ro = new ResizeObserver(setSize);
+    let resizeTimeout: NodeJS.Timeout;
+    const throttledResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(setSize, 100);
+    };
+
+    const ro = new ResizeObserver(throttledResize);
     ro.observe(containerRef.current);
     setSize();
 
-    let raf = 0;
+    // Handle visibility change to pause when tab is inactive
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden);
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     const t0 = performance.now();
     const loop = (t: number) => {
+      if (!isVisible) {
+        rafRef.current = requestAnimationFrame(loop);
+        return;
+      }
+
       let timeValue = (t - t0) * 0.001;
       if (direction === 'pingpong') {
         const pingpongDuration = 10;
@@ -188,13 +217,16 @@ export const Plasma: React.FC<PlasmaProps> = ({
         (program.uniforms.iTime as any).value = timeValue;
       }
       renderer.render({ scene: mesh });
-      raf = requestAnimationFrame(loop);
+      rafRef.current = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+    rafRef.current = requestAnimationFrame(loop);
 
     return () => {
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(rafRef.current);
       ro.disconnect();
+      clearTimeout(resizeTimeout);
+      clearTimeout(mouseMoveTimeout);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (mouseInteractive && containerRef.current) {
         containerRef.current.removeEventListener('mousemove', handleMouseMove);
       }
@@ -202,7 +234,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
         containerRef.current?.removeChild(canvas);
       } catch {}
     };
-  }, [color, speed, direction, scale, opacity, mouseInteractive]);
+  }, [color, speed, direction, scale, opacity, mouseInteractive, isVisible]);
 
   return <div ref={containerRef} className="w-full h-full relative overflow-hidden" />;
 };
