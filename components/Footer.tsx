@@ -170,7 +170,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Eliott Scherrer. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
-              <LanguageSwitcher className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors" />
+              <LanguageSwitcher side="top" className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors" />
               <AnimatedThemeToggler
                 className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors flex items-center justify-center"
                 aria-label="Toggle theme"

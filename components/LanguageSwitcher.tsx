@@ -13,7 +13,13 @@ import { Languages } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export default function LanguageSwitcher({ className }: { className?: string }) {
+export default function LanguageSwitcher({ 
+  className, 
+  side = "bottom" 
+}: { 
+  className?: string;
+  side?: "top" | "bottom" | "left" | "right";
+}) {
   const t = useTranslations("LanguageSwitcher");
   const locale = useLocale();
   const router = useRouter();
@@ -54,7 +60,7 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
           <span className="sr-only">{t("label")}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-background/80 backdrop-blur-md border-border/50">
+      <DropdownMenuContent align="end" side={side} className="bg-card/40 backdrop-blur-xl border-white/10 shadow-lg">
         <DropdownMenuItem 
           onClick={() => handleLocaleChange("en")}
           className={locale === 'en' ? "bg-accent" : ""}
