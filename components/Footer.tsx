@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
@@ -169,8 +170,9 @@ export default function Footer() {
               © {new Date().getFullYear()} Eliott Scherrer. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
+              <LanguageSwitcher className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors" />
               <AnimatedThemeToggler
-                className="p-2 rounded-md bg-background/10 dark:bg-input/30"
+                className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors flex items-center justify-center"
                 aria-label="Toggle theme"
               />
               <p className="flex items-center gap-1.5 text-sm text-muted-foreground">

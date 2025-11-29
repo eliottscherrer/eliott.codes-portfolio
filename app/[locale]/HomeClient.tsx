@@ -128,18 +128,18 @@ export default function HomeClient({ locale }: { locale?: string }) {
         top: 0, 
         left: 0, 
         width: '100%', 
-        height: '100vh', 
+        height: '100%', 
         zIndex: -1 
       }}>
         { /* a4d3ff */}
-        {/* <Plasma 
+        {<Plasma 
           color="#0e64b4" 
           speed={0.4}
           direction="forward"
           scale={2}
           opacity={0.3}
-          mouseInteractive={true}
-        /> */}
+          mouseInteractive={false}
+        />}
       </div>
 
       <main className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 md:py-16 relative">
