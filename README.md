@@ -1,5 +1,7 @@
 # [eliott.codes](https://eliott.codes)
 
+<img width="1488" height="640" alt="image" src="https://github.com/user-attachments/assets/7b0b6399-de56-4270-8382-e29215fa57d1" />
+
 [![Deploy Next.js site to Pages](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/nextjs.yml/badge.svg)](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/nextjs.yml)
 
 My personal portfolio built from scratch to showcase both frontend and full-stack capabilities through completed projects. Everything was made to demonstrate my attention to detail and the modern web development practices I use.
