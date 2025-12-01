@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Github, Linkedin, MapPin, Coins, ChartCandlestick } from "lucide-react";
 import SplitText from "@/components/SplitText";
-import Plasma from "@/components/Plasma";
+import DarkVeil from "@/components/DarkVeil";
 import GradualBlur from "@/components/GradualBlur";
 import { useEffect, useRef } from "react";
 
@@ -20,7 +20,6 @@ import {
   SiJavascript,
   SiNodedotjs,
   SiVuedotjs,
-  SiAdonisjs,
   SiMariadb,
   SiMongodb,
   SiRedis,
@@ -126,23 +125,27 @@ export default function HomeClient({ locale }: { locale?: string }) {
   return (
     <>
       {/* Background */}
-      <div style={{ 
-        position: 'fixed', 
-        top: 0, 
-        left: 0, 
-        width: '100%', 
-        height: '100%', 
-        zIndex: -1 
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        opacity: 0.4,
+        zIndex: -1
       }}>
-        { /* a4d3ff */}
-        {/* <Plasma 
-          color="#0e64b4" 
-          speed={0.4}
-          direction="forward"
-          scale={2}
-          opacity={0.3}
-          mouseInteractive={false}
-        /> */}
+        <DarkVeil
+          speed={0.5}
+          hueShift={35}
+          noiseIntensity={0}
+          scanlineFrequency={0}
+          scanlineIntensity={0}
+          warpAmount={5}
+          resolutionScale={1}
+          alpha={10}
+          alphaThreshold={0.08}
+          style={{ pointerEvents: 'none' }}
+        />
       </div>
 
       <main className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 md:py-16 relative">
