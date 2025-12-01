@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 import { Badge } from '@/components/ui/badge';
+import { useTranslations } from 'next-intl';
 
 type StackItem = { node?: React.ReactNode; label?: string };
 
@@ -16,6 +17,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ title, description, link, cover, stack = [] }: ProjectCardProps) {
+  const t = useTranslations('Projects');
   const isExternal = link.startsWith('http');
 
   return (
@@ -84,7 +86,7 @@ export default function ProjectCard({ title, description, link, cover, stack = [
           {/* CTA Button */}
           <div className="mt-auto">
             <div className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 text-primary font-medium text-sm border border-primary/20 transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(14,100,180,0.3)] w-full sm:w-auto">
-              View Project
+              {t('viewProject')}
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </div>
           </div>

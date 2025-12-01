@@ -8,6 +8,14 @@
     "projects": "Projets",
     "contact": "Contact"
   },
+  "Common": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "E-mail",
+    "toggleTheme": "Changer de thème",
+    "frontendTechnologies": "Technologies frontend",
+    "backendTechnologiesTools": "Technologies et outils backend"
+  },
   "Hero": {
     "location": "Lausanne, Suisse",
     "description": "Étudiant de {age} ans à l'ETML en développement logiciel et web, avec un intérêt pour la cybersécurité.",
@@ -16,6 +24,7 @@
   },
   "Projects": {
     "title": "Projets",
+    "viewProject": "Voir le projet",
     "items": {
       "PlotThoseLines": {
         "description": "C# .NET MAUI + Blazor Hybride + TokenInsight API + ApexCharts - Visualiser des séries temporelles pour des crypto-monnaies."
@@ -40,6 +49,10 @@
     "quickLinks": "Liens rapides",
     "projects": "Projets",
     "contact": "Contact",
-    "email": "Email"
+    "email": "E-mail",
+    "connect": "Réseaux",
+    "allRightsReserved": "Tous droits réservés.",
+    "madeWithLoveIn": "Fait avec <heart></heart> en <country></country>",
+    "switzerland": "Suisse"
   }
 }

@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("Footer");
+  const tc = useTranslations("Common");
 
   return (
     <footer className="relative mt-auto mb-20 sm:mb-12 pt-8">
@@ -50,12 +51,12 @@ export default function Footer() {
             </div>
             {/* Social */}
             <div className="space-y-3">
-              <h4 className="font-semibold text-sm">Connect</h4>
+              <h4 className="font-semibold text-sm">{t("connect")}</h4>
               <div className="flex gap-2">
                 <Button 
                   variant="secondary" 
                   size="icon" 
-                  aria-label="GitHub"
+                  aria-label={tc("github")}
                   className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
                   asChild
                 >
@@ -66,7 +67,7 @@ export default function Footer() {
                 <Button 
                   variant="secondary" 
                   size="icon" 
-                  aria-label="LinkedIn"
+                  aria-label={tc("linkedin")}
                   className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
                   asChild
                 >
@@ -77,7 +78,7 @@ export default function Footer() {
                 <Button 
                   variant="secondary" 
                   size="icon" 
-                  aria-label="Email"
+                  aria-label={tc("email")}
                   className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
                   asChild
                 >
@@ -124,12 +125,12 @@ export default function Footer() {
 
           {/* Social */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-sm">Connect</h4>
+            <h4 className="font-semibold text-sm">{t("connect")}</h4>
             <div className="flex gap-2">
               <Button 
                 variant="secondary" 
                 size="icon" 
-                aria-label="GitHub"
+                aria-label={tc("github")}
                 className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
                 asChild
               >
@@ -140,7 +141,7 @@ export default function Footer() {
               <Button 
                 variant="secondary" 
                 size="icon" 
-                aria-label="LinkedIn"
+                aria-label={tc("linkedin")}
                 className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
                 asChild
               >
@@ -151,7 +152,7 @@ export default function Footer() {
               <Button 
                 variant="secondary" 
                 size="icon" 
-                aria-label="Email"
+                aria-label={tc("email")}
                 className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
                 asChild
               >
@@ -167,16 +168,19 @@ export default function Footer() {
         <div className="pt-6 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
             <p className="flex items-center gap-1.5">
-              © {new Date().getFullYear()} Eliott Scherrer. All rights reserved.
+              © {new Date().getFullYear()} Eliott Scherrer. {t("allRightsReserved")}
             </p>
             <div className="flex items-center gap-3">
               <LanguageSwitcher side="top" className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors" />
               <AnimatedThemeToggler
                 className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors flex items-center justify-center"
-                aria-label="Toggle theme"
+                aria-label={tc("toggleTheme")}
               />
               <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                Made with <Heart className="size-3.5 fill-current text-blue-500" /> in Switzerland
+                {t.rich("madeWithLoveIn", {
+                  heart: () => <Heart className="size-3.5 fill-current text-blue-500" />,
+                  country: () => <>{t("switzerland")}</>
+                })}
               </p>
             </div>
           </div>

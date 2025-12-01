@@ -61,6 +61,7 @@ const backendTech = [
 
 export default function HomeClient({ locale }: { locale?: string }) {
   const t = useTranslations();
+  const tc = useTranslations("Common");
   const waveRef = useRef<HTMLSpanElement | null>(null);
 
   // Trigger initial wave once on mount
@@ -151,7 +152,7 @@ export default function HomeClient({ locale }: { locale?: string }) {
             <a href="/" className="text-sm font-medium">eliott.codes</a>
           </div>
           <div className="flex gap-2 sm:gap-3">
-            <AnimatedThemeToggler className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
+            <AnimatedThemeToggler aria-label={tc("toggleTheme")} className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
             <LanguageSwitcher />
             <Button variant="ghost" asChild className="hidden sm:inline-flex">
               <a href="#projects">{t("Navigation.projects")}</a>
@@ -201,22 +202,22 @@ export default function HomeClient({ locale }: { locale?: string }) {
             </div>
             {/* Social Links */}
             <div className="flex flex-row gap-2 sm:gap-3">
-              <Button variant="secondary" size="icon" aria-label="LinkedIn" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
+              <Button variant="secondary" size="icon" aria-label={tc("linkedin")} className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
                 <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="size-4" />
-                  <span className="sr-only">LinkedIn</span>
+                  <span className="sr-only">{tc("linkedin")}</span>
                 </a>
               </Button>
-              <Button variant="secondary" size="icon" aria-label="GitHub" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
+              <Button variant="secondary" size="icon" aria-label={tc("github")} className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
                 <a href="https://github.com/eliottscherrer" target="_blank" rel="noopener noreferrer">
                   <Github className="size-4" />
-                  <span className="sr-only">GitHub</span>
+                  <span className="sr-only">{tc("github")}</span>
                 </a>
               </Button>
-              <Button variant="secondary" size="icon" aria-label="Email" className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
+              <Button variant="secondary" size="icon" aria-label={tc("email")} className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input" asChild>
                 <a href="mailto:contact@eliott.codes">
                   <Mail className="size-4" />
-                  <span className="sr-only">Email</span>
+                  <span className="sr-only">{tc("email")}</span>
                 </a>
               </Button>
             </div>
@@ -252,7 +253,7 @@ export default function HomeClient({ locale }: { locale?: string }) {
               gap={40}
               pauseOnHover
               scaleOnHover
-              ariaLabel="Frontend technologies"
+              ariaLabel={tc("frontendTechnologies")}
             />
           </div>
           { /* Fade out using alpha mask */ }
@@ -268,7 +269,7 @@ export default function HomeClient({ locale }: { locale?: string }) {
               gap={40}
               pauseOnHover
               scaleOnHover
-              ariaLabel="Backend technologies and tools"
+              ariaLabel={tc("backendTechnologiesTools")}
             />
           </div>
         </div>
