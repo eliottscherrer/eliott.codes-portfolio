@@ -38,6 +38,17 @@ import { DiDotnet } from "react-icons/di";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
+const AGE = (() => {
+  const birthDate = new Date("2006-11-20");
+  const now = new Date();
+  let age = now.getFullYear() - birthDate.getFullYear();
+  const hasHadBirthdayThisYear =
+    now.getMonth() > birthDate.getMonth() ||
+    (now.getMonth() === birthDate.getMonth() && now.getDate() >= birthDate.getDate());
+  if (!hasHadBirthdayThisYear) age -= 1;
+  return age;
+})();
+
 // Frontend & Languages
 const frontendTech = [
   { node: <TechLogo icon={<SiHtml5 />} label="HTML" />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
@@ -119,8 +130,6 @@ export default function HomeClient({ locale }: { locale?: string }) {
       ],
     },
   ];
-
-  const age = new Date(Date.now() - new Date('2006-11-20').getTime()).getUTCFullYear() - 1970;
 
   return (
     <>
@@ -230,7 +239,7 @@ export default function HomeClient({ locale }: { locale?: string }) {
             {t("Hero.location")}
           </p>
           <p className="max-w-2xl text-base sm:text-lg leading-relaxed">
-            {t("Hero.description", { age })}
+            {t("Hero.description", { age: AGE })}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button asChild size="lg" className="w-full sm:w-auto">
