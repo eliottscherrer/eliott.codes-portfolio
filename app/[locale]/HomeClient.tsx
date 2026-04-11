@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Github, Linkedin, MapPin, Coins, ChartCandlestick } from "lucide-react";
@@ -161,7 +162,7 @@ export default function HomeClient() {
         {/* Navigation */}
         <header className="flex items-center justify-between mb-8 sm:mb-12 md:mb-16">
           <div className="flex items-center gap-2">
-            <a href="/" className="text-sm font-medium">eliott.codes</a>
+            <Link href="/" className="text-sm font-medium">eliott.codes</Link>
           </div>
           <div className="flex gap-2 sm:gap-3">
             <AnimatedThemeToggler aria-label={tc("toggleTheme")} className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
