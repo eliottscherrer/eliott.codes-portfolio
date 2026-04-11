@@ -14,7 +14,9 @@ import {
   SiCloudinary,
 } from 'react-icons/si';
 
-export function getProjects(t: any) {
+type ProjectTranslator = (key: string) => string;
+
+export function getProjects(t: ProjectTranslator) {
   return [
     {
       title: "PlotThoseLines",

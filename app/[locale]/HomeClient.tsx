@@ -1,14 +1,10 @@
 "use client"
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import DarkVeil from "@/components/DarkVeil";
 import GradualBlur from "@/components/GradualBlur";
-import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import Footer from "@/components/Footer"
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { useTranslations } from "next-intl";
+import HomeNavigation from "@/components/HomeNavigation";
 
 import HeroSection from "@/components/sections/HeroSection";
 import TechnologiesSection from "@/components/sections/TechnologiesSection";
@@ -17,9 +13,6 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomeClient() {
-  const t = useTranslations();
-  const tc = useTranslations("Common");
-
   return (
     <>
       {/* Background */}
@@ -47,43 +40,13 @@ export default function HomeClient() {
       </div>
 
       <main className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 md:py-16 relative">
-        {/* Navigation */}
-        <header className="flex items-center justify-between mb-8 sm:mb-12 md:mb-16">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="text-sm font-medium">eliott.codes</Link>
-          </div>
-          <div className="flex gap-2 sm:gap-3">
-            <AnimatedThemeToggler aria-label={tc("toggleTheme")} className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
-            <LanguageSwitcher />
-            <Button variant="ghost" asChild className="hidden sm:inline-flex">
-              <a href="#experience">{t("Navigation.journey")}</a>
-            </Button>
-            <Button variant="ghost" asChild className="hidden sm:inline-flex">
-              <a href="#projects">{t("Navigation.projects")}</a>
-            </Button>
-            <Button asChild className="text-xs sm:text-sm px-3 sm:px-4">
-              <a href="#contact">{t("Navigation.contact")}</a>
-            </Button>
-          </div>
-        </header>
-
-        {/* Hero Section */}
+        <HomeNavigation />
         <HeroSection />
-
-        {/* Technologies Section */}
         <TechnologiesSection />
-
         <Separator className="my-12 sm:my-16" />
-
-        {/* Experience Section */}
         <ExperienceSection />
-
         <Separator className="my-12 sm:my-16" />
-
-        {/* Projects Section */}
         <ProjectsSection />
-
-        {/* Contact Section */}
         <ContactSection />
 
         <GradualBlur
@@ -97,7 +60,6 @@ export default function HomeClient() {
           opacity={1}
         />
       </main>
-
       <Footer />
     </>
   );
