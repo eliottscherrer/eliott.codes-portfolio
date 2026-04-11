@@ -12,7 +12,7 @@ export default function HomeNavigation() {
   const tc = useTranslations("Common");
 
   return (
-    <header className="flex items-center justify-between mb-8 sm:mb-12 md:mb-16">
+    <header className="flex items-center justify-between mb-12 sm:mb-12 md:mb-16">
       <div className="flex items-center gap-2">
         <Link href="/" className="text-sm font-medium">
           eliott.codes
@@ -21,9 +21,9 @@ export default function HomeNavigation() {
       <div className="flex gap-2 sm:gap-3">
         <AnimatedThemeToggler
           aria-label={tc("toggleTheme")}
-          className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4"
+          className="ds-icon-control border-0 !border-transparent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4"
         />
-        <LanguageSwitcher />
+        <LanguageSwitcher className="ds-icon-control border-0 !border-transparent" />
         <Button variant="ghost" asChild className="hidden sm:inline-flex">
           <a href="#experience">{t("Navigation.journey")}</a>
         </Button>

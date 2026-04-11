@@ -37,9 +37,9 @@ export default function LanguageSwitcher({
   if (!mounted) {
     return (
       <Button
-        variant="ghost"
+        variant="glass"
         size="icon"
-        className={cn("bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4", className)}
+        className={cn("ds-icon-control rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4", className)}
         disabled
       >
         <Languages className="h-4 w-4" />
@@ -49,18 +49,18 @@ export default function LanguageSwitcher({
   }
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          variant="glass"
           size="icon"
-          className={cn("bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4", className)}
+          className={cn("ds-icon-control rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4", className)}
         >
           <Languages className="h-4 w-4" />
           <span className="sr-only">{t("label")}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" side={side} className="bg-card/40 backdrop-blur-xl border-white/10 shadow-lg">
+      <DropdownMenuContent align="end" side={side} className="bg-[var(--surface-glass)] backdrop-blur-xl border-[var(--surface-border)] shadow-lg">
         <DropdownMenuItem 
           onClick={() => handleLocaleChange("en")}
           className={locale === 'en' ? "bg-accent" : ""}

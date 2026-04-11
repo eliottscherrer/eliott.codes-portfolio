@@ -290,7 +290,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           // eslint-disable-next-line @next/next/no-img-element
           <img
             className={cx(
-              'h-[var(--logoloop-logoHeight)] w-auto block object-contain',
+              'h-[var(--logoloop-logoHeight)] w-auto !w-auto !h-auto block object-contain',
               '[-webkit-user-drag:none] pointer-events-none',
               '[image-rendering:-webkit-optimize-contrast]',
               'motion-reduce:transition-none',
@@ -300,8 +300,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             src={imageItem?.src ?? ''}
             srcSet={imageItem?.srcSet}
             sizes={imageItem?.sizes}
-            width={imageItem?.width}
-            height={imageItem?.height}
+            style={{ width: 'auto', height: 'auto' }}
             alt={imageItem?.alt ?? ''}
             title={imageItem?.title}
             loading="lazy"

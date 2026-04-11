@@ -10,14 +10,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        brand: "bg-brand text-brand-foreground hover:opacity-90 shadow-[0_8px_30px_-14px_color-mix(in_oklab,var(--brand)_75%,transparent)]",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        glass:
+          "border bg-transparent text-foreground/90 hover:bg-accent hover:text-accent-foreground backdrop-blur-sm",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "text-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -33,6 +36,12 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
+    compoundVariants: [
+      {
+        variant: "glass",
+        className: "[border-color:var(--surface-border)]",
+      },
+    ],
   }
 )
 

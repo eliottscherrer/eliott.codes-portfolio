@@ -37,6 +37,12 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-glass: var(--surface-glass);
+  --color-surface-border: var(--surface-border);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -76,6 +82,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --brand: oklch(0.56 0.16 245);
+  --brand-foreground: oklch(0.985 0 0);
+  --surface: oklch(0.985 0 0 / 65%);
+  --surface-elevated: oklch(0.97 0 0 / 84%);
+  --surface-glass: oklch(1 0 0 / 62%);
+  --surface-border: oklch(0.84 0.01 250 / 38%);
 }
 
 .dark {
@@ -110,6 +122,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --brand: oklch(0.68 0.15 244);
+  --brand-foreground: oklch(0.19 0.02 250);
+  --surface: oklch(0.21 0.01 250 / 66%);
+  --surface-elevated: oklch(0.25 0.01 250 / 82%);
+  --surface-glass: oklch(0.3 0.01 250 / 48%);
+  --surface-border: oklch(0.78 0.01 250 / 24%);
 }
 
 :root {
@@ -119,7 +137,7 @@
 }
 
 html {
-  scrollbar-gutter: stable;
+  scrollbar-gutter: stable !important;
 }
 
 html::-webkit-scrollbar,
@@ -167,6 +185,36 @@ body,
   }
   body {
     @apply bg-background text-foreground;
+    scrollbar-gutter: stable !important;
+  }
+}
+
+@layer components {
+  .ds-section-title {
+    @apply text-2xl sm:text-3xl font-semibold tracking-tight;
+  }
+
+  .ds-body-lg {
+    @apply text-base sm:text-lg leading-relaxed text-muted-foreground;
+  }
+
+  .ds-inline-link {
+    @apply underline decoration-border underline-offset-4 transition-colors hover:text-foreground;
+  }
+
+  .ds-surface-card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(10px);
+  }
+
+  .ds-surface-card-hover {
+    background: var(--surface-elevated);
+  }
+
+  .ds-icon-control {
+    @apply border bg-transparent hover:bg-accent text-foreground/90 hover:text-accent-foreground backdrop-blur-sm;
+    border-color: var(--surface-border);
   }
 }
 

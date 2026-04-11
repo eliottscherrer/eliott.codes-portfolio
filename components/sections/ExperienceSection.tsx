@@ -63,11 +63,11 @@ export default function ExperienceSection() {
       className="relative space-y-8 sm:space-y-10"
       aria-labelledby="timeline-title"
     >
-      <h2 id="timeline-title" className="text-2xl sm:text-3xl font-semibold">
+      <h2 id="timeline-title" className="ds-section-title">
         {tt("title")}
       </h2>
 
-      <div ref={timelineBodyRef} className="w-full space-y-1 relative">
+      <div ref={timelineBodyRef} className="relative w-full space-y-1">
         <div
           className="pointer-events-none absolute left-3.75 sm:left-4 top-12 bottom-0 w-[2px] rounded-full bg-gradient-to-b from-border/40 via-border to-border/40"
           aria-hidden="true"
@@ -101,7 +101,7 @@ export default function ExperienceSection() {
                   >
                     <div className="relative z-10 size-8 flex items-center justify-center">
                       {item.iconSrc ? (
-                        <span className="flex shrink-0 justify-center items-center size-8 rounded-full border border-black/10 dark:border-white/10 bg-card/95 shadow-[0_6px_20px_-12px_rgba(0,0,0,0.7)] overflow-hidden">
+                        <span className="flex shrink-0 justify-center items-center size-8 rounded-full border border-black/15 dark:border-white/10 bg-[var(--surface-elevated)] shadow-[0_6px_20px_-12px_rgba(0,0,0,0.7)] overflow-hidden">
                           <Image
                             src={item.iconSrc}
                             alt={item.iconAlt ?? item.organization ?? item.title}
@@ -111,7 +111,7 @@ export default function ExperienceSection() {
                           />
                         </span>
                       ) : (
-                        <span className="flex shrink-0 justify-center items-center size-8 rounded-full border border-black/10 dark:border-white/10 bg-card/95 text-foreground shadow-[0_6px_20px_-12px_rgba(0,0,0,0.7)]">
+                        <span className="flex shrink-0 justify-center items-center size-8 rounded-full border border-black/15 dark:border-white/10 bg-[var(--surface-elevated)] text-foreground shadow-[0_6px_20px_-12px_rgba(0,0,0,0.7)]">
                           <span className="text-[11px] font-semibold uppercase text-foreground/80">
                             {item.iconAlt?.[0] ??
                               item.organization?.[0] ??
@@ -129,7 +129,7 @@ export default function ExperienceSection() {
                     aria-label={`${item.period} - ${item.title}`}
                   >
                     <SpotlightCard
-                      className="flex flex-col w-full h-full p-0 bg-card/40 hover:bg-card/60 transition-all duration-500 border border-black/10 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 overflow-hidden rounded-2xl"
+                      className="flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-all duration-500 border border-[var(--surface-border)] hover:border-foreground/20 backdrop-blur-xl overflow-hidden rounded-2xl"
                       spotlightColor="rgba(14, 100, 180, 0.15)"
                     >
                       {item.isCurrent && (
@@ -170,8 +170,8 @@ export default function ExperienceSection() {
                           {item.tags.map((tag) => (
                             <Badge
                               key={`${item.id}-${tag}`}
-                              variant="secondary"
-                              className="rounded-full border border-black/10 dark:border-white/10 bg-secondary/70 px-2.5 py-1 text-[11px] text-foreground/85"
+                              variant="glass"
+                              className="rounded-full px-2.5 py-1 text-[11px] text-foreground/85"
                             >
                               {tag}
                             </Badge>

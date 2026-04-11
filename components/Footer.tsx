@@ -12,7 +12,7 @@ export default function Footer() {
   const tc = useTranslations("Common");
 
   return (
-    <footer className="relative mt-auto mb-20 sm:mb-12 pt-8">
+    <footer className="relative mt-auto mb-20 sm:mb-16 pt-8">
       <Separator className="mb-8" />
       
       <div className="max-w-4xl mx-auto px-6 pb-8">
@@ -30,19 +30,19 @@ export default function Footer() {
                 <nav className="flex flex-col gap-2 items-end text-right sm:items-start sm:text-left">
                   <a 
                     href="#projects" 
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit text-right sm:text-left"
+                    className="ds-inline-link text-sm w-fit text-right sm:text-left"
                   >
                     {t("projects")}
                   </a>
                   <a 
                     href="#contact" 
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit text-right sm:text-left"
+                    className="ds-inline-link text-sm w-fit text-right sm:text-left"
                   >
                     {t("contact")}
                   </a>
                   <a 
                     href="mailto:contact@eliott.codes" 
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit text-right sm:text-left"
+                    className="ds-inline-link text-sm w-fit text-right sm:text-left"
                   >
                     {t("email")}
                   </a>
@@ -54,10 +54,10 @@ export default function Footer() {
               <h4 className="font-semibold text-sm">{t("connect")}</h4>
               <div className="flex gap-2">
                 <Button 
-                  variant="secondary" 
+                  variant="glass" 
                   size="icon" 
                   aria-label={tc("github")}
-                  className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
+                  className="ds-icon-control"
                   asChild
                 >
                   <a href="https://github.com/eliottscherrer" target="_blank" rel="noopener noreferrer">
@@ -65,10 +65,10 @@ export default function Footer() {
                   </a>
                 </Button>
                 <Button 
-                  variant="secondary" 
+                  variant="glass" 
                   size="icon" 
                   aria-label={tc("linkedin")}
-                  className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
+                  className="ds-icon-control"
                   asChild
                 >
                   <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
@@ -76,10 +76,10 @@ export default function Footer() {
                   </a>
                 </Button>
                 <Button 
-                  variant="secondary" 
+                  variant="glass" 
                   size="icon" 
                   aria-label={tc("email")}
-                  className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
+                  className="ds-icon-control"
                   asChild
                 >
                   <a href="mailto:contact@eliott.codes">
@@ -104,19 +104,19 @@ export default function Footer() {
             <nav className="flex flex-col gap-2">
               <a 
                 href="#projects" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+                className="ds-inline-link text-sm w-fit"
               >
                 {t("projects")}
               </a>
               <a 
                 href="#contact" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+                className="ds-inline-link text-sm w-fit"
               >
                 {t("contact")}
               </a>
               <a 
                 href="mailto:contact@eliott.codes" 
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors w-fit"
+                className="ds-inline-link text-sm w-fit"
               >
                 {t("email")}
               </a>
@@ -128,10 +128,10 @@ export default function Footer() {
             <h4 className="font-semibold text-sm">{t("connect")}</h4>
             <div className="flex gap-2">
               <Button 
-                variant="secondary" 
+                variant="glass" 
                 size="icon" 
                 aria-label={tc("github")}
-                className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
+                className="ds-icon-control"
                 asChild
               >
                 <a href="https://github.com/eliottscherrer" target="_blank" rel="noopener noreferrer">
@@ -139,10 +139,10 @@ export default function Footer() {
                 </a>
               </Button>
               <Button 
-                variant="secondary" 
+                variant="glass" 
                 size="icon" 
                 aria-label={tc("linkedin")}
-                className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
+                className="ds-icon-control"
                 asChild
               >
                 <a href="https://www.linkedin.com/in/eliottscherrer/" target="_blank" rel="noopener noreferrer">
@@ -150,10 +150,10 @@ export default function Footer() {
                 </a>
               </Button>
               <Button 
-                variant="secondary" 
+                variant="glass" 
                 size="icon" 
                 aria-label={tc("email")}
-                className="bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input"
+                className="ds-icon-control"
                 asChild
               >
                 <a href="mailto:contact@eliott.codes">
@@ -171,9 +171,9 @@ export default function Footer() {
               © {new Date().getFullYear()} Eliott Scherrer. {t("allRightsReserved")}
             </p>
             <div className="flex items-center gap-3">
-              <LanguageSwitcher side="top" className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors" />
+              <LanguageSwitcher side="top" className="ds-icon-control border-0 !border-transparent w-8 h-8 p-2 rounded-md transition-colors" />
               <AnimatedThemeToggler
-                className="w-8 h-8 p-2 rounded-md bg-background/10 dark:bg-input/30 hover:bg-accent hover:text-accent-foreground transition-colors flex items-center justify-center"
+                className="ds-icon-control border-0 !border-transparent w-8 h-8 p-2 rounded-md transition-colors flex items-center justify-center"
                 aria-label={tc("toggleTheme")}
               />
               <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
