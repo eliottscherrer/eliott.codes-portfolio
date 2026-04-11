@@ -5,6 +5,7 @@
     "fr": "French"
   },
   "Navigation": {
+    "journey": "Experience",
     "projects": "Projects",
     "contact": "Contact"
   },
@@ -41,7 +42,7 @@
     }
   },
   "Timeline": {
-    "title": "My journey",
+    "title": "Experience",
     "current": "Current",
     "items": {
       "cfc": {

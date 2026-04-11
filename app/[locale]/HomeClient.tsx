@@ -172,7 +172,7 @@ export default function HomeClient() {
             <AnimatedThemeToggler aria-label={tc("toggleTheme")} className="bg-transparent hover:bg-accent rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4" />
             <LanguageSwitcher />
             <Button variant="ghost" asChild className="hidden sm:inline-flex">
-              <a href="#journey">{t("Navigation.journey")}</a>
+              <a href="#experience">{t("Navigation.journey")}</a>
             </Button>
             <Button variant="ghost" asChild className="hidden sm:inline-flex">
               <a href="#projects">{t("Navigation.projects")}</a>
