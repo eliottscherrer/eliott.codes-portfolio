@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, cloneElement, isValidElement, ReactElement, CSSProperties, useSyncExternalStore } from 'react';
+import { ReactNode, cloneElement, isValidElement, ReactElement, CSSProperties, useSyncExternalStore, useState } from 'react';
 import { useTheme } from 'next-themes';
 
 interface TechLogoProps {
@@ -14,6 +14,7 @@ interface TechLogoProps {
 
 export default function TechLogo({ icon, label, brandColor, size, labelSize, forcedTheme }: TechLogoProps) {
   const { resolvedTheme } = useTheme();
+  const [isHovered, setIsHovered] = useState(false);
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -78,11 +79,11 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
   };
 
   const color = mounted ? getAdjustedColor(originalColor, forcedTheme || resolvedTheme) : originalColor;
-  const hoverVars = color
-    ? ({ '--tech-logo-hover-color': color } as React.CSSProperties)
-    : undefined;
+  const iconStyle = isHovered && color 
+    ? { color }
+    : {};
   
-  // Clone the icon element and add ref + transition class
+  // Clone the icon element and add transition class
   let enhancedIcon = icon;
   
   if (isValidElement(icon)) {
@@ -96,8 +97,8 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
       const sizeClass = size === 'sm' ? 'size-3' : size === 'md' ? 'size-4' : size === 'lg' ? 'size-5' : '';
 
       enhancedIcon = cloneElement(iconElement, {
-        className: `${existingClassName} ${sizeClass} transition-colors duration-300 group-hover:text-[var(--tech-logo-hover-color)]`.trim(),
-        style: existingStyle,
+        className: `${existingClassName} ${sizeClass} transition-colors duration-300`.trim(),
+        style: { ...existingStyle, ...iconStyle },
       });
   }
 
@@ -114,8 +115,9 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
   if (label) {
     return (
       <div 
-        className="group flex gap-2 items-center"
-        style={hoverVars}
+        className="flex gap-2 items-center"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         {enhancedIcon}
         <span className={labelClass}>{label}</span>
@@ -125,8 +127,8 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
   
   return (
     <div
-      className="group"
-      style={hoverVars}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {enhancedIcon}
     </div>
