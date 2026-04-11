@@ -40,6 +40,33 @@
       }
     }
   },
+  "Timeline": {
+    "title": "My journey",
+    "current": "Current",
+    "items": {
+      "cfc": {
+        "period": "September 2023 - July 2027",
+        "title": "CFC IT Specialist focused on application development with integrated maturity",
+        "organization": "ETML",
+        "location": "Lausanne",
+        "description": "Training in application development, continuous progress, and a strong foundation in software engineering. Winner of the ETML practical award during the first year."
+      },
+      "pos": {
+        "period": "February to March 2026",
+        "title": "Frontend Developer (internship)",
+        "organization": "infomaniak - Point of Sale team",
+        "location": "Geneva",
+        "description": "Contributed to the Point of Sale platform, implemented interfaces from Figma with React/Gatsby, and kicked off the migration to a more modern codebase with Inertia.js + TypeScript."
+      },
+      "kchat": {
+        "period": "2026 - Today",
+        "title": "Frontend Developer (internship)",
+        "organization": "infomaniak - kChat team",
+        "location": "Geneva",
+        "description": "Worked on web, desktop, and mobile apps, handled tickets, fixed bugs, and continuously improved the product."
+      }
+    }
+  },
   "Contact": {
     "title": "Contact",
     "emailText": "Email me at <email>contact@eliott.codes</email>"

@@ -40,6 +40,33 @@
       }
     }
   },
+  "Timeline": {
+    "title": "Mon parcours",
+    "current": "En cours",
+    "items": {
+      "cfc": {
+        "period": "Septembre 2023 - Juillet 2027",
+        "title": "CFC Informaticien orienté développement d'applications avec maturité intégrée",
+        "organization": "ETML",
+        "location": "Lausanne",
+        "description": "Formation en développement d'applications, progression continue, base solide en ingénierie logicielle. Obtention du Lauréat du Prix de pratique ETML en première année."
+      },
+      "pos": {
+        "period": "Février à Mars 2026",
+        "title": "Développeur frontend (stage)",
+        "organization": "infomaniak - Team Point de Vente",
+        "location": "Genève",
+        "description": "Contribution à la plateforme Point de Vente, implémentation d'interfaces depuis Figma avec React/Gatsby, démarrage de migration vers une codebase moderne avec Inertia.js + TypeScript."
+      },
+      "kchat": {
+        "period": "2026 - Aujourd'hui",
+        "title": "Développeur frontend (stage)",
+        "organization": "infomaniak - Team kChat",
+        "location": "Genève",
+        "description": "Travail sur applications web, desktop et mobile, prise en charge de tickets, corrections de bugs, amélioration continue produit."
+      }
+    }
+  },
   "Contact": {
     "title": "Contact",
     "emailText": "Écrivez-moi à <email>contact@eliott.codes</email>"
