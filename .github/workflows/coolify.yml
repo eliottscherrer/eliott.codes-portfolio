@@ -41,9 +41,12 @@ jobs:
     needs: ci
     runs-on: ubuntu-24.04
     steps:
-      - name: Trigger Coolify Deploy Webhook
+      - name: Trigger Coolify Deploy
         env:
           COOLIFY_DEPLOY_WEBHOOK: ${{ secrets.COOLIFY_DEPLOY_WEBHOOK }}
+          COOLIFY_API_KEY: ${{ secrets.COOLIFY_API_KEY }}
         run: |
-          test -n "$COOLIFY_DEPLOY_WEBHOOK"
-          curl --retry 5 --retry-delay 2 --retry-connrefused -fsS -X POST "$COOLIFY_DEPLOY_WEBHOOK"
+          test -n "$COOLIFY_DEPLOY_WEBHOOK" && test -n "$COOLIFY_API_KEY"
+          curl --retry 5 --retry-delay 2 --retry-connrefused -fsS -X POST \
+            "$COOLIFY_DEPLOY_WEBHOOK" \
+            -H "Authorization: Bearer $COOLIFY_API_KEY"
