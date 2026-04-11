@@ -75,9 +75,9 @@ export default function ExperienceTimeline({
       </h2>
 
       <div ref={timelineBodyRef} className="w-full space-y-1 relative">
-        <div className="pointer-events-none absolute left-3.75 sm:left-4 top-12 bottom-0 w-[2px] bg-gradient-to-b from-border/40 via-border to-border/40" aria-hidden="true" />
+        <div className="pointer-events-none absolute left-3.75 sm:left-4 top-12 bottom-0 w-[2px] rounded-full bg-gradient-to-b from-border/40 via-border to-border/40" aria-hidden="true" />
         <motion.div
-          className="pointer-events-none absolute left-3.75 sm:left-4 top-12 bottom-0 w-[2px] origin-top bg-gradient-to-b from-primary/25 via-primary/55 to-primary/15"
+          className="pointer-events-none absolute left-3.75 sm:left-4 top-12 bottom-0 w-[2px] rounded-full origin-top bg-gradient-to-b from-primary/25 via-primary/55 to-primary/15"
           style={{
             scaleY: shouldReduceMotion ? 1 : lineProgress,
           }}
@@ -86,11 +86,9 @@ export default function ExperienceTimeline({
 
         {groupedTimeline.map((group) => (
           <div key={group.period} className="w-full">
-            <div className="ps-2 my-3 first:mt-0">
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                {group.period}
-              </h3>
-            </div>
+            <h3 className="ps-2 my-3 first:mt-0 pl-12 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              {group.period}
+            </h3>
 
             {group.entries.map((item, entryPosition) => {
               const isLastInGroup = entryPosition === group.entries.length - 1;
