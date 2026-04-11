@@ -88,6 +88,7 @@ export default function ExperienceSection() {
 
             {group.entries.map((item, entryPosition) => {
               const isLastInGroup = entryPosition === group.entries.length - 1;
+              const lightIconSrc = item.iconSrc?.replace(".svg", "-light.svg");
 
               return (
                 <div key={item.id} className="flex gap-x-3 sm:gap-x-4">
@@ -107,7 +108,15 @@ export default function ExperienceSection() {
                             alt={item.iconAlt ?? item.organization ?? item.title}
                             width={32}
                             height={32}
-                            className="size-8 object-cover"
+                            className="hidden size-8 object-cover dark:block"
+                          />
+                          <Image
+                            src={lightIconSrc ?? item.iconSrc}
+                            alt=""
+                            aria-hidden="true"
+                            width={32}
+                            height={32}
+                            className="block size-8 object-cover dark:hidden"
                           />
                         </span>
                       ) : (
