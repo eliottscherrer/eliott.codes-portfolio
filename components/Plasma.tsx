@@ -106,6 +106,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
   useEffect(() => {
     if (!containerRef.current) return;
+    const container = containerRef.current;
 
     const useCustomColor = color ? 1.0 : 0.0;
     const customColorRgb = color ? hexToRgb(color) : [1, 1, 1];
@@ -127,7 +128,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
     canvas.style.display = 'block';
     canvas.style.width = '100%';
     canvas.style.height = '100%';
-    containerRef.current.appendChild(canvas);
+    container.appendChild(canvas);
 
     const geometry = new Triangle(gl);
 
@@ -150,7 +151,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     const mesh = new Mesh(gl, { geometry, program });
 
-    let mouseMoveTimeout: NodeJS.Timeout;
+    let mouseMoveTimeout: ReturnType<typeof setTimeout>;
     const handleMouseMove = (e: MouseEvent) => {
       if (!mouseInteractive) return;
       clearTimeout(mouseMoveTimeout);
@@ -166,7 +167,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
     };
 
     if (mouseInteractive) {
-      containerRef.current.addEventListener('mousemove', handleMouseMove, { passive: true });
+      container.addEventListener('mousemove', handleMouseMove, { passive: true });
     }
 
     const setSize = () => {
@@ -180,7 +181,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
       res[1] = gl.drawingBufferHeight;
     };
 
-    let resizeTimeout: NodeJS.Timeout;
+    let resizeTimeout: ReturnType<typeof setTimeout>;
     const throttledResize = () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(setSize, 100);
@@ -203,7 +204,11 @@ export const Plasma: React.FC<PlasmaProps> = ({
         return;
       }
 
-      let timeValue = (t - t0) * 0.001;
+      const timeValue = (t - t0) * 0.001;
+      const uniforms = program.uniforms as {
+        iTime: { value: number };
+        uDirection: { value: number };
+      };
       if (direction === 'pingpong') {
         const pingpongDuration = 10;
         const segmentTime = timeValue % pingpongDuration;
@@ -211,10 +216,10 @@ export const Plasma: React.FC<PlasmaProps> = ({
         const u = segmentTime / pingpongDuration;
         const smooth = u * u * (3 - 2 * u);
         const pingpongTime = isForward ? smooth * pingpongDuration : (1 - smooth) * pingpongDuration;
-        (program.uniforms.uDirection as any).value = 1.0;
-        (program.uniforms.iTime as any).value = pingpongTime;
+        uniforms.uDirection.value = 1.0;
+        uniforms.iTime.value = pingpongTime;
       } else {
-        (program.uniforms.iTime as any).value = timeValue;
+        uniforms.iTime.value = timeValue;
       }
       renderer.render({ scene: mesh });
       rafRef.current = requestAnimationFrame(loop);
@@ -227,11 +232,11 @@ export const Plasma: React.FC<PlasmaProps> = ({
       clearTimeout(resizeTimeout);
       clearTimeout(mouseMoveTimeout);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      if (mouseInteractive && containerRef.current) {
-        containerRef.current.removeEventListener('mousemove', handleMouseMove);
+      if (mouseInteractive) {
+        container.removeEventListener('mousemove', handleMouseMove);
       }
       try {
-        containerRef.current?.removeChild(canvas);
+        container.removeChild(canvas);
       } catch {}
     };
   }, [color, speed, direction, scale, opacity, mouseInteractive, isVisible]);

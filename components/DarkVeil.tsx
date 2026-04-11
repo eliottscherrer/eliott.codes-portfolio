@@ -170,6 +170,6 @@ export default function DarkVeil({
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
     };
-  }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
+  }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale, alpha, alphaThreshold]);
   return <canvas ref={ref} className={`w-full h-full block${className ? ` ${className}` : ''}`} style={style} />;
 }

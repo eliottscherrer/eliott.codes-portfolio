@@ -1,10 +1,6 @@
 import HomeClient from './HomeClient';
 
-export default async function Page({
-  params
-}: {
-  params: Promise<{locale: string}>
-}) {
+export default async function Page() {
   return <HomeClient />;
 }
 

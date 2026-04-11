@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, cloneElement, isValidElement, SVGProps, ReactElement, useRef, useEffect, useState } from 'react';
+import { ReactNode, cloneElement, isValidElement, ReactElement, CSSProperties, useSyncExternalStore } from 'react';
 import { useTheme } from 'next-themes';
 
 interface TechLogoProps {
@@ -13,13 +13,12 @@ interface TechLogoProps {
 }
 
 export default function TechLogo({ icon, label, brandColor, size, labelSize, forcedTheme }: TechLogoProps) {
-  const iconRef = useRef<SVGSVGElement | null>(null);
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   
   // Brand colors from Simple Icons (https://simpleicons.org/)
   const brandColors: Record<string, string> = {
@@ -79,32 +78,25 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
   };
 
   const color = mounted ? getAdjustedColor(originalColor, forcedTheme || resolvedTheme) : originalColor;
-  
-  const handleMouseEnter = () => {
-    if (color && iconRef.current) {
-      iconRef.current.style.color = color;
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (iconRef.current) {
-      iconRef.current.style.color = '';
-    }
-  };
+  const hoverVars = color
+    ? ({ '--tech-logo-hover-color': color } as React.CSSProperties)
+    : undefined;
   
   // Clone the icon element and add ref + transition class
   let enhancedIcon = icon;
   
   if (isValidElement(icon)) {
-    const iconElement = icon as ReactElement<any>;
+    const iconElement = icon as ReactElement<{
+      className?: string;
+      style?: CSSProperties;
+    }>;
     const existingClassName = iconElement.props.className || '';
     const existingStyle = iconElement.props.style || {};
     
       const sizeClass = size === 'sm' ? 'size-3' : size === 'md' ? 'size-4' : size === 'lg' ? 'size-5' : '';
 
       enhancedIcon = cloneElement(iconElement, {
-        ref: iconRef,
-        className: `${existingClassName} ${sizeClass} transition-colors duration-300`.trim(),
+        className: `${existingClassName} ${sizeClass} transition-colors duration-300 group-hover:text-[var(--tech-logo-hover-color)]`.trim(),
         style: existingStyle,
       });
   }
@@ -122,9 +114,8 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
   if (label) {
     return (
       <div 
-        className="flex gap-2 items-center"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        className="group flex gap-2 items-center"
+        style={hoverVars}
       >
         {enhancedIcon}
         <span className={labelClass}>{label}</span>
@@ -134,8 +125,8 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
   
   return (
     <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className="group"
+      style={hoverVars}
     >
       {enhancedIcon}
     </div>

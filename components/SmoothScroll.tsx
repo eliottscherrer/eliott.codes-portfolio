@@ -31,7 +31,7 @@ const SmoothScroll = () => {
             if (targetElement) {
               lenis.scrollTo(targetElement, { offset: -80 }); // Offset for header
             }
-          } catch (error) {
+          } catch {
             console.warn(`Invalid selector: ${href}`);
           }
         }
