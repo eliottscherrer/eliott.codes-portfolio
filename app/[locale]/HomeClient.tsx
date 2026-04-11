@@ -7,7 +7,7 @@ import { Mail, Github, Linkedin, MapPin, Coins, ChartCandlestick } from "lucide-
 import SplitText from "@/components/SplitText";
 import DarkVeil from "@/components/DarkVeil";
 import GradualBlur from "@/components/GradualBlur";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import Footer from "@/components/Footer"
@@ -15,6 +15,8 @@ import Footer from "@/components/Footer"
 import LogoLoop from '@/components/LogoLoop';
 import TechLogo from '@/components/TechLogo';
 import ProjectCard from '@/components/ProjectCard';
+import ExperienceTimeline from '@/components/ExperienceTimeline';
+import { getExperienceTimeline } from '@/lib/timeline-data';
 import {
   SiHtml5,
   SiCss3,
@@ -73,7 +75,9 @@ const backendTech = [
 export default function HomeClient() {
   const t = useTranslations();
   const tc = useTranslations("Common");
+  const tt = useTranslations("Timeline");
   const waveRef = useRef<HTMLSpanElement | null>(null);
+  const timelineItems = useMemo(() => getExperienceTimeline(tt), [tt]);
 
   // Trigger initial wave once on mount
   useEffect(() => {
@@ -286,6 +290,12 @@ export default function HomeClient() {
             />
           </div>
         </div>
+
+        <Separator className="my-12 sm:my-16" />
+
+        <ExperienceTimeline
+          items={timelineItems}
+        />
 
         <Separator className="my-12 sm:my-16" />
 
