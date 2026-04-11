@@ -69,7 +69,7 @@ const backendTech = [
   { node: <TechLogo icon={<SiFigma />} label="Figma" />, title: "Figma", href: "https://www.figma.com" },
 ];
 
-export default function HomeClient({ locale }: { locale?: string }) {
+export default function HomeClient() {
   const t = useTranslations();
   const tc = useTranslations("Common");
   const waveRef = useRef<HTMLSpanElement | null>(null);
