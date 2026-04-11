@@ -31,11 +31,31 @@ export const AnimatedThemeToggler = ({
     const isDark = resolvedTheme === "dark"
     const newTheme = isDark ? "light" : "dark"
 
-    await document.startViewTransition(() => {
+    const applyTheme = () => {
       flushSync(() => {
         setTheme(newTheme)
       })
-    }).ready
+    }
+
+    if (typeof document.startViewTransition !== "function") {
+      applyTheme()
+      return
+    }
+
+    let transition: ViewTransition | undefined
+
+    try {
+      transition = document.startViewTransition(applyTheme)
+    } catch {
+      applyTheme()
+      return
+    }
+
+    try {
+      await transition?.ready
+    } catch {
+      return
+    }
 
     const { top, left, width, height } =
       buttonRef.current.getBoundingClientRect()
@@ -46,19 +66,23 @@ export const AnimatedThemeToggler = ({
       Math.max(top, window.innerHeight - top)
     )
 
-    document.documentElement.animate(
-      {
-        clipPath: [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${maxRadius}px at ${x}px ${y}px)`,
-        ],
-      },
-      {
-        duration,
-        easing: "ease-in-out",
-        pseudoElement: "::view-transition-new(root)",
-      }
-    )
+    try {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${maxRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      )
+    } catch {
+      // Ignore animation errors on browsers with partial View Transition support.
+    }
   }, [resolvedTheme, setTheme, duration])
 
   return (
