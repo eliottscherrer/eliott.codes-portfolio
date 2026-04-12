@@ -2,7 +2,7 @@
 
 <img width="1488" height="640" alt="image" src="https://github.com/user-attachments/assets/7b0b6399-de56-4270-8382-e29215fa57d1" />
 
-[![CI and Deploy to Coolify](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/coolify.yml/badge.svg)](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/coolify.yml)
+[![CI and Deploy to Dokploy](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/dokploy.yml/badge.svg)](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/dokploy.yml)
 
 My personal portfolio built from scratch to showcase both frontend and full-stack capabilities through completed projects. Everything was made to demonstrate my attention to detail and the modern web development practices I use.
 
