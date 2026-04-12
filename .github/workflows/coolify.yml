@@ -2,8 +2,6 @@ name: CI and Deploy to Coolify
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [ main ]
   push:
     branches: [ main ]
 
@@ -16,7 +14,8 @@ concurrency:
 
 jobs:
   ci:
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, portfolio-deploy]
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -37,16 +36,26 @@ jobs:
         run: npm run build
 
   deploy_coolify:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: ci
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, portfolio-deploy]
+    timeout-minutes: 5
     steps:
+      - name: Validate required secret
+        env:
+          COOLIFY_DEPLOY_WEBHOOK: ${{ secrets.COOLIFY_DEPLOY_WEBHOOK }}
+        run: |
+          test -n "$COOLIFY_DEPLOY_WEBHOOK"
+
       - name: Trigger Coolify Deploy
         env:
           COOLIFY_DEPLOY_WEBHOOK: ${{ secrets.COOLIFY_DEPLOY_WEBHOOK }}
           COOLIFY_API_KEY: ${{ secrets.COOLIFY_API_KEY }}
         run: |
-          test -n "$COOLIFY_DEPLOY_WEBHOOK" && test -n "$COOLIFY_API_KEY"
-          curl --retry 5 --retry-delay 2 --retry-connrefused -fsS -X POST \
-            "$COOLIFY_DEPLOY_WEBHOOK" \
-            -H "Authorization: Bearer $COOLIFY_API_KEY"
+          if [ -n "$COOLIFY_API_KEY" ]; then
+            curl --retry 5 --retry-delay 2 --retry-connrefused -fsS -X POST \
+              "$COOLIFY_DEPLOY_WEBHOOK" \
+              -H "Authorization: Bearer $COOLIFY_API_KEY"
+          else
+            curl --retry 5 --retry-delay 2 --retry-connrefused -fsS -X POST \
+              "$COOLIFY_DEPLOY_WEBHOOK"
+          fi
