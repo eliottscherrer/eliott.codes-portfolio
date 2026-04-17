@@ -42,7 +42,7 @@ export default function ExperienceSection() {
   const timelineItems = useMemo(() => getExperienceTimeline(tt), [tt]);
   const groupedTimeline = useMemo(
     () => buildGroupedTimeline(timelineItems),
-    [timelineItems]
+    [timelineItems],
   );
 
   const timelineBodyRef = useRef<HTMLDivElement | null>(null);
@@ -60,7 +60,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="relative space-y-8 sm:space-y-10"
+      className="relative space-y-8 sm:space-y-10 ds-anchor-target"
       aria-labelledby="timeline-title"
     >
       <h2 id="timeline-title" className="ds-section-title">
@@ -96,7 +96,7 @@ export default function ExperienceSection() {
                     className={cn(
                       "relative",
                       !isLastInGroup &&
-                        "after:absolute after:top-8 after:bottom-0 after:start-4 after:-translate-x-[0.5px] after:border-s after:border-border/70"
+                        "after:absolute after:top-8 after:bottom-0 after:start-4 after:-translate-x-[0.5px] after:border-s after:border-border/70",
                     )}
                     aria-hidden="true"
                   >
@@ -105,7 +105,9 @@ export default function ExperienceSection() {
                         <span className="flex shrink-0 justify-center items-center size-8 rounded-full border border-black/15 dark:border-white/10 bg-[var(--surface-elevated)] shadow-[0_6px_20px_-12px_rgba(0,0,0,0.7)] overflow-hidden">
                           <Image
                             src={item.iconSrc}
-                            alt={item.iconAlt ?? item.organization ?? item.title}
+                            alt={
+                              item.iconAlt ?? item.organization ?? item.title
+                            }
                             width={32}
                             height={32}
                             className="hidden size-8 object-cover dark:block"
@@ -134,11 +136,13 @@ export default function ExperienceSection() {
 
                   <article
                     tabIndex={0}
-                    className={cn("group relative grow pt-0.5 pb-8 outline-none")}
+                    className={cn(
+                      "group relative grow pt-0.5 pb-8 outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-2xl",
+                    )}
                     aria-label={`${item.period} - ${item.title}`}
                   >
                     <SpotlightCard
-                      className="flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-all duration-500 border border-[var(--surface-border)] hover:border-foreground/20 backdrop-blur-xl overflow-hidden rounded-2xl"
+                      className="flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-[background-color,border-color,box-shadow] duration-500 border border-[var(--surface-border)] hover:border-foreground/20 backdrop-blur-xl overflow-hidden rounded-2xl"
                       spotlightColor="rgba(14, 100, 180, 0.15)"
                     >
                       {item.isCurrent && (
@@ -164,7 +168,10 @@ export default function ExperienceSection() {
                             )}
                             {item.location && (
                               <span className="inline-flex items-center gap-1">
-                                <MapPin className="size-3.5" aria-hidden="true" />
+                                <MapPin
+                                  className="size-3.5"
+                                  aria-hidden="true"
+                                />
                                 {item.location}
                               </span>
                             )}
