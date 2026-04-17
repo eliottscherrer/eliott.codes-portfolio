@@ -1,10 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-import SpotlightCard from './SpotlightCard';
-import { Badge } from '@/components/ui/badge';
-import { useTranslations } from 'next-intl';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import SpotlightCard from "./SpotlightCard";
+import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
 
 type StackItem = { node?: React.ReactNode; label?: string };
 
@@ -16,9 +16,15 @@ interface ProjectCardProps {
   stack?: Array<StackItem | string>;
 }
 
-export default function ProjectCard({ title, description, link, cover, stack = [] }: ProjectCardProps) {
-  const t = useTranslations('Projects');
-  const isExternal = link.startsWith('http');
+export default function ProjectCard({
+  title,
+  description,
+  link,
+  cover,
+  stack = [],
+}: ProjectCardProps) {
+  const t = useTranslations("Projects");
+  const isExternal = link.startsWith("http");
 
   return (
     <Link
@@ -28,11 +34,11 @@ export default function ProjectCard({ title, description, link, cover, stack = [
       className="block w-full group outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
     >
       <SpotlightCard
-        className="ds-surface-card flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-all duration-500 backdrop-blur-xl border border-[var(--surface-border)] hover:border-foreground/20 overflow-hidden"
+        className="ds-surface-card flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-[background-color,border-color,box-shadow] duration-500 backdrop-blur-xl border border-[var(--surface-border)] hover:border-foreground/20 overflow-hidden"
         spotlightColor="rgba(14, 100, 180, 0.15)"
       >
         {/* Image Section */}
-        <div className="relative w-full h-64 md:h-96 overflow-hidden shrink-0">
+        <div className="relative w-full h-52 sm:h-64 md:h-96 overflow-hidden shrink-0">
           {cover ? (
             <>
               <Image
@@ -51,16 +57,23 @@ export default function ProjectCard({ title, description, link, cover, stack = [
           {stack.length > 0 && (
             <div className="absolute bottom-3 left-4 right-4 flex flex-wrap gap-2 z-10">
               {stack.map((item, i) => {
-                if (typeof item === 'object' && item.node) {
+                if (typeof item === "object" && item.node) {
                   return (
-                    <div key={i} className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full px-3 py-2 text-xs text-white/90 flex items-center gap-1.5 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20">
+                    <div
+                      key={i}
+                      className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full px-3 py-2 text-xs text-white/90 flex items-center gap-1.5 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20"
+                    >
                       {item.node}
                     </div>
                   );
                 }
-                const label = typeof item === 'string' ? item : item.label;
+                const label = typeof item === "string" ? item : item.label;
                 return (
-                  <Badge key={i} variant="secondary" className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 text-white/90 rounded-full px-3 py-1 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20">
+                  <Badge
+                    key={i}
+                    variant="secondary"
+                    className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 text-white/90 rounded-full px-3 py-1 shadow-sm transition-[background-color,border-color,box-shadow] duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20"
+                  >
                     {label}
                   </Badge>
                 );
@@ -77,16 +90,16 @@ export default function ProjectCard({ title, description, link, cover, stack = [
                 {title}
               </h3>
             </div>
-            
-            <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-3">
+
+            <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-2 sm:line-clamp-3">
               {description}
             </p>
           </div>
 
           {/* CTA Button */}
           <div className="mt-auto">
-            <div className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 text-primary font-medium text-sm border border-primary/20 transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(14,100,180,0.3)] w-full sm:w-auto">
-              {t('viewProject')}
+            <div className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 text-primary font-medium text-sm border border-primary/20 transition-[background-color,border-color,color,box-shadow] duration-300 group-hover:bg-brand group-hover:text-primary-foreground group-hover:border-brand group-hover:shadow-[0_0_20px_rgba(14,100,180,0.3)] w-full sm:w-auto">
+              {t("viewProject")}
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </div>
           </div>
