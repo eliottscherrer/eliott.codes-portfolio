@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { motion, useAnimationFrame, useMotionValue, useTransform } from 'motion/react';
 
 export type LogoItem =
   | {
@@ -118,76 +119,6 @@ const useImageLoader = (
   }, [seqRef, onLoad]);
 };
 
-const useAnimationLoop = (
-  trackRef: React.RefObject<HTMLDivElement | null>,
-  targetVelocity: number,
-  seqWidth: number,
-  isHovered: boolean,
-  pauseOnHover: boolean
-) => {
-  const rafRef = useRef<number | null>(null);
-  const lastTimestampRef = useRef<number | null>(null);
-  const offsetRef = useRef(0);
-  const velocityRef = useRef(0);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (seqWidth > 0) {
-      offsetRef.current = ((offsetRef.current % seqWidth) + seqWidth) % seqWidth;
-      track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
-    }
-
-    if (prefersReduced) {
-      track.style.transform = 'translate3d(0, 0, 0)';
-      return () => {
-        lastTimestampRef.current = null;
-      };
-    }
-
-    const animate = (timestamp: number) => {
-      if (lastTimestampRef.current === null) {
-        lastTimestampRef.current = timestamp;
-      }
-
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
-      lastTimestampRef.current = timestamp;
-
-      const target = pauseOnHover && isHovered ? 0 : targetVelocity;
-
-      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
-      velocityRef.current += (target - velocityRef.current) * easingFactor;
-
-      if (seqWidth > 0) {
-        let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
-        nextOffset = ((nextOffset % seqWidth) + seqWidth) % seqWidth;
-        offsetRef.current = nextOffset;
-
-        const translateX = -offsetRef.current;
-        track.style.transform = `translate3d(${translateX}px, 0, 0)`;
-      }
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      lastTimestampRef.current = null;
-    };
-  }, [trackRef, targetVelocity, seqWidth, isHovered, pauseOnHover]);
-};
-
 export const LogoLoop = React.memo<LogoLoopProps>(
   ({
     logos,
@@ -205,12 +136,14 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     style
   }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
     const seqRef = useRef<HTMLUListElement>(null);
+    const isHoveredRef = useRef(false);
 
     const [seqWidth, setSeqWidth] = useState<number>(0);
     const [copyCount, setCopyCount] = useState<number>(ANIMATION_CONFIG.MIN_COPIES);
-    const [isHovered, setIsHovered] = useState<boolean>(false);
+
+    const x = useMotionValue(0);
+    const velocity = useMotionValue(0);
 
     const targetVelocity = useMemo(() => {
       const magnitude = Math.abs(speed);
@@ -218,6 +151,22 @@ export const LogoLoop = React.memo<LogoLoopProps>(
       const speedMultiplier = speed < 0 ? -1 : 1;
       return magnitude * directionMultiplier * speedMultiplier;
     }, [speed, direction]);
+
+    useAnimationFrame((_, delta) => {
+      if (seqWidth <= 0) return;
+
+      const deltaTime = delta / 1000;
+      const target = pauseOnHover && isHoveredRef.current ? 0 : targetVelocity;
+
+      const currentVelocity = velocity.get();
+      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
+      const nextVelocity = currentVelocity + (target - currentVelocity) * easingFactor;
+      velocity.set(nextVelocity);
+
+      let nextX = x.get() - nextVelocity * deltaTime;
+      nextX = ((nextX % seqWidth) - seqWidth) % seqWidth;
+      x.set(nextX);
+    });
 
     const updateDimensions = useCallback(() => {
       const containerWidth = containerRef.current?.clientWidth ?? 0;
@@ -231,10 +180,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     }, []);
 
     useResizeObserver(updateDimensions, containerRef, seqRef);
-
     useImageLoader(seqRef, updateDimensions);
-
-    useAnimationLoop(trackRef, targetVelocity, seqWidth, isHovered, pauseOnHover);
 
     const cssVariables = useMemo(
       () =>
@@ -259,14 +205,6 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         ),
       [scaleOnHover, className]
     );
-
-    const handleMouseEnter = useCallback(() => {
-      if (pauseOnHover) setIsHovered(true);
-    }, [pauseOnHover]);
-
-    const handleMouseLeave = useCallback(() => {
-      if (pauseOnHover) setIsHovered(false);
-    }, [pauseOnHover]);
 
     const renderLogoItem = useCallback(
       (item: LogoItem, key: React.Key) => {
@@ -381,8 +319,8 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         style={containerStyle}
         role="region"
         aria-label={ariaLabel}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => (isHoveredRef.current = true)}
+        onMouseLeave={() => (isHoveredRef.current = false)}
       >
         {fadeOut && (
           <>
@@ -405,12 +343,12 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           </>
         )}
 
-        <div
+        <motion.div
           className={cx('flex w-max will-change-transform select-none', 'motion-reduce:transform-none')}
-          ref={trackRef}
+          style={{ x }}
         >
           {logoLists}
-        </div>
+        </motion.div>
       </div>
     );
   }
