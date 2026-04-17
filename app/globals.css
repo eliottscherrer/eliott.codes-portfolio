@@ -190,6 +190,10 @@ body,
 }
 
 @layer components {
+  .ds-anchor-target {
+    scroll-margin-top: clamp(6rem, 10vw, 8.5rem);
+  }
+
   .ds-section-title {
     @apply text-2xl sm:text-3xl font-semibold tracking-tight;
   }
