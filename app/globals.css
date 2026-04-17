@@ -190,8 +190,20 @@ body,
 }
 
 @layer components {
+  .ds-skip-link {
+    @apply sr-only fixed left-3 top-3 z-[100] rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground shadow-lg;
+  }
+
+  .ds-skip-link:focus-visible {
+    @apply not-sr-only outline-none ring-2 ring-ring/70;
+  }
+
   .ds-anchor-target {
     scroll-margin-top: clamp(6rem, 10vw, 8.5rem);
+  }
+
+  .ds-focus-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
 
   .ds-section-title {
@@ -210,6 +222,9 @@ body,
     background: var(--surface);
     border: 1px solid var(--surface-border);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .ds-surface-card-hover {
@@ -219,6 +234,9 @@ body,
   .ds-icon-control {
     @apply border bg-transparent hover:bg-accent text-foreground/90 hover:text-accent-foreground backdrop-blur-sm;
     border-color: var(--surface-border);
+    -webkit-backdrop-filter: blur(4px);
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 
@@ -258,8 +276,8 @@ body,
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 @keyframes wag {
