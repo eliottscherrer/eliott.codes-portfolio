@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useRef, useSyncExternalStore } from "react";
-import { Moon, Sun } from "lucide-react";
+import type { Variants } from "motion/react";
+import { motion, useAnimation } from "motion/react";
+import { Moon } from "lucide-react";
 import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
 
@@ -11,18 +13,52 @@ interface AnimatedThemeTogglerProps extends React.ComponentPropsWithoutRef<"butt
   duration?: number;
 }
 
+const SUN_RAYS_VARIANTS: Variants = {
+  normal: {
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 60,
+      damping: 10,
+      duration: 0.5,
+    },
+  },
+  animate: {
+    rotate: 180,
+    transition: {
+      delay: 0.1,
+      type: "spring",
+      stiffness: 80,
+      damping: 13,
+    },
+  },
+};
+
 export const AnimatedThemeToggler = ({
   className,
   duration = 400,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur,
   ...props
 }: AnimatedThemeTogglerProps) => {
   const { setTheme, resolvedTheme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const sunRaysControls = useAnimation();
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false,
   );
+
+  const startSunRaysAnimation = useCallback(() => {
+    void sunRaysControls.start("animate");
+  }, [sunRaysControls]);
+
+  const stopSunRaysAnimation = useCallback(() => {
+    void sunRaysControls.start("normal");
+  }, [sunRaysControls]);
 
   const toggleTheme = useCallback(async () => {
     if (!buttonRef.current) return;
@@ -107,12 +143,54 @@ export const AnimatedThemeToggler = ({
     <button
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(className)}
+      onMouseEnter={(event) => {
+        startSunRaysAnimation();
+        onMouseEnter?.(event);
+      }}
+      onMouseLeave={(event) => {
+        stopSunRaysAnimation();
+        onMouseLeave?.(event);
+      }}
+      onFocus={(event) => {
+        startSunRaysAnimation();
+        onFocus?.(event);
+      }}
+      onBlur={(event) => {
+        stopSunRaysAnimation();
+        onBlur?.(event);
+      }}
+      className={cn("theme-toggle-btn", className)}
       aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
       {...props}
     >
       {/* Always render both icons and let the css decide which one is displayed to avoid hydration mismatches */}
-      <Sun className="hidden h-4 w-4 dark:inline" aria-hidden />
+      <svg
+        className="theme-toggle-sun hidden h-4 w-4 dark:inline"
+        aria-hidden
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <motion.g
+          initial="normal"
+          animate={sunRaysControls}
+          variants={SUN_RAYS_VARIANTS}
+          style={{ transformOrigin: "12px 12px" }}
+        >
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="m4.93 4.93 1.41 1.41" />
+          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="m4.93 19.07 1.41-1.41" />
+          <path d="m17.66 6.34 1.41-1.41" />
+        </motion.g>
+      </svg>
       <Moon className="inline h-4 w-4 dark:hidden" aria-hidden />
       <span className="sr-only">Toggle theme</span>
     </button>
