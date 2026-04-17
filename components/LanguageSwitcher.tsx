@@ -9,9 +9,58 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Languages } from "lucide-react";
-import { useSyncExternalStore } from "react";
+import type { Variants } from "motion/react";
+import { motion, useAnimation } from "motion/react";
+import { useCallback, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
+
+const LANGUAGE_LEFT_VARIANTS: Variants = {
+  normal: {
+    x: 0,
+    y: 0,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 16,
+    },
+  },
+  animate: {
+    x: 9,
+    y: 9,
+    rotate: 360,
+    transition: {
+      type: "spring",
+      stiffness: 170,
+      damping: 18,
+      mass: 0.7,
+    },
+  },
+};
+
+const LANGUAGE_RIGHT_VARIANTS: Variants = {
+  normal: {
+    x: 0,
+    y: 0,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 16,
+    },
+  },
+  animate: {
+    x: -11,
+    y: -11,
+    rotate: 360,
+    transition: {
+      type: "spring",
+      stiffness: 170,
+      damping: 18,
+      mass: 0.7,
+    },
+  },
+};
 
 export default function LanguageSwitcher({
   className,
@@ -28,6 +77,52 @@ export default function LanguageSwitcher({
     () => () => {},
     () => true,
     () => false,
+  );
+  const languageIconControls = useAnimation();
+
+  const startLanguageIconAnimation = useCallback(() => {
+    void languageIconControls.start("animate");
+  }, [languageIconControls]);
+
+  const stopLanguageIconAnimation = useCallback(() => {
+    void languageIconControls.start("normal");
+  }, [languageIconControls]);
+
+  const renderLanguageIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lucide lucide-languages-icon lucide-languages h-4 w-4"
+      aria-hidden
+    >
+      <motion.g
+        initial="normal"
+        animate={languageIconControls}
+        variants={LANGUAGE_LEFT_VARIANTS}
+        style={{ transformBox: "fill-box", transformOrigin: "center" }}
+      >
+        <path d="m5 8 6 6" />
+        <path d="m4 14 6-6 2-3" />
+        <path d="M2 5h12" />
+        <path d="M7 2h1" />
+      </motion.g>
+      <motion.g
+        initial="normal"
+        animate={languageIconControls}
+        variants={LANGUAGE_RIGHT_VARIANTS}
+        style={{ transformBox: "fill-box", transformOrigin: "center" }}
+      >
+        <path d="m22 22-5-10-5 10" />
+        <path d="M14 18h6" />
+      </motion.g>
+    </svg>
   );
   const languageNames = new Intl.DisplayNames([locale], { type: "language" });
   const formatLanguageLabel = (
@@ -58,7 +153,7 @@ export default function LanguageSwitcher({
         )}
         disabled
       >
-        <Languages className="h-4 w-4" />
+        {renderLanguageIcon()}
         <span className="sr-only">{t("label")}</span>
       </Button>
     );
@@ -70,12 +165,16 @@ export default function LanguageSwitcher({
         <Button
           variant="glass"
           size="icon"
+          onMouseEnter={startLanguageIconAnimation}
+          onMouseLeave={stopLanguageIconAnimation}
+          onFocus={startLanguageIconAnimation}
+          onBlur={stopLanguageIconAnimation}
           className={cn(
             "ds-icon-control rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4",
             className,
           )}
         >
-          <Languages className="h-4 w-4" />
+          {renderLanguageIcon()}
           <span className="sr-only">{t("label")}</span>
         </Button>
       </DropdownMenuTrigger>
