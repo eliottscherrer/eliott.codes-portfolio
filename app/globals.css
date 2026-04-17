@@ -232,7 +232,23 @@ body,
   animation: wave 0.6s ease-in-out 0s 3 alternate;
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .wave-emoji.is-waving {
+    animation: none !important;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;
 }
