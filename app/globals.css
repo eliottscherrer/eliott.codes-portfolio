@@ -223,8 +223,13 @@ body,
 }
 
 @keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(20deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
 }
 
 .wave-emoji {
@@ -255,4 +260,40 @@ body,
 ::view-transition-new(root) {
     animation: none;
     mix-blend-mode: normal;
+}
+
+@keyframes wag {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(16deg);
+  }
+  75% {
+    transform: rotate(-8deg);
+  }
+}
+
+#github-tail.is-wagging {
+  animation: wag 0.35s ease-in-out 0s 2;
+}
+
+@keyframes ear-twitch {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+#github-body.is-wagging {
+  animation: ear-twitch 0.35s ease-in-out 0s 2;
+}
+
+@keyframes linkedin-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#linkedin-dot.is-spinning {
+  animation: linkedin-spin 0.5s ease-in-out forwards;
 }
