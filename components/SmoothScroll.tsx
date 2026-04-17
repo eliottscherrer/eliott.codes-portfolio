@@ -18,31 +18,48 @@ const SmoothScroll = () => {
 
     requestAnimationFrame(raf);
 
-    // Handle anchor link clicks
+    // Handle anchor link clicks with a dynamic offset based on sticky header size
     const handleAnchorClick = (e: Event) => {
-      const target = e.target as HTMLAnchorElement;
-      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
-        e.preventDefault();
-        const href = target.getAttribute('href');
-        // Only attempt to scroll if href is not just '#' and is a valid selector
-        if (href && href.length > 1) {
-          try {
-            const targetElement = document.querySelector(href) as HTMLElement;
-            if (targetElement) {
-              lenis.scrollTo(targetElement, { offset: -80 }); // Offset for header
-            }
-          } catch {
-            console.warn(`Invalid selector: ${href}`);
-          }
-        }
+      const clickTarget = e.target as HTMLElement | null;
+      const anchor = clickTarget?.closest(
+        'a[href^="#"]',
+      ) as HTMLAnchorElement | null;
+
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (!href || href.length <= 1) return;
+
+      e.preventDefault();
+
+      try {
+        const targetElement = document.querySelector(
+          href,
+        ) as HTMLElement | null;
+        if (!targetElement) return;
+
+        const stickyHeader = document.querySelector(
+          "header.sticky",
+        ) as HTMLElement | null;
+        const stickyHeaderHeight =
+          stickyHeader?.getBoundingClientRect().height ?? 0;
+        const stickyTopOffset = stickyHeader
+          ? Number.parseFloat(getComputedStyle(stickyHeader).top || "0") || 0
+          : 0;
+        const breathingRoom = 16;
+        const offset = -(stickyHeaderHeight + stickyTopOffset + breathingRoom);
+
+        lenis.scrollTo(targetElement, { offset });
+      } catch {
+        console.warn(`Invalid selector: ${href}`);
       }
     };
 
-    document.addEventListener('click', handleAnchorClick);
+    document.addEventListener("click", handleAnchorClick);
 
     return () => {
       lenis.destroy();
-      document.removeEventListener('click', handleAnchorClick);
+      document.removeEventListener("click", handleAnchorClick);
     };
   }, []);
 
