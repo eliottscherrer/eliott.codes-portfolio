@@ -20,7 +20,7 @@
   "Hero": {
     "location": "Lausanne, Suisse",
     "description": "Étudiant de {age} ans à l'ETML en développement logiciel et web, avec un intérêt pour la cybersécurité.",
-    "viewProjects": "Voir les projets",
+    "viewProjects": "Voir mes projets",
     "getInTouch": "Me contacter"
   },
   "Projects": {
