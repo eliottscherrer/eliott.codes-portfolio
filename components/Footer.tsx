@@ -93,24 +93,24 @@ export default function Footer() {
                   {t("quickLinks")}
                 </h4>
                 <nav className="flex flex-col gap-2 items-end text-right sm:items-start sm:text-left">
-                  <a
+                  <Link
+                    href="#experience"
+                    className="ds-inline-link text-sm w-fit text-right sm:text-left"
+                  >
+                    {t("experience")}
+                  </Link>
+                  <Link
                     href="#projects"
                     className="ds-inline-link text-sm w-fit text-right sm:text-left"
                   >
                     {t("projects")}
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#contact"
                     className="ds-inline-link text-sm w-fit text-right sm:text-left"
                   >
                     {t("contact")}
-                  </a>
-                  <a
-                    href="mailto:contact@eliott.codes"
-                    className="ds-inline-link text-sm w-fit text-right sm:text-left"
-                  >
-                    {t("email")}
-                  </a>
+                  </Link>
                 </nav>
               </div>
             </div>
@@ -136,17 +136,14 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="font-semibold text-md">{t("quickLinks")}</h4>
             <nav className="flex flex-col gap-2">
+              <Link href="#experience" className="ds-inline-link text-sm w-fit">
+                {t("experience")}
+              </Link>
               <Link href="#projects" className="ds-inline-link text-sm w-fit">
                 {t("projects")}
               </Link>
               <Link href="#contact" className="ds-inline-link text-sm w-fit">
                 {t("contact")}
-              </Link>
-              <Link
-                href="mailto:contact@eliott.codes"
-                className="ds-inline-link text-sm w-fit"
-              >
-                {t("email")}
               </Link>
             </nav>
           </div>
