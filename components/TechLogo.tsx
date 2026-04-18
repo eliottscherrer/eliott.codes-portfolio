@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, cloneElement, isValidElement, ReactElement, CSSProperties, useSyncExternalStore, useState } from 'react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/components/theme-provider';
 
 interface TechLogoProps {
   icon: ReactNode;

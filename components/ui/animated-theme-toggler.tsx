@@ -4,7 +4,7 @@ import { useCallback, useRef, useSyncExternalStore } from "react";
 import type { Variants } from "motion/react";
 import { motion, useAnimation } from "motion/react";
 import { flushSync } from "react-dom";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/theme-provider";
 
 import { cn } from "@/lib/utils";
 
