@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { createSamePageAnchorClickHandler } from "@/lib/anchor-scroll";
 
 const SmoothScroll = () => {
   useEffect(() => {
@@ -11,55 +12,23 @@ const SmoothScroll = () => {
       smoothWheel: true,
     });
 
-    function raf(time: number) {
+    let rafId = 0;
+    const raf = (time: number) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    // Handle anchor link clicks with a dynamic offset based on sticky header size
-    const handleAnchorClick = (e: Event) => {
-      const clickTarget = e.target as HTMLElement | null;
-      const anchor = clickTarget?.closest(
-        'a[href^="#"]',
-      ) as HTMLAnchorElement | null;
-
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href");
-      if (!href || href.length <= 1) return;
-
-      e.preventDefault();
-
-      try {
-        const targetElement = document.querySelector(
-          href,
-        ) as HTMLElement | null;
-        if (!targetElement) return;
-
-        const stickyHeader = document.querySelector(
-          "header.sticky",
-        ) as HTMLElement | null;
-        const stickyHeaderHeight =
-          stickyHeader?.getBoundingClientRect().height ?? 0;
-        const stickyTopOffset = stickyHeader
-          ? Number.parseFloat(getComputedStyle(stickyHeader).top || "0") || 0
-          : 0;
-        const breathingRoom = 16;
-        const offset = -(stickyHeaderHeight + stickyTopOffset + breathingRoom);
-
-        lenis.scrollTo(targetElement, { offset });
-      } catch {
-        console.warn(`Invalid selector: ${href}`);
-      }
+      rafId = requestAnimationFrame(raf);
     };
 
-    document.addEventListener("click", handleAnchorClick);
+    rafId = requestAnimationFrame(raf);
+
+    const handleAnchorClick = createSamePageAnchorClickHandler(lenis);
+
+    // Capture phase prevents Next hash navigation from mutating the URL first.
+    document.addEventListener("click", handleAnchorClick, true);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
-      document.removeEventListener("click", handleAnchorClick);
+      document.removeEventListener("click", handleAnchorClick, true);
     };
   }, []);
 
