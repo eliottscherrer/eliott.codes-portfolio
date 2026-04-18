@@ -62,6 +62,19 @@ const LANGUAGE_RIGHT_VARIANTS: Variants = {
   },
 };
 
+const LOCALE_TO_FLAG_CLASS: Partial<
+  Record<(typeof routing.locales)[number], string>
+> = {
+  fr: "fi-fr",
+  en: "fi-gb",
+};
+
+const getLocaleFlagClass = (
+  availableLocale: (typeof routing.locales)[number],
+) => {
+  return LOCALE_TO_FLAG_CLASS[availableLocale] ?? `fi-${availableLocale}`;
+};
+
 export default function LanguageSwitcher({
   className,
   side = "bottom",
@@ -124,6 +137,23 @@ export default function LanguageSwitcher({
       </motion.g>
     </svg>
   );
+
+  const renderLocaleFlag = (
+    availableLocale: (typeof routing.locales)[number],
+    size: "sm" | "md" = "md",
+  ) => (
+    <span
+      aria-hidden
+      className={cn(
+        "fi shrink-0 rounded-[2px]",
+        size === "sm"
+          ? "text-[10px] leading-[10px]"
+          : "text-[12px] leading-[12px]",
+        getLocaleFlagClass(availableLocale),
+      )}
+    />
+  );
+
   const languageNames = new Intl.DisplayNames([locale], { type: "language" });
   const formatLanguageLabel = (
     availableLocale: (typeof routing.locales)[number],
@@ -181,15 +211,20 @@ export default function LanguageSwitcher({
       <DropdownMenuContent
         align="end"
         side={side}
-        className="bg-[var(--surface-glass)] backdrop-blur-xl border-[var(--surface-border)] shadow-lg transform-gpu"
+        className="bg-surface-glass backdrop-blur-xl border-surface-border shadow-lg transform-gpu"
       >
         {routing.locales.map((availableLocale) => (
           <DropdownMenuItem
             key={availableLocale}
             onClick={() => handleLocaleChange(availableLocale)}
-            className={cn(locale === availableLocale && "bg-accent")}
+            className={cn(
+              "text-foreground/85 transition-colors data-[highlighted]:bg-foreground/8 data-[highlighted]:text-foreground focus:bg-foreground/8 focus:text-foreground",
+              locale === availableLocale &&
+                "bg-foreground/12 text-foreground data-[highlighted]:bg-foreground/18 data-[highlighted]:text-foreground focus:bg-foreground/18 focus:text-foreground",
+            )}
           >
-            {formatLanguageLabel(availableLocale)}
+            {renderLocaleFlag(availableLocale)}
+            <span>{formatLanguageLabel(availableLocale)}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
