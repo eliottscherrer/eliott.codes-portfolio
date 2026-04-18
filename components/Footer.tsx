@@ -34,13 +34,13 @@ export default function Footer() {
           triggerGithubWag(event.currentTarget);
         }}
       >
-        <a
+        <Link
           href="https://github.com/eliottscherrer"
           target="_blank"
           rel="noopener noreferrer"
         >
           <AnimatedGithub />
-        </a>
+        </Link>
       </Button>
       <Button
         variant="glass"
@@ -49,13 +49,13 @@ export default function Footer() {
         className={socialIconClass}
         asChild
       >
-        <a
+        <Link
           href="https://www.linkedin.com/in/eliottscherrer/"
           target="_blank"
           rel="noopener noreferrer"
         >
           <AnimatedLinkedin />
-        </a>
+        </Link>
       </Button>
       <Button
         variant="glass"
@@ -64,9 +64,9 @@ export default function Footer() {
         className={socialIconClass}
         asChild
       >
-        <a href="mailto:contact@eliott.codes">
+        <Link href="mailto:contact@eliott.codes">
           <AnimatedMail />
-        </a>
+        </Link>
       </Button>
     </div>
   );
