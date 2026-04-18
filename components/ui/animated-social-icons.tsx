@@ -10,6 +10,7 @@ export const AnimatedLinkedin = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     className="size-4"
+    overflow="visible"
   >
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <rect width="4" height="12" x="2" y="9" />
@@ -81,7 +82,7 @@ export const AnimatedMail = () => (
       className="opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
     />
     <path
-      d="M22 7 L12 12.7 L2 7"
+      d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
       className="[transform-box:view-box] [transform-origin:12px_5px] [transform:rotateX(0deg)] transition-transform duration-500 ease-out group-hover:[transform:rotateX(180deg)]"
     />
     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />

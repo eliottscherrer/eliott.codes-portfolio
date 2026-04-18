@@ -114,6 +114,7 @@ export default function LanguageSwitcher({
       strokeLinejoin="round"
       className="lucide lucide-languages-icon lucide-languages h-4 w-4"
       aria-hidden
+      overflow="visible"
     >
       <motion.g
         initial="normal"
