@@ -3,7 +3,6 @@
 import { useCallback, useRef, useSyncExternalStore } from "react";
 import type { Variants } from "motion/react";
 import { motion, useAnimation } from "motion/react";
-import { Moon } from "lucide-react";
 import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
 
@@ -34,6 +33,50 @@ const SUN_RAYS_VARIANTS: Variants = {
   },
 };
 
+const MOON_ICON_VARIANTS: Variants = {
+  normal: {
+    rotate: 0,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut",
+    },
+  },
+  animate: {
+    rotate: [0, 14, -9, 0],
+    y: [0, -1, 0.2, 0],
+    scale: [1, 1.05, 0.98, 1],
+    transition: {
+      duration: 0.85,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const MOON_DROP_SPARKLE_VARIANTS: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -16,
+    scale: 0.82,
+    rotate: -10,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn",
+    },
+  },
+  settled: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export const AnimatedThemeToggler = ({
   className,
   duration = 400,
@@ -46,6 +89,8 @@ export const AnimatedThemeToggler = ({
   const { setTheme, resolvedTheme } = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const sunRaysControls = useAnimation();
+  const moonControls = useAnimation();
+  const moonDropSparkleControls = useAnimation();
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -59,6 +104,16 @@ export const AnimatedThemeToggler = ({
   const stopSunRaysAnimation = useCallback(() => {
     void sunRaysControls.start("normal");
   }, [sunRaysControls]);
+
+  const startMoonAnimation = useCallback(() => {
+    void moonControls.start("animate");
+    void moonDropSparkleControls.start("settled");
+  }, [moonControls, moonDropSparkleControls]);
+
+  const stopMoonAnimation = useCallback(() => {
+    void moonControls.start("normal");
+    void moonDropSparkleControls.start("hidden");
+  }, [moonControls, moonDropSparkleControls]);
 
   const toggleTheme = useCallback(async () => {
     if (!buttonRef.current) return;
@@ -145,18 +200,22 @@ export const AnimatedThemeToggler = ({
       onClick={toggleTheme}
       onMouseEnter={(event) => {
         startSunRaysAnimation();
+        startMoonAnimation();
         onMouseEnter?.(event);
       }}
       onMouseLeave={(event) => {
         stopSunRaysAnimation();
+        stopMoonAnimation();
         onMouseLeave?.(event);
       }}
       onFocus={(event) => {
         startSunRaysAnimation();
+        startMoonAnimation();
         onFocus?.(event);
       }}
       onBlur={(event) => {
         stopSunRaysAnimation();
+        stopMoonAnimation();
         onBlur?.(event);
       }}
       className={cn("theme-toggle-btn", className)}
@@ -191,7 +250,35 @@ export const AnimatedThemeToggler = ({
           <path d="m17.66 6.34 1.41-1.41" />
         </motion.g>
       </svg>
-      <Moon className="inline h-4 w-4 dark:hidden" aria-hidden />
+      <motion.svg
+        initial="normal"
+        animate={moonControls}
+        className="inline h-4 w-4 dark:hidden"
+        aria-hidden
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <motion.g
+          variants={MOON_ICON_VARIANTS}
+          style={{ transformOrigin: "12px 12px" }}
+        >
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </motion.g>
+        <motion.path
+          initial="hidden"
+          animate={moonDropSparkleControls}
+          variants={MOON_DROP_SPARKLE_VARIANTS}
+          d="M16.8 4.9c0 1.6 1.1 2.7 2.7 2.7-1.6 0-2.7 1.1-2.7 2.7 0-1.6-1.1-2.7-2.7-2.7 1.6 0 2.7-1.1 2.7-2.7Z"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          fill="currentColor"
+        />
+      </motion.svg>
       <span className="sr-only">Toggle theme</span>
     </button>
   );
