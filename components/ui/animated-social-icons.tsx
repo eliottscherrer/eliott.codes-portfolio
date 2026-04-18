@@ -64,7 +64,7 @@ export const AnimatedMail = () => (
     <path d="M22 6V18A2 2 0 0 1 20 20H4A2 2 0 0 1 2 18V6" />
     <path
       d="M22 6A2 2 0 0 0 20 4H4A2 2 0 0 0 2 6"
-      className="transition-opacity duration-300 ease-out group-hover:opacity-0"
+      className="transition-opacity duration-500 ease-out group-hover:opacity-0"
     />
     <defs>
       <clipPath id="mail-doc-clip">
@@ -72,17 +72,17 @@ export const AnimatedMail = () => (
       </clipPath>
     </defs>
     <g clipPath="url(#mail-doc-clip)">
-      <g className="opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:-translate-y-0.25">
+      <g className="opacity-0 translate-y-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:-translate-y-0.25">
         <path d="M6 14V7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7" />
       </g>
     </g>
     <path
       d="M22 6V4 M2 6V4"
-      className="opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+      className="opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
     />
     <path
       d="M22 7 L12 12.7 L2 7"
-      className="[transform-box:view-box] [transform-origin:12px_5px] [transform:rotateX(0deg)] transition-transform duration-300 ease-out group-hover:[transform:rotateX(180deg)]"
+      className="[transform-box:view-box] [transform-origin:12px_5px] [transform:rotateX(0deg)] transition-transform duration-500 ease-out group-hover:[transform:rotateX(180deg)]"
     />
     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </svg>

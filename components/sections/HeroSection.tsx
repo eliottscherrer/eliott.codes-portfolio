@@ -12,6 +12,7 @@ import {
   AnimatedMail,
   triggerGithubWag,
 } from "@/components/ui/animated-social-icons";
+import { SendIcon, type SendIconHandle } from "@/components/ui/send-icon";
 
 const AGE = (() => {
   const birthDate = new Date("2006-11-20");
@@ -29,6 +30,7 @@ export default function HeroSection() {
   const t = useTranslations();
   const tc = useTranslations("Common");
   const waveRef = useRef<HTMLSpanElement | null>(null);
+  const sendIconRef = useRef<SendIconHandle>(null);
 
   const triggerWave = useCallback((el: HTMLSpanElement | null) => {
     if (!el || el.classList.contains("is-waving")) return;
@@ -133,17 +135,31 @@ export default function HeroSection() {
       <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-foreground/90">
         {t("Hero.description", { age: AGE })}
       </p>
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-        <Button variant="brand" asChild size="lg" className="w-full sm:w-auto">
-          <Link href="#projects">{t("Hero.viewProjects")}</Link>
-        </Button>
+      <div className="flex flex-col sm:flex-row gap-2 mt-4">
         <Button
-          variant="outline"
+          variant="brand"
           asChild
           size="lg"
-          className="w-full sm:w-auto"
+          className="w-full sm:w-auto group relative overflow-hidden transition-all duration-300 hover:scale-[1.02] active:scale-95"
         >
-          <Link href="#contact">{t("Hero.getInTouch")}</Link>
+          <Link href="#projects" className="gap-2">
+            <span className="relative z-10">{t("Hero.viewProjects")}</span>{" "}
+            {/* Shine effect overlay */}
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-[150%] ease-in-out" />
+          </Link>
+        </Button>
+        <Button
+          variant="ghost"
+          asChild
+          size="lg"
+          className="w-full sm:w-auto group transition-all duration-300 hover:bg-0 dark:hover:bg-0"
+          onMouseEnter={() => sendIconRef.current?.startAnimation()}
+          onMouseLeave={() => sendIconRef.current?.stopAnimation()}
+        >
+          <Link href="#contact" className="gap-2">
+            {t("Hero.getInTouch")}
+            <SendIcon ref={sendIconRef} className="size-5 shrink-0" size={20} />
+          </Link>
         </Button>
       </div>
     </section>
