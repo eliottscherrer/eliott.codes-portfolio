@@ -14,6 +14,8 @@
     "linkedin": "LinkedIn",
     "email": "Email",
     "toggleTheme": "Toggle theme",
+    "copySectionLink": "Copy section link",
+    "sectionLinkCopied": "Section link copied",
     "frontendTechnologies": "Frontend technologies",
     "backendTechnologiesTools": "Backend technologies and tools"
   },
