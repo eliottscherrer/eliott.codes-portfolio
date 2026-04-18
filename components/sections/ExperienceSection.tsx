@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { MapPin } from "lucide-react";
 
 import SpotlightCard from "@/components/SpotlightCard";
+import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
 import { Badge } from "@/components/ui/badge";
 import { getExperienceTimeline, type TimelineItem } from "@/lib/timeline-data";
 import { cn } from "@/lib/utils";
@@ -63,9 +64,9 @@ export default function ExperienceSection() {
       className="relative space-y-8 sm:space-y-10 ds-anchor-target"
       aria-labelledby="timeline-title"
     >
-      <h2 id="timeline-title" className="ds-section-title">
+      <SectionAnchorHeading anchorId="experience" headingId="timeline-title">
         {tt("title")}
-      </h2>
+      </SectionAnchorHeading>
 
       <div ref={timelineBodyRef} className="relative w-full space-y-1">
         <div

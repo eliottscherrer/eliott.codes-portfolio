@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import ProjectCard from "@/components/ProjectCard";
+import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
 import { getProjects } from "@/lib/projects-data";
 import { useTranslations } from "next-intl";
 
@@ -11,7 +12,9 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="space-y-6 sm:space-y-8 ds-anchor-target">
-      <h2 className="ds-section-title">{t("Projects.title")}</h2>
+      <SectionAnchorHeading anchorId="projects">
+        {t("Projects.title")}
+      </SectionAnchorHeading>
       <div className="flex flex-col gap-8">
         {projects.map((project) => (
           <ProjectCard key={project.title} {...project} />
