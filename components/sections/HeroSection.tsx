@@ -39,7 +39,7 @@ export default function HeroSection() {
 
   useEffect(() => {
     triggerWave(waveRef.current);
-  }, []);
+  }, [triggerWave]);
 
   return (
     <section className="space-y-5 sm:space-y-6">
