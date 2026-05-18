@@ -1,7 +1,6 @@
 import TechLogo from "@/components/TechLogo";
 import {
   SiHtml5,
-  SiCss3,
   SiNodedotjs,
   SiVuedotjs,
   SiMariadb,
@@ -12,6 +11,8 @@ import {
   SiNextdotjs,
   SiReact,
 } from "react-icons/si";
+import { FaCss3Alt } from "react-icons/fa6";
+
 import { DiDotnet } from "react-icons/di";
 
 export const frontendTech = [
@@ -21,7 +22,7 @@ export const frontendTech = [
     href: "https://developer.mozilla.org/en-US/docs/Web/HTML",
   },
   {
-    node: <TechLogo icon={<SiCss3 />} label="CSS" />,
+    node: <TechLogo icon={<FaCss3Alt />} label="CSS" />,
     title: "CSS3",
     href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
   },
