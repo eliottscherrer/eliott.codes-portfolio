@@ -54,7 +54,7 @@ jobs:
           test -n "$DOKPLOY_URL"
 
       - name: Trigger Dokploy deployment
-        uses: benbristow/dokploy-deploy-action@0.2.2
+        uses: benbristow/dokploy-deploy-action@3a2a16f0158b41377adf300c9dd6d3d396aa7586
         with:
           api_token: ${{ secrets.DOKPLOY_API_KEY }}
           application_id: ${{ secrets.DOKPLOY_APPLICATION_ID }}
