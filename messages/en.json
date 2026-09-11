@@ -82,7 +82,9 @@
   },
   "Contact": {
     "title": "Contact",
-    "subtitle": "Have a project, an opportunity or just a question? My inbox is open."
+    "subtitle": "Have a project, an opportunity or just a question? My inbox is open.",
+    "copyEmail": "Copy email address",
+    "emailCopied": "Email address copied"
   },
   "Footer": {
     "role": "Software and full-stack web developer.",
