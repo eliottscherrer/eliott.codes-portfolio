@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import DarkVeil from "@/components/DarkVeil";
 import GradualBlur from "@/components/GradualBlur";
 import Footer from "@/components/Footer";
@@ -12,6 +13,8 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomeClient() {
+  const tc = useTranslations("Common");
+
   return (
     <>
       {/* Background */}
@@ -39,6 +42,18 @@ export default function HomeClient() {
           style={{ pointerEvents: "none" }}
         />
       </div>
+
+      <a
+        href="#main-content"
+        className="ds-skip-link"
+        onClick={() =>
+          document
+            .getElementById("main-content")
+            ?.focus({ preventScroll: true })
+        }
+      >
+        {tc("skipToContent")}
+      </a>
 
       <main
         id="main-content"

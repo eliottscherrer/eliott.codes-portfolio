@@ -191,12 +191,13 @@ body,
 }
 
 @layer components {
+  /* Off-screen until focused, then slides in; not-sr-only would reset its position and padding */
   .ds-skip-link {
-    @apply sr-only fixed left-3 top-3 z-[100] rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground shadow-lg;
+    @apply fixed left-3 top-3 z-[100] -translate-y-16 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium text-foreground opacity-0 shadow-lg transition;
   }
 
   .ds-skip-link:focus-visible {
-    @apply not-sr-only outline-none ring-2 ring-ring/70;
+    @apply translate-y-0 opacity-100 outline-none ring-2 ring-ring/70;
   }
 
   .ds-anchor-target {
@@ -221,8 +222,20 @@ body,
 
   .ds-fade-x {
     --ds-fade: clamp(24px, 8%, 120px);
-    mask-image: linear-gradient(to right, transparent 0%, black var(--ds-fade), black calc(100% - var(--ds-fade)), transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black var(--ds-fade), black calc(100% - var(--ds-fade)), transparent 100%);
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black var(--ds-fade),
+      black calc(100% - var(--ds-fade)),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black var(--ds-fade),
+      black calc(100% - var(--ds-fade)),
+      transparent 100%
+    );
   }
 
   .ds-body-lg {
