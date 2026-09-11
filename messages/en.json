@@ -17,13 +17,15 @@
     "copySectionLink": "Copy section link",
     "sectionLinkCopied": "Section link copied",
     "frontendTechnologies": "Frontend technologies",
-    "backendTechnologiesTools": "Backend technologies and tools"
+    "backendTechnologiesTools": "Backend technologies and tools",
+    "technologies": "Technologies I work with"
   },
   "Hero": {
     "location": "Lausanne, Switzerland",
-    "description": "{age}yo student at ETML studying software and web development, with an interest in cybersecurity.",
+    "description": "{age}-year-old student at ETML in software and web development, with an interest in cybersecurity.",
     "viewProjects": "View projects",
-    "getInTouch": "Get in touch"
+    "getInTouch": "Get in touch",
+    "currently": "Currently interning at Infomaniak"
   },
   "Projects": {
     "title": "Projects",
@@ -41,7 +43,8 @@
       "PassionLectureBackend": {
         "description": "Node.js REST API with MySQL, Docker and Cloudinary for file storage."
       }
-    }
+    },
+    "subtitle": "A selection of things I've built."
   },
   "Timeline": {
     "title": "Experience",
@@ -54,29 +57,35 @@
         "location": "Lausanne",
         "description": "Training in application development, continuous progress, and a strong foundation in software engineering. Winner of the ETML practical award during the first year."
       },
-      "pos": {
-        "period": "February to March 2026",
-        "title": "Frontend Developer (internship)",
-        "organization": "infomaniak - Point of Sale team",
+      "infomaniak": {
+        "period": "February 2026 - Today",
+        "title": "Frontend Developer",
+        "organization": "Infomaniak",
         "location": "Geneva",
-        "description": "Contributed to the Point of Sale platform, implemented interfaces from Figma with React/Gatsby, and kicked off the migration to a more modern codebase with Inertia.js + TypeScript."
-      },
-      "kchat": {
-        "period": "2026 - Today",
-        "title": "Frontend Developer (internship)",
-        "organization": "infomaniak - kChat team",
-        "location": "Geneva",
-        "description": "Worked on web, desktop, and mobile apps, handled tickets, fixed bugs, and continuously improved the product."
+        "teams": {
+          "pos": {
+            "name": "Point of Sale team",
+            "period": "February - March 2026",
+            "description": "Implemented interfaces from Figma with React/Gatsby and kicked off the migration to a more modern codebase with Inertia.js + TypeScript."
+          },
+          "kchat": {
+            "name": "kChat team",
+            "period": "March 2026 - Today",
+            "description": "Working on the web, desktop and mobile apps: handling tickets, fixing bugs and continuously improving the product."
+          }
+        },
+        "type": "Internship"
       }
-    }
+    },
+    "subtitle": "Where I've studied and worked so far."
   },
   "Contact": {
     "title": "Contact",
-    "emailText": "Email me at <email>contact@eliott.codes</email>"
+    "subtitle": "Have a project, an opportunity or just a question? My inbox is open."
   },
   "Footer": {
-    "role": "Software and full-stack<br />web developer.",
-    "quickLinks": "Quick Links",
+    "role": "Software and full-stack web developer.",
+    "quickLinks": "Navigate",
     "experience": "Experience",
     "projects": "Projects",
     "contact": "Contact",

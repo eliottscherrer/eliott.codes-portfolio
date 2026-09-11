@@ -3,17 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
+import TechLogo from "@/components/TechLogo";
 import { Badge } from "@/components/ui/badge";
 import { useTranslations } from "next-intl";
 
-type StackItem = { node?: React.ReactNode; label?: string };
+export interface StackItem {
+  icon: React.ReactNode;
+  label: string;
+}
 
 interface ProjectCardProps {
   title: string;
   description: string;
   link: string;
   cover?: string | null;
-  stack?: Array<StackItem | string>;
+  stack?: StackItem[];
 }
 
 export default function ProjectCard({
@@ -31,78 +35,65 @@ export default function ProjectCard({
       href={link}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
-      className="block w-full group outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl"
+      className="group group/tech block h-full rounded-2xl ds-focus-ring"
     >
       <SpotlightCard
-        className="ds-surface-card flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-[background-color,border-color,box-shadow] duration-500 backdrop-blur-xl border border-[var(--surface-border)] hover:border-foreground/20 overflow-hidden"
+        className="ds-surface-card flex h-full w-full flex-col overflow-hidden rounded-2xl p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] hover:border-foreground/20 transition-[background-color,border-color] duration-500"
         spotlightColor="rgba(14, 100, 180, 0.15)"
       >
-        {/* Image Section */}
-        <div className="relative w-full h-52 sm:h-64 md:h-96 overflow-hidden shrink-0">
+        {/* Cover */}
+        <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden border-b border-[var(--surface-border)]">
           {cover ? (
-            <>
-              <Image
-                src={cover}
-                alt={title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-60" />
-            </>
+            <Image
+              src={cover}
+              alt=""
+              fill
+              sizes="(min-width: 640px) 440px, 100vw"
+              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-primary/5 to-primary/10 border-b border-black/10 dark:border-white/10" />
-          )}
-
-          {/* Tech Stack */}
-          {stack.length > 0 && (
-            <div className="absolute bottom-3 left-4 right-4 flex flex-wrap gap-2 z-10">
-              {stack.map((item, i) => {
-                if (typeof item === "object" && item.node) {
-                  return (
-                    <div
-                      key={i}
-                      className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full px-3 py-2 text-xs text-white/90 flex items-center gap-1.5 shadow-sm transition-all duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20"
-                    >
-                      {item.node}
-                    </div>
-                  );
-                }
-                const label = typeof item === "string" ? item : item.label;
-                return (
-                  <Badge
-                    key={i}
-                    variant="secondary"
-                    className="bg-black/40 backdrop-blur-md border border-black/10 dark:border-white/10 text-white/90 rounded-full px-3 py-1 shadow-sm transition-[background-color,border-color,box-shadow] duration-300 group-hover:bg-black/60 group-hover:border-black/10 dark:group-hover:border-white/20"
-                  >
-                    {label}
-                  </Badge>
-                );
-              })}
-            </div>
+            <div className="h-full w-full bg-gradient-to-br from-primary/5 to-primary/10" />
           )}
         </div>
 
-        {/* Content Section */}
-        <div className="flex flex-col flex-1 p-6 relative">
-          <div className="flex-1">
-            <div className="flex items-start justify-between gap-4 mb-2">
-              <h3 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
-                {title}
-              </h3>
-            </div>
-
-            <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-2 sm:line-clamp-3">
-              {description}
-            </p>
+        {/* Body */}
+        <div className="relative flex flex-1 flex-col gap-3 p-5">
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-lg font-semibold leading-snug tracking-tight text-foreground">
+              {title}
+            </h3>
+            <ArrowUpRight
+              aria-hidden="true"
+              className="mt-0.5 size-5 shrink-0 text-muted-foreground transition-[color,translate] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground group-focus-visible:-translate-y-0.5 group-focus-visible:translate-x-0.5"
+            />
           </div>
 
-          {/* CTA Button */}
-          <div className="mt-auto">
-            <div className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 text-primary font-medium text-sm border border-primary/20 transition-[background-color,border-color,color,box-shadow] duration-300 group-hover:bg-brand group-hover:text-primary-foreground group-hover:border-brand group-hover:shadow-[0_0_20px_rgba(14,100,180,0.3)] w-full sm:w-auto">
-              {t("viewProject")}
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </div>
-          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3">
+            {description}
+          </p>
+
+          {stack.length > 0 && (
+            <ul className="mt-auto flex flex-wrap gap-1.5 pt-2">
+              {stack.map((item) => (
+                <li key={item.label}>
+                  <Badge
+                    variant="glass"
+                    className="rounded-full p-0 font-normal text-muted-foreground"
+                  >
+                    <TechLogo
+                      icon={item.icon}
+                      label={item.label}
+                      size="sm"
+                      labelSize="xs"
+                      className="px-2.5 py-1"
+                    />
+                  </Badge>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <span className="sr-only">{t("viewProject")}</span>
         </div>
       </SpotlightCard>
     </Link>

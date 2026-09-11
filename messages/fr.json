@@ -17,13 +17,15 @@
     "copySectionLink": "Copier le lien de la section",
     "sectionLinkCopied": "Lien de section copie",
     "frontendTechnologies": "Technologies frontend",
-    "backendTechnologiesTools": "Technologies et outils backend"
+    "backendTechnologiesTools": "Technologies et outils backend",
+    "technologies": "Technologies que j'utilise"
   },
   "Hero": {
     "location": "Lausanne, Suisse",
     "description": "Étudiant de {age} ans à l'ETML en développement logiciel et web, avec un intérêt pour la cybersécurité.",
     "viewProjects": "Voir mes projets",
-    "getInTouch": "Me contacter"
+    "getInTouch": "Me contacter",
+    "currently": "Actuellement en stage chez Infomaniak"
   },
   "Projects": {
     "title": "Projets",
@@ -41,7 +43,8 @@
       "PassionLectureBackend": {
         "description": "API REST Node.js avec MySQL, Docker et Cloudinary pour le stockage de fichiers."
       }
-    }
+    },
+    "subtitle": "Une sélection de projets que j'ai réalisés."
   },
   "Timeline": {
     "title": "Mon parcours",
@@ -54,29 +57,35 @@
         "location": "Lausanne",
         "description": "Formation en développement d'applications, progression continue, base solide en ingénierie logicielle. Obtention du Lauréat du Prix de pratique ETML en première année."
       },
-      "pos": {
-        "period": "Février à Mars 2026",
-        "title": "Développeur frontend (stage)",
-        "organization": "infomaniak - Team Point de Vente",
+      "infomaniak": {
+        "period": "Février 2026 - Aujourd'hui",
+        "title": "Développeur frontend",
+        "organization": "Infomaniak",
         "location": "Genève",
-        "description": "Contribution à la plateforme Point de Vente, implémentation d'interfaces depuis Figma avec React/Gatsby, démarrage de migration vers une codebase moderne avec Inertia.js + TypeScript."
-      },
-      "kchat": {
-        "period": "2026 - Aujourd'hui",
-        "title": "Développeur frontend (stage)",
-        "organization": "infomaniak - Team kChat",
-        "location": "Genève",
-        "description": "Travail sur applications web, desktop et mobile, prise en charge de tickets, corrections de bugs, amélioration continue produit."
+        "teams": {
+          "pos": {
+            "name": "Team Point de Vente",
+            "period": "Février - Mars 2026",
+            "description": "Implémentation d'interfaces depuis Figma avec React/Gatsby et démarrage de la migration vers une codebase moderne avec Inertia.js + TypeScript."
+          },
+          "kchat": {
+            "name": "Team kChat",
+            "period": "Mars 2026 - Aujourd'hui",
+            "description": "Travail sur les applications web, desktop et mobile : prise en charge de tickets, correction de bugs et amélioration continue du produit."
+          }
+        },
+        "type": "Stage"
       }
-    }
+    },
+    "subtitle": "Mes études et mes expériences jusqu'ici."
   },
   "Contact": {
     "title": "Contact",
-    "emailText": "Écrivez-moi à <email>contact@eliott.codes</email>"
+    "subtitle": "Un projet, une opportunité ou simplement une question ? Ma boîte mail est ouverte."
   },
   "Footer": {
-    "role": "Développeur logiciel et<br />web full-stack.",
-    "quickLinks": "Liens rapides",
+    "role": "Développeur logiciel et web full-stack.",
+    "quickLinks": "Navigation",
     "experience": "Mon parcours",
     "projects": "Projets",
     "contact": "Contact",

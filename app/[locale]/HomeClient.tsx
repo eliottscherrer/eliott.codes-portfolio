@@ -1,6 +1,5 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
 import DarkVeil from "@/components/DarkVeil";
 import GradualBlur from "@/components/GradualBlur";
 import Footer from "@/components/Footer";
@@ -44,16 +43,17 @@ export default function HomeClient() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 md:px-8 pt-4 pb-8 sm:pt-6 sm:pb-12 md:pt-6 md:pb-16 relative outline-none"
+        className="min-h-screen mx-auto max-w-4xl px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 relative outline-none"
       >
         <HomeNavigation />
         <HeroSection />
         <TechnologiesSection />
-        <Separator className="my-12 sm:my-16" />
-        <ExperienceSection />
-        <Separator className="my-12 sm:my-16" />
-        <ProjectsSection />
-        <ContactSection />
+
+        <div className="mt-24 sm:mt-28 space-y-24 sm:space-y-28">
+          <ExperienceSection />
+          <ProjectsSection />
+          <ContactSection />
+        </div>
 
         <GradualBlur
           target="page"

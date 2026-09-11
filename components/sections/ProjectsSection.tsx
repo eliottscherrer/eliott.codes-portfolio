@@ -12,10 +12,13 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="space-y-6 sm:space-y-8 ds-anchor-target">
-      <SectionAnchorHeading anchorId="projects">
+      <SectionAnchorHeading
+        anchorId="projects"
+        description={t("Projects.subtitle")}
+      >
         {t("Projects.title")}
       </SectionAnchorHeading>
-      <div className="flex flex-col gap-8">
+      <div className="grid gap-5 sm:grid-cols-2">
         {projects.map((project) => (
           <ProjectCard key={project.title} {...project} />
         ))}

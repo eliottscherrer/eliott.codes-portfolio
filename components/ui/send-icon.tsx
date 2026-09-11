@@ -58,6 +58,7 @@ const SendIcon = forwardRef<SendIconHandle, SendIconProps>(
       >
         <svg
           className="overflow-visible"
+          style={{ width: size, height: size }}
           fill="none"
           height={size}
           stroke="currentColor"
