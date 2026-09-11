@@ -43,7 +43,8 @@
       "PassionLectureBackend": {
         "description": "API REST Node.js avec MySQL, Docker et Cloudinary pour le stockage de fichiers."
       }
-    }
+    },
+    "subtitle": "Une sélection de projets que j'ai réalisés."
   },
   "Timeline": {
     "title": "Mon parcours",
