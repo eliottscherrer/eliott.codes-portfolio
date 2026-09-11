@@ -17,7 +17,8 @@
     "copySectionLink": "Copier le lien de la section",
     "sectionLinkCopied": "Lien de section copie",
     "frontendTechnologies": "Technologies frontend",
-    "backendTechnologiesTools": "Technologies et outils backend"
+    "backendTechnologiesTools": "Technologies et outils backend",
+    "technologies": "Technologies que j'utilise"
   },
   "Hero": {
     "location": "Lausanne, Suisse",

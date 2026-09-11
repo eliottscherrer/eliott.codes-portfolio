@@ -214,6 +214,17 @@ body,
   .ds-section-description {
     @apply mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground;
   }
+
+  .ds-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground;
+  }
+
+  .ds-fade-x {
+    --ds-fade: clamp(24px, 8%, 120px);
+    mask-image: linear-gradient(to right, transparent 0%, black var(--ds-fade), black calc(100% - var(--ds-fade)), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black var(--ds-fade), black calc(100% - var(--ds-fade)), transparent 100%);
+  }
+
   .ds-body-lg {
     @apply text-base sm:text-lg leading-relaxed text-muted-foreground;
   }
