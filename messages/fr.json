@@ -83,7 +83,8 @@
       "label": "Open source sur GitHub",
       "web": "Application web",
       "desktop": "Application desktop",
-      "mobile": "Application mobile"
+      "mobile": "Application mobile",
+      "chip": "Open source"
     }
   },
   "Contact": {

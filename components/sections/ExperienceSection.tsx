@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { Fragment, useMemo, useRef, useSyncExternalStore } from "react";
+import {
+  Fragment,
+  useMemo,
+  useRef,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight, MapPin } from "lucide-react";
 
@@ -88,9 +94,18 @@ function TimelineLogo({
   );
 }
 
-function TagList({ tags, keyPrefix }: { tags: string[]; keyPrefix: string }) {
+function TagList({
+  tags,
+  keyPrefix,
+  trailing,
+}: {
+  tags: string[];
+  keyPrefix: string;
+  /** Extra chip rendered after the tags, e.g. the open source menu. */
+  trailing?: ReactNode;
+}) {
   return (
-    <div className="flex flex-wrap gap-2 pt-1">
+    <div className="flex flex-wrap items-center gap-2 pt-1">
       {tags.map((tag) => (
         <Badge
           key={`${keyPrefix}-${tag}`}
@@ -100,6 +115,7 @@ function TagList({ tags, keyPrefix }: { tags: string[]; keyPrefix: string }) {
           {tag}
         </Badge>
       ))}
+      {trailing}
     </div>
   );
 }
@@ -305,9 +321,6 @@ export default function ExperienceSection() {
                                             {position.team}
                                           </p>
                                         )}
-                                        {position.repos && (
-                                          <RepoMenu repos={position.repos} />
-                                        )}
                                       </span>
                                       <p className="text-xs text-muted-foreground">
                                         {position.period}
@@ -319,6 +332,11 @@ export default function ExperienceSection() {
                                     <TagList
                                       tags={position.tags}
                                       keyPrefix={`${item.id}-${position.id}`}
+                                      trailing={
+                                        position.repos && (
+                                          <RepoMenu repos={position.repos} />
+                                        )
+                                      }
                                     />
                                   </div>
                                 </li>

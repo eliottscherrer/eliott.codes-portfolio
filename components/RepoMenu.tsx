@@ -1,7 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { ArrowUpRight, Globe, Monitor, Smartphone } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Globe,
+  Monitor,
+  Smartphone,
+} from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 
 import {
@@ -16,7 +22,10 @@ import type { Repo } from "@/lib/timeline-data";
 
 const ICONS = { web: Globe, desktop: Monitor, mobile: Smartphone };
 
-/** Small GitHub button that opens the list of public repos the team ships. */
+/**
+ * "Open source" chip that sits with the tags and pulls down the list of public repos.
+ * A pull-down (chevron) rather than a pop-up: it offers actions, not a selection.
+ */
 export default function RepoMenu({ repos }: { repos: Repo[] }) {
   const t = useTranslations("Timeline.repos");
 
@@ -24,9 +33,14 @@ export default function RepoMenu({ repos }: { repos: Repo[] }) {
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger
         aria-label={t("label")}
-        className="ds-focus-ring group/repos flex size-6 items-center justify-center rounded-full border border-black/15 bg-[var(--surface-elevated)] text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground data-[state=open]:border-foreground/30 data-[state=open]:text-foreground dark:border-white/10"
+        className="group/chip ds-focus-ring inline-flex items-center gap-1.5 rounded-full border border-[var(--surface-border)] bg-[var(--surface-glass)] px-2.5 py-1 text-xs text-foreground/85 backdrop-blur-sm transition-colors hover:border-foreground/20 hover:text-foreground data-[state=open]:border-foreground/20 data-[state=open]:text-foreground"
       >
-        <FaGithub className="size-3.5" aria-hidden="true" />
+        <FaGithub className="size-3" aria-hidden="true" />
+        {t("chip")}
+        <ChevronDown
+          className="size-3 text-muted-foreground transition-transform duration-300 group-data-[state=open]/chip:rotate-180"
+          aria-hidden="true"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
