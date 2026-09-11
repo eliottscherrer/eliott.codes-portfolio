@@ -1,6 +1,6 @@
 # [eliott.codes](https://eliott.codes)
 
-<img width="1737" height="778" alt="image" src="https://github.com/user-attachments/assets/7617ee67-01f5-4993-96bf-65e1537660cf" />
+<img width="1738" height="778" alt="image" src=".github/preview.png" />
 
 [![CI and Deploy to Dokploy](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/dokploy.yml/badge.svg)](https://github.com/eliottscherrer/eliott.codes-portfolio/actions/workflows/dokploy.yml)
 
