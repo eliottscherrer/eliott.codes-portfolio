@@ -9,16 +9,26 @@ import {
   useTransform,
 } from "motion/react";
 import Image from "next/image";
-import { useState, type MouseEvent, type ReactNode } from "react";
-
-import { cn } from "@/lib/utils";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
+import { createPortal } from "react-dom";
 
 const WIDTH = 240;
 const HEIGHT = 150;
+const GAP = 10;
+
+const subscribeToNothing = () => () => {};
 
 /**
- * External link that pops a screenshot of its target above it on hover, leaning
- * with the cursor. The image is a prerendered file so nothing is fetched at runtime.
+ * External link that pops a screenshot of its target below it on hover, leaning with
+ * the cursor. The card is portaled to <body> and positioned fixed, so no ancestor's
+ * overflow or stacking context can clip it. The image is a prerendered file.
  */
 export default function LinkPreview({
   href,
@@ -32,8 +42,35 @@ export default function LinkPreview({
   children: ReactNode;
   className?: string;
 }) {
-  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLAnchorElement>(null);
+  const [anchorBox, setAnchorBox] = useState<{ x: number; y: number } | null>(
+    null,
+  );
+  const open = anchorBox !== null;
   const reduceMotion = useReducedMotion();
+  const canPortal = useSyncExternalStore(
+    subscribeToNothing,
+    () => true,
+    () => false,
+  );
+
+  const measure = () => {
+    const rect = anchorRef.current?.getBoundingClientRect();
+    if (rect)
+      setAnchorBox({ x: rect.left + rect.width / 2, y: rect.bottom + GAP });
+  };
+  const close = () => setAnchorBox(null);
+
+  // Follow the link if the page scrolls or resizes while the card is showing.
+  useEffect(() => {
+    if (!open) return;
+    window.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [open]);
 
   // Cursor offset from the link's centre slides the card a little.
   const x = useMotionValue(0);
@@ -46,55 +83,62 @@ export default function LinkPreview({
     x.set(event.clientX - (rect.left + rect.width / 2));
   };
 
+  const card = (
+    <AnimatePresence>
+      {open && preview && (
+        <motion.span
+          aria-hidden="true"
+          initial={{ opacity: 0, y: -12, scale: 0.7 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{
+            opacity: 0,
+            y: -8,
+            scale: 0.85,
+            transition: { duration: 0.15 },
+          }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { type: "spring", stiffness: 280, damping: 18, mass: 0.7 }
+          }
+          style={{
+            translateX,
+            left: anchorBox?.x,
+            top: anchorBox?.y,
+            width: WIDTH + 8,
+          }}
+          className="ds-surface-card pointer-events-none fixed z-50 block origin-top -translate-x-1/2 overflow-hidden rounded-xl bg-[var(--surface-elevated)] p-1 shadow-xl backdrop-blur-xl"
+        >
+          <Image
+            src={preview}
+            alt=""
+            width={WIDTH}
+            height={HEIGHT}
+            className="block rounded-lg"
+            style={{ width: WIDTH, height: HEIGHT }}
+          />
+        </motion.span>
+      )}
+    </AnimatePresence>
+  );
+
   return (
-    <span className="relative inline-flex">
+    <>
       <a
+        ref={anchorRef}
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setOpen(false)}
+        onMouseEnter={measure}
+        onMouseLeave={close}
+        onFocus={measure}
+        onBlur={close}
         onMouseMove={onMouseMove}
         className={className}
       >
         {children}
       </a>
-      <AnimatePresence>
-        {open && preview && (
-          <motion.span
-            aria-hidden="true"
-            initial={{ opacity: 0, y: 16, scale: 0.7 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{
-              opacity: 0,
-              y: 12,
-              scale: 0.85,
-              transition: { duration: 0.15 },
-            }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { type: "spring", stiffness: 280, damping: 18, mass: 0.7 }
-            }
-            // Absolute + shrink-to-fit would collapse the card, so size it explicitly.
-            style={{ translateX, width: WIDTH + 8 }}
-            className={cn(
-              "ds-surface-card pointer-events-none absolute bottom-full left-1/2 z-30 mb-3 block origin-bottom -translate-x-1/2 overflow-hidden rounded-xl bg-[var(--surface-elevated)] p-1 shadow-xl backdrop-blur-xl",
-            )}
-          >
-            <Image
-              src={preview}
-              alt=""
-              width={WIDTH}
-              height={HEIGHT}
-              className="block rounded-lg"
-              style={{ width: WIDTH, height: HEIGHT }}
-            />
-          </motion.span>
-        )}
-      </AnimatePresence>
+      {canPortal && createPortal(card, document.body)}
       {/* Warm the cache so the card appears with its image already loaded. */}
       {preview && (
         <Image
@@ -107,6 +151,6 @@ export default function LinkPreview({
           className="hidden"
         />
       )}
-    </span>
+    </>
   );
 }
