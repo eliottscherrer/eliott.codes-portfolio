@@ -21,9 +21,10 @@
   },
   "Hero": {
     "location": "Lausanne, Switzerland",
-    "description": "{age}yo student at ETML studying software and web development, with an interest in cybersecurity.",
+    "description": "{age}-year-old student at ETML in software and web development, with an interest in cybersecurity.",
     "viewProjects": "View projects",
-    "getInTouch": "Get in touch"
+    "getInTouch": "Get in touch",
+    "currently": "Currently interning at Infomaniak"
   },
   "Projects": {
     "title": "Projects",

@@ -66,7 +66,7 @@ export default function HeroSection() {
           <SplitText
             text="Eliott Scherrer"
             tag="h1"
-            className="text-4xl md:text-5xl font-bold"
+            className="text-4xl md:text-5xl font-bold tracking-tight"
             delay={70}
             duration={2}
             ease="elastic.out(1, 0.3)"
@@ -79,12 +79,12 @@ export default function HeroSection() {
           />
         </div>
         {/* Social Links */}
-        <div className="flex flex-row gap-2 sm:gap-3">
+        <div className="flex flex-row gap-2">
           <Button
-            variant="secondary"
+            variant="glass"
             size="icon"
             aria-label={tc("linkedin")}
-            className="group bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input transition-colors"
+            className="ds-icon-control group"
             asChild
           >
             <Link
@@ -93,14 +93,13 @@ export default function HeroSection() {
               rel="noopener noreferrer"
             >
               <AnimatedLinkedin />
-              <span className="sr-only">{tc("linkedin")}</span>
             </Link>
           </Button>
           <Button
-            variant="secondary"
+            variant="glass"
             size="icon"
             aria-label={tc("github")}
-            className="group bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input transition-colors"
+            className="ds-icon-control group"
             asChild
             onMouseEnter={(event) => triggerGithubWag(event.currentTarget)}
             onFocus={(event) => triggerGithubWag(event.currentTarget)}
@@ -111,30 +110,44 @@ export default function HeroSection() {
               rel="noopener noreferrer"
             >
               <AnimatedGithub />
-              <span className="sr-only">{tc("github")}</span>
             </Link>
           </Button>
           <Button
-            variant="secondary"
+            variant="glass"
             size="icon"
             aria-label={tc("email")}
-            className="group bg-background/10 dark:bg-input/30 hover:dark:bg-input/50 backdrop-blur-sm border !border-border dark:!border-input transition-colors"
+            className="ds-icon-control group"
             asChild
           >
             <Link href="mailto:contact@eliott.codes">
               <AnimatedMail />
-              <span className="sr-only">{tc("email")}</span>
             </Link>
           </Button>
         </div>
       </div>
-      <p className="text-muted-foreground max-w-2xl flex items-center gap-1.5 text-sm sm:text-base">
-        <MapPin className="size-4 flex-shrink-0" />
-        {t("Hero.location")}
-      </p>
+
+      {/* Meta row: location + current status, same icon-slot rhythm */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5">
+          <MapPin className="size-4 shrink-0" aria-hidden="true" />
+          {t("Hero.location")}
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span
+            className="relative flex size-4 shrink-0 items-center justify-center"
+            aria-hidden="true"
+          >
+            <span className="absolute inline-flex size-2 animate-ping rounded-full bg-emerald-400 opacity-60 [animation-duration:2.4s]" />
+            <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+          </span>
+          {t("Hero.currently")}
+        </span>
+      </div>
+
       <p className="max-w-2xl text-base sm:text-lg leading-relaxed text-foreground/90">
         {t("Hero.description", { age: AGE })}
       </p>
+
       <div className="flex flex-col sm:flex-row gap-2 mt-4">
         <Button
           variant="brand"
@@ -152,7 +165,7 @@ export default function HeroSection() {
           variant="ghost"
           asChild
           size="lg"
-          className="w-full sm:w-auto group transition-all duration-300 hover:bg-0 dark:hover:bg-0"
+          className="w-full sm:w-auto group transition-all duration-300 hover:bg-transparent dark:hover:bg-transparent"
           onMouseEnter={() => sendIconRef.current?.startAnimation()}
           onMouseLeave={() => sendIconRef.current?.stopAnimation()}
         >
