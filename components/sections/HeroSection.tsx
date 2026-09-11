@@ -1,7 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Tooltip from "@/components/ui/tooltip";
 import { MapPin } from "lucide-react";
+import LocalTime from "@/components/LocalTime";
 import SplitText from "@/components/SplitText";
 import { useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
@@ -121,10 +123,20 @@ export default function HeroSection() {
 
       {/* Meta row: location + current status, same icon-slot rhythm */}
       <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-muted-foreground">
-        <span className="inline-flex items-center gap-1.5">
+        <Tooltip
+          content={
+            <>
+              <span className="text-muted-foreground">
+                {t("Hero.localTime")}
+              </span>{" "}
+              <LocalTime className="font-medium" />
+            </>
+          }
+          className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+        >
           <MapPin className="size-4 shrink-0" aria-hidden="true" />
           {t("Hero.location")}
-        </span>
+        </Tooltip>
         <span className="inline-flex items-center gap-1.5">
           <span
             className="relative flex size-4 shrink-0 items-center justify-center"

@@ -269,6 +269,12 @@ body,
   }
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @keyframes wave {
   0%,
   100% {

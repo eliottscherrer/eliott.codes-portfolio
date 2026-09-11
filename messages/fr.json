@@ -26,7 +26,8 @@
     "description": "Étudiant de {age} ans à l'ETML en développement logiciel et web, avec un intérêt pour la cybersécurité.",
     "viewProjects": "Voir mes projets",
     "getInTouch": "Me contacter",
-    "currently": "Actuellement en stage chez Infomaniak"
+    "currently": "Actuellement en stage chez Infomaniak",
+    "localTime": "Heure locale"
   },
   "Projects": {
     "title": "Projets",

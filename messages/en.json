@@ -26,7 +26,8 @@
     "description": "{age}-year-old student at ETML in software and web development, with an interest in cybersecurity.",
     "viewProjects": "View projects",
     "getInTouch": "Get in touch",
-    "currently": "Currently interning at Infomaniak"
+    "currently": "Currently interning at Infomaniak",
+    "localTime": "Local time"
   },
   "Projects": {
     "title": "Projects",
