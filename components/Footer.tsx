@@ -2,6 +2,7 @@
 
 import { Heart } from "lucide-react";
 import Link from "next/link";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
@@ -62,7 +63,7 @@ export default function Footer() {
                     asChild
                   >
                     <Link
-                      href="https://www.linkedin.com/in/eliottscherrer/"
+                      href={LINKEDIN_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -81,7 +82,7 @@ export default function Footer() {
                     onFocus={(event) => triggerGithubWag(event.currentTarget)}
                   >
                     <Link
-                      href="https://github.com/eliottscherrer"
+                      href={GITHUB_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -95,7 +96,7 @@ export default function Footer() {
                     className="ds-icon-control group"
                     asChild
                   >
-                    <Link href="mailto:contact@eliott.codes">
+                    <Link href={`mailto:${EMAIL}`}>
                       <AnimatedMail />
                     </Link>
                   </Button>

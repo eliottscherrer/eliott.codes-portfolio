@@ -10,7 +10,7 @@ import {
 import { useTranslations } from "next-intl";
 
 import { LinkIcon, type LinkIconHandle } from "@/components/ui/link-icon";
-import { cn } from "@/lib/utils";
+import { cn, copyToClipboard } from "@/lib/utils";
 
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -20,19 +20,6 @@ interface SectionAnchorHeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   as?: HeadingTag;
   description?: string;
 }
-
-const copyToClipboard = async (text: string) => {
-  if (!window.isSecureContext || !navigator.clipboard?.writeText) {
-    return false;
-  }
-
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    return false;
-  }
-};
 
 export default function SectionAnchorHeading({
   anchorId,

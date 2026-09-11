@@ -6,6 +6,7 @@ import SplitText from "@/components/SplitText";
 import { useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import {
   AnimatedLinkedin,
   AnimatedGithub,
@@ -87,11 +88,7 @@ export default function HeroSection() {
             className="ds-icon-control group"
             asChild
           >
-            <Link
-              href="https://www.linkedin.com/in/eliottscherrer/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               <AnimatedLinkedin />
             </Link>
           </Button>
@@ -104,11 +101,7 @@ export default function HeroSection() {
             onMouseEnter={(event) => triggerGithubWag(event.currentTarget)}
             onFocus={(event) => triggerGithubWag(event.currentTarget)}
           >
-            <Link
-              href="https://github.com/eliottscherrer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
               <AnimatedGithub />
             </Link>
           </Button>
@@ -119,7 +112,7 @@ export default function HeroSection() {
             className="ds-icon-control group"
             asChild
           >
-            <Link href="mailto:contact@eliott.codes">
+            <Link href={`mailto:${EMAIL}`}>
               <AnimatedMail />
             </Link>
           </Button>

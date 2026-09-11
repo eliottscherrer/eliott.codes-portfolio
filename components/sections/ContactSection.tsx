@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 
 import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
 import { Button } from "@/components/ui/button";
@@ -36,8 +37,8 @@ export default function ContactSection() {
           onMouseEnter={() => sendIconRef.current?.startAnimation()}
           onMouseLeave={() => sendIconRef.current?.stopAnimation()}
         >
-          <Link href="mailto:contact@eliott.codes" className="gap-2">
-            contact@eliott.codes
+          <Link href={`mailto:${EMAIL}`} className="gap-2">
+            {EMAIL}
             <SendIcon ref={sendIconRef} className="size-5 shrink-0" size={20} />
           </Link>
         </Button>
@@ -49,11 +50,7 @@ export default function ContactSection() {
             className="ds-icon-control group"
             asChild
           >
-            <Link
-              href="https://www.linkedin.com/in/eliottscherrer/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               <AnimatedLinkedin />
             </Link>
           </Button>
@@ -66,11 +63,7 @@ export default function ContactSection() {
             onMouseEnter={(event) => triggerGithubWag(event.currentTarget)}
             onFocus={(event) => triggerGithubWag(event.currentTarget)}
           >
-            <Link
-              href="https://github.com/eliottscherrer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
               <AnimatedGithub />
             </Link>
           </Button>
