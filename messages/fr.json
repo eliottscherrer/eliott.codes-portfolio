@@ -81,7 +81,7 @@
   },
   "Contact": {
     "title": "Contact",
-    "emailText": "Écrivez-moi à <email>contact@eliott.codes</email>"
+    "subtitle": "Un projet, une opportunité ou simplement une question ? Ma boîte mail est ouverte."
   },
   "Footer": {
     "role": "Développeur logiciel et<br />web full-stack.",
