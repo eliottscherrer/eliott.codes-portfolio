@@ -1,11 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import Tooltip from "@/components/ui/tooltip";
 import { MapPin } from "lucide-react";
+import LocalTime from "@/components/LocalTime";
 import SplitText from "@/components/SplitText";
 import { useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import {
   AnimatedLinkedin,
   AnimatedGithub,
@@ -87,11 +90,7 @@ export default function HeroSection() {
             className="ds-icon-control group"
             asChild
           >
-            <Link
-              href="https://www.linkedin.com/in/eliottscherrer/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
               <AnimatedLinkedin />
             </Link>
           </Button>
@@ -104,11 +103,7 @@ export default function HeroSection() {
             onMouseEnter={(event) => triggerGithubWag(event.currentTarget)}
             onFocus={(event) => triggerGithubWag(event.currentTarget)}
           >
-            <Link
-              href="https://github.com/eliottscherrer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
               <AnimatedGithub />
             </Link>
           </Button>
@@ -119,7 +114,7 @@ export default function HeroSection() {
             className="ds-icon-control group"
             asChild
           >
-            <Link href="mailto:contact@eliott.codes">
+            <Link href={`mailto:${EMAIL}`}>
               <AnimatedMail />
             </Link>
           </Button>
@@ -128,10 +123,20 @@ export default function HeroSection() {
 
       {/* Meta row: location + current status, same icon-slot rhythm */}
       <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-muted-foreground">
-        <span className="inline-flex items-center gap-1.5">
+        <Tooltip
+          content={
+            <>
+              <span className="text-muted-foreground">
+                {t("Hero.localTime")}
+              </span>{" "}
+              <LocalTime className="font-medium" />
+            </>
+          }
+          className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+        >
           <MapPin className="size-4 shrink-0" aria-hidden="true" />
           {t("Hero.location")}
-        </span>
+        </Tooltip>
         <span className="inline-flex items-center gap-1.5">
           <span
             className="relative flex size-4 shrink-0 items-center justify-center"

@@ -2,15 +2,33 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { Fragment, useMemo, useRef } from "react";
-import { useTranslations } from "next-intl";
-import { MapPin } from "lucide-react";
+import {
+  Fragment,
+  useMemo,
+  useRef,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { ArrowUpRight, MapPin } from "lucide-react";
 
+import RepoMenu from "@/components/RepoMenu";
+import LinkPreview from "@/components/ui/link-preview";
 import SpotlightCard from "@/components/SpotlightCard";
 import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
 import { Badge } from "@/components/ui/badge";
 import { getExperienceTimeline, type TimelineItem } from "@/lib/timeline-data";
 import { cn } from "@/lib/utils";
+
+// Day granularity keeps the snapshot stable, and a static build from before a period ended
+// simply re-renders with the right labels on the client.
+const DAY_MS = 86_400_000;
+const subscribeToNothing = () => () => {};
+const getDayIndex = () => Math.floor(Date.now() / DAY_MS);
+// Hydrate with the day the site was built (what the static HTML shows); React then
+// re-renders with the real day without a hydration mismatch.
+const getBuildDayIndex = () =>
+  Number(process.env.NEXT_PUBLIC_BUILD_DAY ?? getDayIndex());
 
 interface GroupedTimeline {
   period: string;
@@ -76,9 +94,18 @@ function TimelineLogo({
   );
 }
 
-function TagList({ tags, keyPrefix }: { tags: string[]; keyPrefix: string }) {
+function TagList({
+  tags,
+  keyPrefix,
+  trailing,
+}: {
+  tags: string[];
+  keyPrefix: string;
+  /** Extra chip rendered after the tags, e.g. the open source menu. */
+  trailing?: ReactNode;
+}) {
   return (
-    <div className="flex flex-wrap gap-2 pt-1">
+    <div className="flex flex-wrap items-center gap-2 pt-1">
       {tags.map((tag) => (
         <Badge
           key={`${keyPrefix}-${tag}`}
@@ -88,13 +115,23 @@ function TagList({ tags, keyPrefix }: { tags: string[]; keyPrefix: string }) {
           {tag}
         </Badge>
       ))}
+      {trailing}
     </div>
   );
 }
 
 export default function ExperienceSection() {
   const tt = useTranslations("Timeline");
-  const timelineItems = useMemo(() => getExperienceTimeline(tt), [tt]);
+  const locale = useLocale();
+  const day = useSyncExternalStore(
+    subscribeToNothing,
+    getDayIndex,
+    getBuildDayIndex,
+  );
+  const timelineItems = useMemo(
+    () => getExperienceTimeline(tt, locale, day * DAY_MS),
+    [tt, locale, day],
+  );
   const groupedTimeline = useMemo(
     () => buildGroupedTimeline(timelineItems),
     [timelineItems],
@@ -158,9 +195,6 @@ export default function ExperienceSection() {
                     {item.location}
                   </span>
                 ),
-                item.employmentType && (
-                  <span key="type">{item.employmentType}</span>
-                ),
               ].filter(Boolean);
 
               return (
@@ -202,6 +236,12 @@ export default function ExperienceSection() {
                         <div className="flex items-start justify-between gap-3">
                           <h3 className="text-[15px] sm:text-base font-semibold text-foreground leading-snug">
                             {item.title}
+                            {item.employmentType && (
+                              <span className="ml-2 text-sm font-normal text-muted-foreground">
+                                <span aria-hidden="true">• </span>
+                                {item.employmentType}
+                              </span>
+                            )}
                           </h3>
                           {item.isCurrent && (
                             <Badge
@@ -263,9 +303,25 @@ export default function ExperienceSection() {
                                     )}
                                   >
                                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
-                                      <p className="text-sm font-medium text-foreground/90">
-                                        {position.team}
-                                      </p>
+                                      <span className="inline-flex items-center gap-2">
+                                        {position.href ? (
+                                          <LinkPreview
+                                            href={position.href}
+                                            preview={position.previewSrc}
+                                            className="group/team ds-focus-ring inline-flex items-center gap-1 rounded-sm text-sm font-medium text-foreground/90 transition-colors hover:text-foreground"
+                                          >
+                                            {position.team}
+                                            <ArrowUpRight
+                                              className="size-3.5 text-muted-foreground transition-[color,translate] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/team:-translate-y-0.5 group-hover/team:translate-x-0.5 group-hover/team:text-foreground group-focus-visible/team:-translate-y-0.5 group-focus-visible/team:translate-x-0.5"
+                                              aria-hidden="true"
+                                            />
+                                          </LinkPreview>
+                                        ) : (
+                                          <p className="text-sm font-medium text-foreground/90">
+                                            {position.team}
+                                          </p>
+                                        )}
+                                      </span>
                                       <p className="text-xs text-muted-foreground">
                                         {position.period}
                                       </p>
@@ -276,6 +332,11 @@ export default function ExperienceSection() {
                                     <TagList
                                       tags={position.tags}
                                       keyPrefix={`${item.id}-${position.id}`}
+                                      trailing={
+                                        position.repos && (
+                                          <RepoMenu repos={position.repos} />
+                                        )
+                                      }
                                     />
                                   </div>
                                 </li>

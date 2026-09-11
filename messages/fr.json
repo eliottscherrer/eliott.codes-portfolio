@@ -18,14 +18,16 @@
     "sectionLinkCopied": "Lien de section copie",
     "frontendTechnologies": "Technologies frontend",
     "backendTechnologiesTools": "Technologies et outils backend",
-    "technologies": "Technologies que j'utilise"
+    "technologies": "Technologies que j'utilise",
+    "skipToContent": "Aller au contenu"
   },
   "Hero": {
     "location": "Lausanne, Suisse",
     "description": "Étudiant de {age} ans à l'ETML en développement logiciel et web, avec un intérêt pour la cybersécurité.",
     "viewProjects": "Voir mes projets",
     "getInTouch": "Me contacter",
-    "currently": "Actuellement en stage chez Infomaniak"
+    "currently": "Actuellement en stage chez Infomaniak",
+    "localTime": "Heure locale"
   },
   "Projects": {
     "title": "Projets",
@@ -51,37 +53,45 @@
     "current": "En cours",
     "items": {
       "cfc": {
-        "period": "Septembre 2023 - Juillet 2027",
         "title": "CFC Informaticien orienté développement d'applications avec maturité intégrée",
         "organization": "ETML",
         "location": "Lausanne",
         "description": "Formation en développement d'applications, progression continue, base solide en ingénierie logicielle. Obtention du Lauréat du Prix de pratique ETML en première année."
       },
       "infomaniak": {
-        "period": "Février 2026 - Aujourd'hui",
         "title": "Développeur frontend",
         "organization": "Infomaniak",
         "location": "Genève",
         "teams": {
           "pos": {
             "name": "Team Point de Vente",
-            "period": "Février - Mars 2026",
-            "description": "Implémentation d'interfaces depuis Figma avec React/Gatsby et démarrage de la migration vers une codebase moderne avec Inertia.js + TypeScript."
+            "description": "Implémentation d'interfaces depuis Figma avec React/Gatsby et démarrage de la migration vers une codebase moderne avec Inertia.js + TypeScript.",
+            "url": "https://www.infomaniak.com/fr"
           },
           "kchat": {
             "name": "Team kChat",
-            "period": "Mars 2026 - Aujourd'hui",
-            "description": "Travail sur les applications web, desktop et mobile : prise en charge de tickets, correction de bugs et amélioration continue du produit."
+            "description": "Travail sur les applications web, desktop et mobile : prise en charge de tickets, correction de bugs et amélioration continue du produit.",
+            "url": "https://www.infomaniak.com/fr/ksuite/kchat"
           }
         },
         "type": "Stage"
       }
     },
-    "subtitle": "Mes études et mes expériences jusqu'ici."
+    "subtitle": "Mes études et mes expériences jusqu'ici.",
+    "today": "Aujourd'hui",
+    "repos": {
+      "label": "Open source sur GitHub",
+      "web": "Application web",
+      "desktop": "Application desktop",
+      "mobile": "Application mobile",
+      "chip": "Open source"
+    }
   },
   "Contact": {
     "title": "Contact",
-    "subtitle": "Un projet, une opportunité ou simplement une question ? Ma boîte mail est ouverte."
+    "subtitle": "Un projet, une opportunité ou simplement une question ? Ma boîte mail est ouverte.",
+    "copyEmail": "Copier l'adresse e-mail",
+    "emailCopied": "Adresse e-mail copiée"
   },
   "Footer": {
     "role": "Développeur logiciel et web full-stack.",
@@ -93,5 +103,9 @@
     "allRightsReserved": "Tous droits réservés.",
     "madeWithLoveIn": "Fait avec <heart></heart> en <country></country>",
     "switzerland": "Suisse"
+  },
+  "Metadata": {
+    "title": "Eliott Scherrer | Développeur",
+    "description": "Portfolio d'Eliott Scherrer, développeur frontend et étudiant en développement logiciel à l'ETML à Lausanne, en Suisse."
   }
 }
