@@ -43,6 +43,7 @@ export default function LinkPreview({
   className?: string;
 }) {
   const anchorRef = useRef<HTMLAnchorElement>(null);
+  const pointer = useRef({ x: 0, y: 0 });
   const [anchorBox, setAnchorBox] = useState<{ x: number; y: number } | null>(
     null,
   );
@@ -61,13 +62,22 @@ export default function LinkPreview({
   };
   const close = () => setAnchorBox(null);
 
-  // Follow the link if the page scrolls or resizes while the card is showing.
+  // While the card shows: follow the link on resize, and on scroll either follow it or
+  // close if the page moved out from under the pointer (no mouseleave fires for that).
   useEffect(() => {
     if (!open) return;
-    window.addEventListener("scroll", measure, { passive: true });
+    const onScroll = () => {
+      const under = document.elementFromPoint(
+        pointer.current.x,
+        pointer.current.y,
+      );
+      if (anchorRef.current?.contains(under)) measure();
+      else close();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", measure);
     return () => {
-      window.removeEventListener("scroll", measure);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", measure);
     };
   }, [open]);
@@ -79,6 +89,7 @@ export default function LinkPreview({
     damping: 16,
   });
   const onMouseMove = (event: MouseEvent<HTMLAnchorElement>) => {
+    pointer.current = { x: event.clientX, y: event.clientY };
     const rect = event.currentTarget.getBoundingClientRect();
     x.set(event.clientX - (rect.left + rect.width / 2));
   };

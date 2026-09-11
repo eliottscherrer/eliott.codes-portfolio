@@ -1,7 +1,14 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useId, useState, type MouseEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -19,6 +26,23 @@ export default function Tooltip({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+
+  // Hovering then scrolling never fires mouseleave, so close once the trigger has moved
+  // out from under the pointer.
+  useEffect(() => {
+    if (!open) return;
+    const onScroll = () => {
+      const under = document.elementFromPoint(
+        pointer.current.x,
+        pointer.current.y,
+      );
+      if (!triggerRef.current?.contains(under)) setOpen(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
   const id = useId();
   const reduceMotion = useReducedMotion();
 
@@ -33,7 +57,14 @@ export default function Tooltip({
       <button
         type="button"
         aria-describedby={open ? id : undefined}
-        onMouseEnter={() => setOpen(true)}
+        ref={triggerRef}
+        onMouseEnter={(event) => {
+          pointer.current = { x: event.clientX, y: event.clientY };
+          setOpen(true);
+        }}
+        onMouseMove={(event) => {
+          pointer.current = { x: event.clientX, y: event.clientY };
+        }}
         onMouseLeave={() => setOpen(false)}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
