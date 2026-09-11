@@ -14,8 +14,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Repo } from "@/lib/timeline-data";
@@ -47,10 +45,6 @@ export default function RepoMenu({ repos }: { repos: Repo[] }) {
         sideOffset={6}
         className="bg-surface-glass backdrop-blur-xl border-surface-border shadow-lg transform-gpu"
       >
-        <DropdownMenuLabel className="ds-eyebrow px-2 pb-1 pt-1.5 text-[10px] font-semibold">
-          {t("label")}
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-[var(--surface-border)]" />
         {repos.map((repo) => {
           const Icon = ICONS[repo.kind];
           return (
