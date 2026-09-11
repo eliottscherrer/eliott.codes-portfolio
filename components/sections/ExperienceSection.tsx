@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { Fragment, useMemo, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { Fragment, useMemo, useRef, useSyncExternalStore } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight, MapPin } from "lucide-react";
 
 import SpotlightCard from "@/components/SpotlightCard";
@@ -11,6 +11,16 @@ import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
 import { Badge } from "@/components/ui/badge";
 import { getExperienceTimeline, type TimelineItem } from "@/lib/timeline-data";
 import { cn } from "@/lib/utils";
+
+// Day granularity keeps the snapshot stable, and a static build from before a period ended
+// simply re-renders with the right labels on the client.
+const DAY_MS = 86_400_000;
+const subscribeToNothing = () => () => {};
+const getDayIndex = () => Math.floor(Date.now() / DAY_MS);
+// Hydrate with the day the site was built (what the static HTML shows); React then
+// re-renders with the real day without a hydration mismatch.
+const getBuildDayIndex = () =>
+  Number(process.env.NEXT_PUBLIC_BUILD_DAY ?? getDayIndex());
 
 interface GroupedTimeline {
   period: string;
@@ -94,7 +104,16 @@ function TagList({ tags, keyPrefix }: { tags: string[]; keyPrefix: string }) {
 
 export default function ExperienceSection() {
   const tt = useTranslations("Timeline");
-  const timelineItems = useMemo(() => getExperienceTimeline(tt), [tt]);
+  const locale = useLocale();
+  const day = useSyncExternalStore(
+    subscribeToNothing,
+    getDayIndex,
+    getBuildDayIndex,
+  );
+  const timelineItems = useMemo(
+    () => getExperienceTimeline(tt, locale, day * DAY_MS),
+    [tt, locale, day],
+  );
   const groupedTimeline = useMemo(
     () => buildGroupedTimeline(timelineItems),
     [timelineItems],

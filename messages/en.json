@@ -52,27 +52,23 @@
     "current": "Current",
     "items": {
       "cfc": {
-        "period": "September 2023 - July 2027",
         "title": "CFC IT Specialist focused on application development with integrated maturity",
         "organization": "ETML",
         "location": "Lausanne",
         "description": "Training in application development, continuous progress, and a strong foundation in software engineering. Winner of the ETML practical award during the first year."
       },
       "infomaniak": {
-        "period": "February 2026 - Today",
         "title": "Frontend Developer",
         "organization": "Infomaniak",
         "location": "Geneva",
         "teams": {
           "pos": {
             "name": "Point of Sale team",
-            "period": "February - March 2026",
             "description": "Implemented interfaces from Figma with React/Gatsby and kicked off the migration to a more modern codebase with Inertia.js + TypeScript.",
             "url": "https://www.infomaniak.com/en"
           },
           "kchat": {
             "name": "kChat team",
-            "period": "March 2026 - Today",
             "description": "Working on the web, desktop and mobile apps: handling tickets, fixing bugs and continuously improving the product.",
             "url": "https://www.infomaniak.com/en/ksuite/kchat"
           }
@@ -80,7 +76,8 @@
         "type": "Internship"
       }
     },
-    "subtitle": "Where I've studied and worked so far."
+    "subtitle": "Where I've studied and worked so far.",
+    "today": "Today"
   },
   "Contact": {
     "title": "Contact",

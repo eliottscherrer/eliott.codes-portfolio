@@ -1,3 +1,5 @@
+import { formatPeriod, isOngoing, type Period } from "@/lib/format-period";
+
 export interface TimelinePosition {
   id: string;
   team: string;
@@ -14,7 +16,7 @@ export interface TimelineItem {
   title: string;
   organization?: string;
   location?: string;
-  /** e.g. "Internship"; shown in the meta line, not the title */
+  /** e.g. "Internship"; shown next to the title, not in the meta line */
   employmentType?: string;
   description?: string;
   tags?: string[];
@@ -27,11 +29,27 @@ export interface TimelineItem {
 
 type TimelineTranslator = (key: string) => string;
 
-export function getExperienceTimeline(t: TimelineTranslator): TimelineItem[] {
+// Dates live here; labels ("March 2026 – Today") are derived per locale at render time,
+// so the kChat entry closes itself once 31 January 2027 has passed.
+const PERIODS = {
+  cfc: { start: "2023-09", end: "2027-07" },
+  infomaniak: { start: "2026-02", end: "2027-01-31", today: true },
+  pos: { start: "2026-02", end: "2026-03" },
+  kchat: { start: "2026-03", end: "2027-01-31", today: true },
+} satisfies Record<string, Period>;
+
+export function getExperienceTimeline(
+  t: TimelineTranslator,
+  locale: string,
+  now: number,
+): TimelineItem[] {
+  const period = (value: Period) =>
+    formatPeriod(locale, value, t("today"), now);
+
   return [
     {
       id: "cfc-etml",
-      period: t("items.cfc.period"),
+      period: period(PERIODS.cfc),
       title: t("items.cfc.title"),
       organization: t("items.cfc.organization"),
       location: t("items.cfc.location"),
@@ -42,21 +60,21 @@ export function getExperienceTimeline(t: TimelineTranslator): TimelineItem[] {
     },
     {
       id: "infomaniak",
-      period: t("items.infomaniak.period"),
+      period: period(PERIODS.infomaniak),
       title: t("items.infomaniak.title"),
       organization: t("items.infomaniak.organization"),
       location: t("items.infomaniak.location"),
       employmentType: t("items.infomaniak.type"),
       iconSrc: "/icons/infomaniak-k-icon.svg",
       iconAlt: "Infomaniak",
-      isCurrent: true,
+      isCurrent: isOngoing(PERIODS.infomaniak, now),
       positions: [
         {
           id: "pos",
           iconSrc: "/icons/infomaniak-k-icon.svg",
           team: t("items.infomaniak.teams.pos.name"),
           href: t("items.infomaniak.teams.pos.url"),
-          period: t("items.infomaniak.teams.pos.period"),
+          period: period(PERIODS.pos),
           description: t("items.infomaniak.teams.pos.description"),
           tags: [
             "React",
@@ -72,7 +90,7 @@ export function getExperienceTimeline(t: TimelineTranslator): TimelineItem[] {
           iconSrc: "/icons/infomaniak-kchat-icon.svg",
           team: t("items.infomaniak.teams.kchat.name"),
           href: t("items.infomaniak.teams.kchat.url"),
-          period: t("items.infomaniak.teams.kchat.period"),
+          period: period(PERIODS.kchat),
           description: t("items.infomaniak.teams.kchat.description"),
           tags: [
             "React",
