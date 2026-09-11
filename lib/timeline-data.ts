@@ -5,6 +5,7 @@ export interface TimelinePosition {
   description: string;
   tags: string[];
   iconSrc?: string;
+  href?: string;
 }
 
 export interface TimelineItem {
@@ -54,6 +55,7 @@ export function getExperienceTimeline(t: TimelineTranslator): TimelineItem[] {
           id: "pos",
           iconSrc: "/icons/infomaniak-k-icon.svg",
           team: t("items.infomaniak.teams.pos.name"),
+          href: t("items.infomaniak.teams.pos.url"),
           period: t("items.infomaniak.teams.pos.period"),
           description: t("items.infomaniak.teams.pos.description"),
           tags: [
@@ -69,6 +71,7 @@ export function getExperienceTimeline(t: TimelineTranslator): TimelineItem[] {
           id: "kchat",
           iconSrc: "/icons/infomaniak-kchat-icon.svg",
           team: t("items.infomaniak.teams.kchat.name"),
+          href: t("items.infomaniak.teams.kchat.url"),
           period: t("items.infomaniak.teams.kchat.period"),
           description: t("items.infomaniak.teams.kchat.description"),
           tags: [

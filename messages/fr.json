@@ -67,12 +67,14 @@
           "pos": {
             "name": "Team Point de Vente",
             "period": "Février - Mars 2026",
-            "description": "Implémentation d'interfaces depuis Figma avec React/Gatsby et démarrage de la migration vers une codebase moderne avec Inertia.js + TypeScript."
+            "description": "Implémentation d'interfaces depuis Figma avec React/Gatsby et démarrage de la migration vers une codebase moderne avec Inertia.js + TypeScript.",
+            "url": "https://www.infomaniak.com/fr"
           },
           "kchat": {
             "name": "Team kChat",
             "period": "Mars 2026 - Aujourd'hui",
-            "description": "Travail sur les applications web, desktop et mobile : prise en charge de tickets, correction de bugs et amélioration continue du produit."
+            "description": "Travail sur les applications web, desktop et mobile : prise en charge de tickets, correction de bugs et amélioration continue du produit.",
+            "url": "https://www.infomaniak.com/fr/ksuite/kchat"
           }
         },
         "type": "Stage"
