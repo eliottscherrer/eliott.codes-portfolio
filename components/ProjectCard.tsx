@@ -35,7 +35,7 @@ export default function ProjectCard({
       href={link}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
-      className="group group/tech block h-full rounded-2xl ds-focus-ring"
+      className="group group/tech block h-full rounded-2xl ds-focus-ring transition-opacity duration-300 [@media(hover:hover)]:group-has-[a:hover]/grid:opacity-60 group-has-[a:focus-visible]/grid:opacity-60 hover:!opacity-100 focus-visible:!opacity-100"
     >
       <SpotlightCard
         className="ds-surface-card flex h-full w-full flex-col overflow-hidden rounded-2xl p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] hover:border-foreground/20 transition-[background-color,border-color] duration-500"
