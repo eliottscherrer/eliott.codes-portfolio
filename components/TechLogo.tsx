@@ -72,8 +72,9 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
 
   // Brand colors from Simple Icons (https://simpleicons.org/)
   const brandColors: Record<string, string> = {
-    'HTML': '#E34F26',
-    'CSS': '#1572B6',
+    'Tailwind CSS': '#06B6D4',
+    'Linux': '#FCC624',
+    'GitLab': '#FC6D26',
     'JavaScript': '#F7DF1E',
     'Vue.js': '#4FC08D',
     'C# .NET': '#512BD4',
@@ -83,7 +84,6 @@ export default function TechLogo({ icon, label, brandColor, size, labelSize, for
     'MariaDB': '#003545',
     'MySQL': '#f29111',
     'MongoDB': '#47A248',
-    'Redis': '#DC382D',
     'Docker': '#2496ED',
     'Docker Swarm': '#2496ED',
     'WordPress': '#21759B',

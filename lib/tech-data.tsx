@@ -1,30 +1,25 @@
 import TechLogo from "@/components/TechLogo";
 import {
-  SiHtml5,
+  SiTailwindcss,
+  SiGitlab,
   SiNodedotjs,
   SiVuedotjs,
   SiMariadb,
   SiMongodb,
-  SiRedis,
   SiFigma,
   SiDocker,
   SiNextdotjs,
   SiReact,
 } from "react-icons/si";
-import { FaCss3Alt } from "react-icons/fa6";
+import { FaLinux } from "react-icons/fa6";
 
 import { DiDotnet } from "react-icons/di";
 
 export const frontendTech = [
   {
-    node: <TechLogo icon={<SiHtml5 />} label="HTML" />,
-    title: "HTML5",
-    href: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-  },
-  {
-    node: <TechLogo icon={<FaCss3Alt />} label="CSS" />,
-    title: "CSS3",
-    href: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+    node: <TechLogo icon={<SiTailwindcss />} label="Tailwind CSS" />,
+    title: "Tailwind CSS",
+    href: "https://tailwindcss.com",
   },
   {
     node: <TechLogo icon={<SiReact />} label="React" />,
@@ -65,14 +60,19 @@ export const backendTech = [
     href: "https://www.mongodb.com",
   },
   {
-    node: <TechLogo icon={<SiRedis />} label="Redis" />,
-    title: "Redis",
-    href: "https://redis.io",
+    node: <TechLogo icon={<SiGitlab />} label="GitLab" />,
+    title: "GitLab",
+    href: "https://about.gitlab.com",
   },
   {
     node: <TechLogo icon={<SiDocker />} label="Docker" />,
     title: "Docker",
     href: "https://www.docker.com",
+  },
+  {
+    node: <TechLogo icon={<FaLinux />} label="Linux" />,
+    title: "Linux",
+    href: "https://www.kernel.org",
   },
   {
     node: <TechLogo icon={<SiFigma />} label="Figma" />,
