@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 
 import "@/app/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -26,16 +25,23 @@ export default async function RootLayout({
 }) {
   return (
     <html lang={routing.defaultLocale} suppressHydrationWarning>
+      <head>
+        {/* Plain inline script so it runs before first paint. next/script's
+            beforeInteractive is deferred until the JS bundle loads in the App Router,
+            which flashes the light theme on reload. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: getThemeScript({
+              attribute: "class",
+              defaultTheme: DEFAULT_THEME,
+              enableColorScheme: true,
+              enableSystem: true,
+              storageKey: THEME_STORAGE_KEY,
+            }),
+          }}
+        />
+      </head>
       <body className={cn(inter.className, "bg-background text-foreground")}>
-        <Script id="theme-bootstrap" strategy="beforeInteractive">
-          {getThemeScript({
-            attribute: "class",
-            defaultTheme: DEFAULT_THEME,
-            enableColorScheme: true,
-            enableSystem: true,
-            storageKey: THEME_STORAGE_KEY,
-          })}
-        </Script>
         <ThemeProvider
           attribute="class"
           defaultTheme={DEFAULT_THEME}
