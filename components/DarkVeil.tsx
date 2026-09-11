@@ -138,11 +138,15 @@ export default function DarkVeil({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const resize = () => {
       const w = parent.clientWidth,
         h = parent.clientHeight;
       renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
+      // Without the render loop (reduced motion), redraw the still frame after a resize.
+      if (reduceMotion) renderer.render({ scene: mesh });
     };
 
     window.addEventListener('resize', resize);
@@ -176,13 +180,12 @@ export default function DarkVeil({
       program.uniforms.uAlpha.value = alpha;
       program.uniforms.uAlphaThreshold.value = alphaThreshold;
       renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(loop);
+      if (!reduceMotion) frame = requestAnimationFrame(loop);
     };
 
     loop();
     // Fade in once the first frame is drawn instead of popping in. This uses the Web Animations
     // API because the theme provider switches CSS transitions off while it applies the theme on load.
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fadeIn = canvas.animate([{ opacity: 0 }, { opacity: 1 }], {
       duration: reduceMotion ? 0 : 1000,
       easing: 'ease-out',

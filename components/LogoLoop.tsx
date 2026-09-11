@@ -9,6 +9,7 @@ import {
   motion,
   useAnimationFrame,
   useMotionValue,
+  useReducedMotion,
 } from "motion/react";
 import Link from "next/link";
 
@@ -150,6 +151,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
     const containerRef = useRef<HTMLDivElement>(null);
     const seqRef = useRef<HTMLUListElement>(null);
     const isHoveredRef = useRef(false);
+    const reduceMotion = useReducedMotion();
 
     const [seqWidth, setSeqWidth] = useState<number>(0);
     const [copyCount, setCopyCount] = useState<number>(
@@ -170,7 +172,8 @@ export const LogoLoop = React.memo<LogoLoopProps>(
       if (seqWidth <= 0) return;
 
       const deltaTime = delta / 1000;
-      const target = pauseOnHover && isHoveredRef.current ? 0 : targetVelocity;
+      const target =
+        reduceMotion || (pauseOnHover && isHoveredRef.current) ? 0 : targetVelocity;
 
       const currentVelocity = velocity.get();
       const easingFactor =

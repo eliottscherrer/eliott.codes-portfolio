@@ -54,6 +54,8 @@ const SplitText: React.FC<SplitTextProps> = ({
   useGSAP(
     () => {
       if (!ref.current || !text || !fontsLoaded) return;
+      // Keep the text still for people who prefer reduced motion.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const el = ref.current as HTMLElement & {
         _rbsplitInstance?: GSAPSplitText;
       };
