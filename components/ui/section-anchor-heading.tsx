@@ -18,6 +18,7 @@ interface SectionAnchorHeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   anchorId: string;
   headingId?: string;
   as?: HeadingTag;
+  description?: string;
 }
 
 const copyToClipboard = async (text: string) => {
@@ -37,6 +38,7 @@ export default function SectionAnchorHeading({
   anchorId,
   headingId,
   as: HeadingTag = "h2",
+  description,
   className,
   children,
   ...props
@@ -77,43 +79,46 @@ export default function SectionAnchorHeading({
   }, []);
 
   return (
-    <div className="group/section-anchor relative w-fit max-w-full">
-      <button
-        type="button"
-        aria-label={copied ? tc("sectionLinkCopied") : tc("copySectionLink")}
-        className={cn(
-          "absolute -left-8 top-1/2 z-10 inline-flex size-8 -translate-y-1/2 items-center justify-center text-muted-foreground transition-all duration-300",
-          "hover:text-foreground",
-          "opacity-70 md:opacity-0 md:-translate-x-1",
-          "group-hover/section-anchor:opacity-100 group-hover/section-anchor:translate-x-0",
-          "group-focus-within/section-anchor:opacity-100 group-focus-within/section-anchor:translate-x-0",
-          "focus-visible:outline-none focus-visible:text-foreground",
-        )}
-        onClick={handleCopyClick}
-        onMouseEnter={() => iconRef.current?.startAnimation()}
-        onMouseLeave={() => iconRef.current?.stopAnimation()}
-        onFocus={() => iconRef.current?.startAnimation()}
-        onBlur={() => iconRef.current?.stopAnimation()}
-      >
-        <LinkIcon
-          ref={iconRef}
-          size={16}
-          className="pointer-events-none"
-          aria-hidden="true"
-        />
-      </button>
+    <div>
+      <div className="group/section-anchor relative w-fit max-w-full">
+        <button
+          type="button"
+          aria-label={copied ? tc("sectionLinkCopied") : tc("copySectionLink")}
+          className={cn(
+            "absolute -left-8 top-1/2 z-10 hidden size-8 -translate-y-1/2 items-center justify-center text-muted-foreground transition-all duration-300 md:inline-flex",
+            "hover:text-foreground",
+            "opacity-0 -translate-x-1",
+            "group-hover/section-anchor:opacity-100 group-hover/section-anchor:translate-x-0",
+            "group-focus-within/section-anchor:opacity-100 group-focus-within/section-anchor:translate-x-0",
+            "focus-visible:outline-none focus-visible:text-foreground",
+          )}
+          onClick={handleCopyClick}
+          onMouseEnter={() => iconRef.current?.startAnimation()}
+          onMouseLeave={() => iconRef.current?.stopAnimation()}
+          onFocus={() => iconRef.current?.startAnimation()}
+          onBlur={() => iconRef.current?.stopAnimation()}
+        >
+          <LinkIcon
+            ref={iconRef}
+            size={16}
+            className="pointer-events-none"
+            aria-hidden="true"
+          />
+        </button>
 
-      <span className="sr-only" role="status" aria-live="polite">
-        {copied ? tc("sectionLinkCopied") : ""}
-      </span>
+        <span className="sr-only" role="status" aria-live="polite">
+          {copied ? tc("sectionLinkCopied") : ""}
+        </span>
 
-      <HeadingTag
-        id={headingId}
-        className={cn("ds-section-title", className)}
-        {...props}
-      >
-        {children}
-      </HeadingTag>
+        <HeadingTag
+          id={headingId}
+          className={cn("ds-section-title", className)}
+          {...props}
+        >
+          {children}
+        </HeadingTag>
+      </div>
+      {description && <p className="ds-section-description">{description}</p>}
     </div>
   );
 }
