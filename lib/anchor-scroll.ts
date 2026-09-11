@@ -24,36 +24,13 @@ const getSamePageHashFromAnchor = (anchor: HTMLAnchorElement) => {
   return decodeURIComponent(parsedUrl.hash.slice(1));
 };
 
-const getStickyHeaderOffset = () => {
-  const stickyHeader = document.querySelector("header.sticky");
-  if (!(stickyHeader instanceof HTMLElement)) return 0;
-
-  const stickyHeaderHeight = stickyHeader.getBoundingClientRect().height;
-  const stickyTopOffset =
-    Number.parseFloat(getComputedStyle(stickyHeader).top || "0") || 0;
-  const breathingRoom = 16;
-
-  return -(stickyHeaderHeight + stickyTopOffset + breathingRoom);
-};
-
 const clearHashFromCurrentUrl = () => {
   const cleanUrl = `${window.location.pathname}${window.location.search}`;
   window.history.replaceState(window.history.state, "", cleanUrl);
 };
 
-const scrollWithReducedMotion = (
-  targetElement: HTMLElement,
-  offset: number,
-) => {
-  const targetTop =
-    targetElement.getBoundingClientRect().top + window.scrollY + offset;
-
-  window.scrollTo({
-    top: targetTop,
-    behavior: "auto",
-  });
-};
-
+// The landing position comes from the target's `scroll-margin-top` in both branches:
+// scrollIntoView honours it natively and Lenis subtracts it itself.
 export const createSamePageAnchorClickHandler = (lenis: Lenis) => {
   return (event: MouseEvent) => {
     if (!isPrimaryPointerClick(event)) return;
@@ -72,14 +49,10 @@ export const createSamePageAnchorClickHandler = (lenis: Lenis) => {
 
     event.preventDefault();
 
-    const offset = getStickyHeaderOffset();
-    const prefersReducedMotion =
-      window.matchMedia(REDUCED_MOTION_QUERY).matches;
-
-    if (prefersReducedMotion) {
-      scrollWithReducedMotion(targetElement, offset);
+    if (window.matchMedia(REDUCED_MOTION_QUERY).matches) {
+      targetElement.scrollIntoView({ behavior: "auto" });
     } else {
-      lenis.scrollTo(targetElement, { offset });
+      lenis.scrollTo(targetElement);
     }
 
     clearHashFromCurrentUrl();

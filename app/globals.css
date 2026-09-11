@@ -200,8 +200,9 @@ body,
     @apply translate-y-0 opacity-100 outline-none ring-2 ring-ring/70;
   }
 
+  /* Where anchor links land: just below the sticky header. Lenis reads this too. */
   .ds-anchor-target {
-    scroll-margin-top: clamp(6rem, 10vw, 8.5rem);
+    scroll-margin-top: 6rem;
   }
 
   .ds-focus-ring {
