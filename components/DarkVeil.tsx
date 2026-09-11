@@ -148,6 +148,21 @@ export default function DarkVeil({
     window.addEventListener('resize', resize);
     resize();
 
+    // On reload or navigation, Chrome can paint this WebGL canvas as a light layer while the
+    // old page is torn down, so hide it as soon as the page starts unloading. The timer brings
+    // it back if the page doesn't actually leave, e.g. after clicking a mailto: link.
+    let restoreTimer = 0;
+    const show = () => {
+      window.clearTimeout(restoreTimer);
+      canvas.style.visibility = '';
+    };
+    const hideBeforeUnload = () => {
+      canvas.style.visibility = 'hidden';
+      restoreTimer = window.setTimeout(show, 2000);
+    };
+    window.addEventListener('beforeunload', hideBeforeUnload);
+    window.addEventListener('pageshow', show);
+
     const start = performance.now();
     let frame = 0;
 
@@ -168,7 +183,10 @@ export default function DarkVeil({
 
     return () => {
       cancelAnimationFrame(frame);
+      window.clearTimeout(restoreTimer);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('beforeunload', hideBeforeUnload);
+      window.removeEventListener('pageshow', show);
     };
   }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale, alpha, alphaThreshold]);
   return <canvas ref={ref} className={`w-full h-full block${className ? ` ${className}` : ''}`} style={style} />;
