@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { Variants } from "motion/react";
 import { motion, useAnimation } from "motion/react";
-import { useCallback, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
 const LANGUAGE_LEFT_VARIANTS: Variants = {
@@ -97,9 +97,38 @@ export default function LanguageSwitcher({
     void languageIconControls.start("animate");
   }, [languageIconControls]);
 
+  // While the menu is open the icon stays in its "animate" pose until it closes. After
+  // picking a language it also stays until the new locale is on screen, so the pose isn't
+  // cut off mid-switch.
+  const isMenuOpenRef = useRef(false);
+  const isSwitchingLocaleRef = useRef(false);
+
   const stopLanguageIconAnimation = useCallback(() => {
+    if (isMenuOpenRef.current || isSwitchingLocaleRef.current) return;
     void languageIconControls.start("normal");
   }, [languageIconControls]);
+
+  const handleMenuOpenChange = useCallback(
+    (isOpen: boolean) => {
+      isMenuOpenRef.current = isOpen;
+      if (isOpen) {
+        void languageIconControls.start("animate");
+      } else {
+        stopLanguageIconAnimation();
+      }
+    },
+    [languageIconControls, stopLanguageIconAnimation],
+  );
+
+  const isFirstLocaleRef = useRef(true);
+  useEffect(() => {
+    if (isFirstLocaleRef.current) {
+      isFirstLocaleRef.current = false;
+      return;
+    }
+    isSwitchingLocaleRef.current = false;
+    void languageIconControls.start("normal");
+  }, [locale, languageIconControls]);
 
   const renderLanguageIcon = () => (
     <svg
@@ -155,21 +184,20 @@ export default function LanguageSwitcher({
     />
   );
 
-  const languageNames = new Intl.DisplayNames([locale], { type: "language" });
+  // Each language is written in itself ("English", "Français"), whatever the current locale.
   const formatLanguageLabel = (
     availableLocale: (typeof routing.locales)[number],
   ) => {
     const label =
-      languageNames.of(availableLocale) ?? availableLocale.toUpperCase();
+      new Intl.DisplayNames([availableLocale], { type: "language" }).of(
+        availableLocale,
+      ) ?? availableLocale.toUpperCase();
 
-    if (!label) {
-      return availableLocale.toUpperCase();
-    }
-
-    return label.charAt(0).toLocaleUpperCase(locale) + label.slice(1);
+    return label.charAt(0).toLocaleUpperCase(availableLocale) + label.slice(1);
   };
 
   const handleLocaleChange = (newLocale: (typeof routing.locales)[number]) => {
+    if (newLocale !== locale) isSwitchingLocaleRef.current = true;
     router.replace(pathname, { locale: newLocale });
   };
 
@@ -191,14 +219,20 @@ export default function LanguageSwitcher({
   }
 
   return (
-    <DropdownMenu modal={false}>
+    <DropdownMenu modal={false} onOpenChange={handleMenuOpenChange}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="glass"
           size="icon"
           onMouseEnter={startLanguageIconAnimation}
           onMouseLeave={stopLanguageIconAnimation}
-          onFocus={startLanguageIconAnimation}
+          // Keyboard focus only: Radix hands focus back to the trigger after a click-away,
+          // which must not re-trigger the pose.
+          onFocus={(event) => {
+            if (event.currentTarget.matches(":focus-visible")) {
+              startLanguageIconAnimation();
+            }
+          }}
           onBlur={stopLanguageIconAnimation}
           className={cn(
             "ds-icon-control rounded-md w-8 h-8 flex items-center justify-center transition-colors [&_svg]:h-4 [&_svg]:w-4",
