@@ -4,17 +4,20 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
 
 concurrency:
-  group: portfolio-main
+  group: portfolio-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   ci:
-    runs-on: [self-hosted, portfolio-deploy]
+    # PR code runs on a throwaway GitHub-hosted VM, never on the self-hosted runner
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || fromJSON('["self-hosted", "portfolio-deploy"]') }}
     timeout-minutes: 10
 
     steps:
