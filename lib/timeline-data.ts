@@ -14,6 +14,8 @@ export interface TimelinePosition {
   tags: string[];
   iconSrc?: string;
   href?: string;
+  /** Prerendered screenshot of `href`, shown on hover. */
+  previewSrc?: string;
   /** Public source code of what the team ships. */
   repos?: Repo[];
 }
@@ -100,6 +102,7 @@ export function getExperienceTimeline(
           iconSrc: "/icons/infomaniak-k-icon.svg",
           team: t("items.infomaniak.teams.pos.name"),
           href: t("items.infomaniak.teams.pos.url"),
+          previewSrc: `/previews/infomaniak-${locale}.webp`,
           period: period(PERIODS.pos),
           description: t("items.infomaniak.teams.pos.description"),
           tags: [
@@ -116,6 +119,7 @@ export function getExperienceTimeline(
           iconSrc: "/icons/infomaniak-kchat-icon.svg",
           team: t("items.infomaniak.teams.kchat.name"),
           href: t("items.infomaniak.teams.kchat.url"),
+          previewSrc: `/previews/kchat-${locale}.webp`,
           period: period(PERIODS.kchat),
           description: t("items.infomaniak.teams.kchat.description"),
           tags: [
