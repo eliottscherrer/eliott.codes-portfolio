@@ -77,7 +77,13 @@
       }
     },
     "subtitle": "Where I've studied and worked so far.",
-    "today": "Today"
+    "today": "Today",
+    "repos": {
+      "label": "Open source on GitHub",
+      "web": "Web app",
+      "desktop": "Desktop app",
+      "mobile": "Mobile app"
+    }
   },
   "Contact": {
     "title": "Contact",

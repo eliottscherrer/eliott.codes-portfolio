@@ -6,6 +6,7 @@ import { Fragment, useMemo, useRef, useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight, MapPin } from "lucide-react";
 
+import RepoMenu from "@/components/RepoMenu";
 import SpotlightCard from "@/components/SpotlightCard";
 import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
 import { Badge } from "@/components/ui/badge";
@@ -285,24 +286,29 @@ export default function ExperienceSection() {
                                     )}
                                   >
                                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
-                                      {position.href ? (
-                                        <a
-                                          href={position.href}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="group/team ds-focus-ring inline-flex items-center gap-1 rounded-sm text-sm font-medium text-foreground/90 transition-colors hover:text-foreground"
-                                        >
-                                          {position.team}
-                                          <ArrowUpRight
-                                            className="size-3.5 text-muted-foreground transition-[color,translate] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/team:-translate-y-0.5 group-hover/team:translate-x-0.5 group-hover/team:text-foreground group-focus-visible/team:-translate-y-0.5 group-focus-visible/team:translate-x-0.5"
-                                            aria-hidden="true"
-                                          />
-                                        </a>
-                                      ) : (
-                                        <p className="text-sm font-medium text-foreground/90">
-                                          {position.team}
-                                        </p>
-                                      )}
+                                      <span className="inline-flex items-center gap-2">
+                                        {position.href ? (
+                                          <a
+                                            href={position.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="group/team ds-focus-ring inline-flex items-center gap-1 rounded-sm text-sm font-medium text-foreground/90 transition-colors hover:text-foreground"
+                                          >
+                                            {position.team}
+                                            <ArrowUpRight
+                                              className="size-3.5 text-muted-foreground transition-[color,translate] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover/team:-translate-y-0.5 group-hover/team:translate-x-0.5 group-hover/team:text-foreground group-focus-visible/team:-translate-y-0.5 group-focus-visible/team:translate-x-0.5"
+                                              aria-hidden="true"
+                                            />
+                                          </a>
+                                        ) : (
+                                          <p className="text-sm font-medium text-foreground/90">
+                                            {position.team}
+                                          </p>
+                                        )}
+                                        {position.repos && (
+                                          <RepoMenu repos={position.repos} />
+                                        )}
+                                      </span>
                                       <p className="text-xs text-muted-foreground">
                                         {position.period}
                                       </p>

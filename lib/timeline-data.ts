@@ -1,5 +1,11 @@
 import { formatPeriod, isOngoing, type Period } from "@/lib/format-period";
 
+export interface Repo {
+  name: string;
+  kind: "web" | "desktop" | "mobile";
+  href: string;
+}
+
 export interface TimelinePosition {
   id: string;
   team: string;
@@ -8,6 +14,8 @@ export interface TimelinePosition {
   tags: string[];
   iconSrc?: string;
   href?: string;
+  /** Public source code of what the team ships. */
+  repos?: Repo[];
 }
 
 export interface TimelineItem {
@@ -37,6 +45,24 @@ const PERIODS = {
   pos: { start: "2026-02", end: "2026-03" },
   kchat: { start: "2026-03", end: "2027-01-31", today: true },
 } satisfies Record<string, Period>;
+
+const KCHAT_REPOS: Repo[] = [
+  {
+    name: "webapp-kChat",
+    kind: "web",
+    href: "https://github.com/Infomaniak/webapp-kChat",
+  },
+  {
+    name: "desktop-kChat",
+    kind: "desktop",
+    href: "https://github.com/Infomaniak/desktop-kChat",
+  },
+  {
+    name: "mobile-kchat",
+    kind: "mobile",
+    href: "https://github.com/Infomaniak/mobile-kchat",
+  },
+];
 
 export function getExperienceTimeline(
   t: TimelineTranslator,
@@ -100,6 +126,7 @@ export function getExperienceTimeline(
             "Redux",
             "Redmine",
           ],
+          repos: KCHAT_REPOS,
         },
       ],
     },
