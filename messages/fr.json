@@ -56,21 +56,27 @@
         "location": "Lausanne",
         "description": "Formation en développement d'applications, progression continue, base solide en ingénierie logicielle. Obtention du Lauréat du Prix de pratique ETML en première année."
       },
-      "pos": {
-        "period": "Février à Mars 2026",
-        "title": "Développeur frontend (stage)",
-        "organization": "infomaniak - Team Point de Vente",
+      "infomaniak": {
+        "period": "Février 2026 - Aujourd'hui",
+        "title": "Développeur frontend",
+        "organization": "Infomaniak",
         "location": "Genève",
-        "description": "Contribution à la plateforme Point de Vente, implémentation d'interfaces depuis Figma avec React/Gatsby, démarrage de migration vers une codebase moderne avec Inertia.js + TypeScript."
-      },
-      "kchat": {
-        "period": "2026 - Aujourd'hui",
-        "title": "Développeur frontend (stage)",
-        "organization": "infomaniak - Team kChat",
-        "location": "Genève",
-        "description": "Travail sur applications web, desktop et mobile, prise en charge de tickets, corrections de bugs, amélioration continue produit."
+        "teams": {
+          "pos": {
+            "name": "Team Point de Vente",
+            "period": "Février - Mars 2026",
+            "description": "Implémentation d'interfaces depuis Figma avec React/Gatsby et démarrage de la migration vers une codebase moderne avec Inertia.js + TypeScript."
+          },
+          "kchat": {
+            "name": "Team kChat",
+            "period": "Mars 2026 - Aujourd'hui",
+            "description": "Travail sur les applications web, desktop et mobile : prise en charge de tickets, correction de bugs et amélioration continue du produit."
+          }
+        },
+        "type": "Stage"
       }
-    }
+    },
+    "subtitle": "Mes études et mes expériences jusqu'ici."
   },
   "Contact": {
     "title": "Contact",

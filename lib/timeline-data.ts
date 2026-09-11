@@ -1,11 +1,24 @@
+export interface TimelinePosition {
+  id: string;
+  team: string;
+  period: string;
+  description: string;
+  tags: string[];
+  iconSrc?: string;
+}
+
 export interface TimelineItem {
   id: string;
   period: string;
   title: string;
   organization?: string;
   location?: string;
-  description: string;
-  tags: string[];
+  /** e.g. "Internship"; shown in the meta line, not the title */
+  employmentType?: string;
+  description?: string;
+  tags?: string[];
+  /** Several teams/roles at the same organization, oldest first. */
+  positions?: TimelinePosition[];
   isCurrent?: boolean;
   iconSrc?: string;
   iconAlt?: string;
@@ -27,27 +40,47 @@ export function getExperienceTimeline(t: TimelineTranslator): TimelineItem[] {
       tags: ["JavaScript", "Docker", "C#", "MySQL", "Git", "Agile"],
     },
     {
-      id: "stage-infomaniak",
-      period: t("items.pos.period"),
-      title: t("items.pos.title"),
-      organization: t("items.pos.organization"),
-      location: t("items.pos.location"),
+      id: "infomaniak",
+      period: t("items.infomaniak.period"),
+      title: t("items.infomaniak.title"),
+      organization: t("items.infomaniak.organization"),
+      location: t("items.infomaniak.location"),
+      employmentType: t("items.infomaniak.type"),
       iconSrc: "/icons/infomaniak-k-icon.svg",
-      iconAlt: "infomaniak",
-      description: t("items.pos.description"),
-      tags: ["React", "Gatsby", "Inertia.js", "TypeScript", "Figma", "UX/UI"],
-    },
-    {
-      id: "kchat-team",
-      period: t("items.kchat.period"),
-      title: t("items.kchat.title"),
-      organization: t("items.kchat.organization"),
-      location: t("items.kchat.location"),
-      iconSrc: "/icons/infomaniak-kchat-icon.svg",
-      iconAlt: "kChat",
-      description: t("items.kchat.description"),
-      tags: ["React", "React Native", "Electron", "TypeScript", "Redux", "Redmine"],
+      iconAlt: "Infomaniak",
       isCurrent: true,
+      positions: [
+        {
+          id: "pos",
+          iconSrc: "/icons/infomaniak-k-icon.svg",
+          team: t("items.infomaniak.teams.pos.name"),
+          period: t("items.infomaniak.teams.pos.period"),
+          description: t("items.infomaniak.teams.pos.description"),
+          tags: [
+            "React",
+            "Gatsby",
+            "Inertia.js",
+            "TypeScript",
+            "Figma",
+            "UX/UI",
+          ],
+        },
+        {
+          id: "kchat",
+          iconSrc: "/icons/infomaniak-kchat-icon.svg",
+          team: t("items.infomaniak.teams.kchat.name"),
+          period: t("items.infomaniak.teams.kchat.period"),
+          description: t("items.infomaniak.teams.kchat.description"),
+          tags: [
+            "React",
+            "React Native",
+            "Electron",
+            "TypeScript",
+            "Redux",
+            "Redmine",
+          ],
+        },
+      ],
     },
   ];
 }
