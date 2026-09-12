@@ -45,6 +45,8 @@ function commitSubject() {
 
 const nextConfig: NextConfig = {
   output: "export",
+  // Next 16.3 writes AGENTS.md and CLAUDE.md into the repo on every build otherwise
+  agentRules: false,
   env: {
     // Day index of the build; lets date-derived labels hydrate exactly as prerendered
     NEXT_PUBLIC_BUILD_DAY: String(Math.floor(Date.now() / 86_400_000)),
