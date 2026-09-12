@@ -53,15 +53,15 @@
     "subtitle": "Ce que j'apprends en ce moment, et la machine sur laquelle je casse des choses.",
     "learning": {
       "label": "J'apprends",
-      "go": "Je commence tout juste, plutôt pour du backend.",
-      "rust": "Débutant. De petits outils en ligne de commande, une notion à la fois.",
-      "cpp": "Quelques projets natifs au compteur. À l'aise, loin d'être expert."
+      "go": "Je commence tout juste, plutôt backend et outillage.",
+      "rust": "Débutant, sur un projet plus gros que moi — lecture mémoire à travers une frontière QEMU/KVM avec memflow, une app desktop Tauri et un périphérique USB à piloter.",
+      "cpp": "Celui où je suis le plus à l'aise, sans être expert — internals Win32, hooks et overlays, scan mémoire, le tout buildé avec CMake."
     },
     "homelab": {
       "label": "Homelab",
       "description": "Un VPS qui fait tourner une vingtaine de services auto-hébergés, déployés avec <dokploy>Dokploy</dokploy>, routés par <traefik>Traefik</traefik> et gardés privés via <tailscale>Tailscale</tailscale>.",
-      "runs": "Forge Git · média · mots de passe · monitoring · serveurs de jeu",
-      "meta": "Ce site tourne dessus, et chaque pull request a sa propre URL de prévisualisation."
+      "runs": "Apps web · forge Git · média · mots de passe · monitoring · serveurs de jeu",
+      "meta": "Par exemple, ce site tourne dessus, et chaque pull request a sa propre URL de prévisualisation."
     }
   },
   "Timeline": {

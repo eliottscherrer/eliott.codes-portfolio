@@ -51,9 +51,10 @@ export default function OffTheClockSection() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         {/* Languages I'm picking up: an honest line each, no skill bars */}
-        <div className="ds-surface-card space-y-4 rounded-2xl p-5">
+        <div className="ds-surface-card flex flex-col gap-4 rounded-2xl p-5">
           <p className="ds-eyebrow">{t("learning.label")}</p>
-          <ul className="space-y-3.5">
+          {/* Spread the rows so the card fills whatever height its neighbour sets */}
+          <ul className="flex flex-1 flex-col justify-between gap-4">
             {LEARNING.map(({ key, icon, label, color }) => (
               <li key={key} className="group/tech flex gap-3">
                 <TechLogo
@@ -76,27 +77,34 @@ export default function OffTheClockSection() {
         {/* The homelab this very site runs on */}
         <div className="ds-surface-card flex flex-col gap-4 rounded-2xl p-5">
           <p className="ds-eyebrow">{t("homelab.label")}</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {t.rich("homelab.description", {
-              dokploy: (chunks) => (
-                <ExternalLink href="https://dokploy.com">{chunks}</ExternalLink>
-              ),
-              traefik: (chunks) => (
-                <ExternalLink href="https://traefik.io">{chunks}</ExternalLink>
-              ),
-              tailscale: (chunks) => (
-                <ExternalLink href="https://tailscale.com">
-                  {chunks}
-                </ExternalLink>
-              ),
-            })}
-          </p>
-          <p className="text-sm leading-relaxed text-muted-foreground/80">
-            {t("homelab.runs")}
-          </p>
-          <p className="mt-auto border-t border-[var(--surface-border)] pt-4 text-sm leading-relaxed text-muted-foreground">
-            {t("homelab.meta")}
-          </p>
+          {/* Same as the other card: spread rather than pool the slack at the bottom */}
+          <div className="flex flex-1 flex-col justify-between gap-4">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {t.rich("homelab.description", {
+                dokploy: (chunks) => (
+                  <ExternalLink href="https://dokploy.com">
+                    {chunks}
+                  </ExternalLink>
+                ),
+                traefik: (chunks) => (
+                  <ExternalLink href="https://traefik.io">
+                    {chunks}
+                  </ExternalLink>
+                ),
+                tailscale: (chunks) => (
+                  <ExternalLink href="https://tailscale.com">
+                    {chunks}
+                  </ExternalLink>
+                ),
+              })}
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground/80">
+              {t("homelab.runs")}
+            </p>
+            <p className="border-t border-[var(--surface-border)] pt-4 text-sm leading-relaxed text-muted-foreground">
+              {t("homelab.meta")}
+            </p>
+          </div>
         </div>
       </div>
     </section>
