@@ -49,15 +49,15 @@ My personal portfolio built from scratch to showcase both frontend and full-stac
 ## Run Locally
 
 ```bash
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Visit `http://localhost:3000/en` or `http://localhost:3000/fr` to view the portfolio. If no route is specified, the website will automatically redirect you to the `/fr` version by default.
 
 Build the static export:
 ```bash
-npm run build
+bun --bun run build
 ```
 
 ## License
