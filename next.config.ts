@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import type { NextConfig } from "next";
 
@@ -28,6 +29,20 @@ function commitSha() {
   }
 }
 
+/** First line of the commit message, for the footer's hover card. Empty without git. */
+function commitSubject() {
+  try {
+    return execFileSync("git", ["log", "-1", "--pretty=%s"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    })
+      .trim()
+      .slice(0, 120);
+  } catch {
+    return "";
+  }
+}
+
 const nextConfig: NextConfig = {
   output: "export",
   env: {
@@ -35,6 +50,7 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_BUILD_DAY: String(Math.floor(Date.now() / 86_400_000)),
     NEXT_PUBLIC_COMMIT_SHA: commitSha(),
     NEXT_PUBLIC_BUILD_DATE: new Date().toISOString().slice(0, 10),
+    NEXT_PUBLIC_COMMIT_SUBJECT: commitSubject(),
   },
   images: {
     unoptimized: true,

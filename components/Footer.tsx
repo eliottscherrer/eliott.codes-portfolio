@@ -2,9 +2,10 @@
 
 import { Heart } from "lucide-react";
 import Link from "next/link";
-import { EMAIL, GITHUB_URL, LINKEDIN_URL, REPO_URL } from "@/lib/site";
+import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import { useTranslations } from "next-intl";
 
+import CommitStamp from "@/components/CommitStamp";
 import { Button } from "@/components/ui/button";
 import {
   AnimatedLinkedin,
@@ -23,10 +24,6 @@ export default function Footer() {
     { href: "#off-the-clock", label: t("offTheClock") },
     { href: "#contact", label: t("contact") },
   ];
-
-  // Both are baked in at build time, so they hydrate exactly as prerendered
-  const commitSha = process.env.NEXT_PUBLIC_COMMIT_SHA;
-  const buildDate = process.env.NEXT_PUBLIC_BUILD_DATE;
 
   return (
     <footer className="mt-24 sm:mt-28 pb-32">
@@ -116,20 +113,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Eliott Scherrer.{" "}
               {t("allRightsReserved")}
             </p>
-            {commitSha && (
-              <p className="font-mono text-xs">
-                <Link
-                  href={`${REPO_URL}/commit/${commitSha}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ds-focus-ring rounded-sm transition-colors hover:text-foreground"
-                >
-                  #{commitSha}
-                </Link>
-                <span aria-hidden="true"> · </span>
-                {buildDate}
-              </p>
-            )}
+            <CommitStamp />
             <p className="flex items-center gap-1.5">
               {t.rich("madeWithLoveIn", {
                 heart: () => (
