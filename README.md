@@ -53,6 +53,8 @@ npm install
 npm run dev
 ```
 
+[Nub](https://nubjs.com) works as a drop-in here and keeps the same `package-lock.json`, so `nub install` and `nub run dev` do the job too.
+
 Visit `http://localhost:3000/en` or `http://localhost:3000/fr` to view the portfolio. If no route is specified, the website will automatically redirect you to the `/fr` version by default.
 
 Build the static export:
