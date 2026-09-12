@@ -4,9 +4,9 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
 
-// Gap plus tile, the width the sentence opens up to make room for the logo
-const TILE = 18;
-const SLOT = TILE + 4;
+// Gap plus logo, the width the sentence opens up to make room for it
+const LOGO = 15;
+const SLOT = LOGO + 4;
 
 /**
  * External link whose service logo slides out of the word on hover, inline, pushing the
@@ -57,21 +57,21 @@ export default function ServiceLink({
             className="inline-flex items-center overflow-hidden align-middle"
           >
             <span
-              className="ds-surface-card ml-1 flex shrink-0 items-center justify-center rounded-[5px] bg-background p-[3px]"
-              style={{ width: TILE, height: TILE }}
+              className="ml-1 flex shrink-0 items-center justify-center"
+              style={{ width: LOGO, height: LOGO }}
             >
               <Image
                 src={`/logos/${logo}.svg`}
                 alt=""
-                width={12}
-                height={12}
+                width={LOGO}
+                height={LOGO}
                 className="hidden size-full object-contain dark:block"
               />
               <Image
                 src={`/logos/${logo}-light.svg`}
                 alt=""
-                width={12}
-                height={12}
+                width={LOGO}
+                height={LOGO}
                 className="block size-full object-contain dark:hidden"
               />
             </span>
