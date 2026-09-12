@@ -42,29 +42,33 @@ export default function CommitStamp() {
                 ? { duration: 0 }
                 : { type: "spring", stiffness: 380, damping: 24, mass: 0.6 }
             }
-            className="ds-surface-card pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 block w-64 origin-bottom -translate-x-1/2 rounded-xl bg-[var(--surface-elevated)] p-3 text-left shadow-xl backdrop-blur-xl"
+            // Same surface as the dropdowns elsewhere on the site
+            className="bg-surface-glass border-surface-border pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 block w-64 origin-bottom -translate-x-1/2 transform-gpu rounded-md border p-1 text-left shadow-lg backdrop-blur-xl"
           >
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-2 px-2 py-1.5">
               <Image
                 src="/avatar.png"
                 alt=""
-                width={28}
-                height={28}
-                className="size-7 shrink-0 rounded-full"
+                width={24}
+                height={24}
+                className="size-6 shrink-0 rounded-full"
               />
               <span className="block min-w-0">
-                <span className="block truncate text-xs font-medium text-foreground">
+                <span className="block truncate text-sm font-medium text-foreground">
                   Eliott Scherrer
                 </span>
-                <span className="block font-mono text-[11px] text-muted-foreground">
+                <span className="block font-mono text-xs text-muted-foreground">
                   {SHA} · {DATE}
                 </span>
               </span>
             </span>
             {SUBJECT && (
-              <span className="mt-2 block border-t border-[var(--surface-border)] pt-2 text-xs leading-relaxed text-muted-foreground">
-                {SUBJECT}
-              </span>
+              <>
+                <span className="bg-border -mx-1 my-1 block h-px" />
+                <span className="block px-2 py-1.5 text-sm leading-relaxed text-muted-foreground">
+                  {SUBJECT}
+                </span>
+              </>
             )}
           </motion.span>
         )}
