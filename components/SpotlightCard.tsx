@@ -56,7 +56,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-[var(--surface-border)] bg-[var(--surface-glass)] backdrop-blur-xl transform-gpu transition-[background-color,border-color] duration-500 hover:bg-[var(--surface-elevated)] hover:border-foreground/20",
+        "relative overflow-hidden rounded-[var(--spot-radius)] [--spot-radius:1rem] border border-[var(--surface-border)] bg-[var(--surface-glass)] backdrop-blur-xl transform-gpu transition-[background-color,border-color] duration-500 hover:bg-[var(--surface-elevated)] hover:border-foreground/20",
         className,
       )}
     >
@@ -67,9 +67,11 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
           background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
         }}
       />
-      {/* The same light picked up by the border: a one pixel ring masked down to its edge */}
+      {/* The same light picked up by the border: a one pixel ring masked down to its edge.
+          The card clips to its padding box, so the ring sits just inside the border and
+          takes the radius minus that one pixel, or the two curves drift apart. */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-[inherit] p-px opacity-0 transition-opacity duration-500 ease-in-out"
+        className="pointer-events-none absolute inset-0 rounded-[calc(var(--spot-radius)-1px)] p-px opacity-0 transition-opacity duration-500 ease-in-out"
         style={{
           opacity,
           background: `radial-gradient(180px circle at ${position.x}px ${position.y}px, var(--spotlight-border), transparent 70%)`,
