@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, type ReactNode } from "react";
 
 // Gap plus logo, the width the sentence opens up to make room for it
-const LOGO = 15;
+const LOGO = 13;
 const SLOT = LOGO + 4;
 
 /**
@@ -57,7 +57,7 @@ export default function ServiceLink({
             className="inline-flex items-center overflow-hidden align-middle"
           >
             <span
-              className="ml-1 flex shrink-0 items-center justify-center"
+              className="ml-1 flex shrink-0 -translate-y-px items-center justify-center"
               style={{ width: LOGO, height: LOGO }}
             >
               <Image

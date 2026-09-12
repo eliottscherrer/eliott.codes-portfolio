@@ -1,6 +1,6 @@
 "use client";
 
-import { GitCommitVertical } from "lucide-react";
+import { GitPullRequestArrow } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,7 +80,10 @@ export default function CommitStamp() {
         onBlur={() => setOpen(false)}
         className="ds-focus-ring inline-flex items-center gap-1 rounded-sm transition-colors hover:text-foreground"
       >
-        <GitCommitVertical className="size-3.5 shrink-0" aria-hidden="true" />
+        <GitPullRequestArrow
+          className="size-3 shrink-0 -translate-y-px"
+          aria-hidden="true"
+        />
         <span className="font-mono text-xs">{SHA}</span>
       </Link>
     </span>
