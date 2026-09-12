@@ -61,7 +61,7 @@ export default function OffTheClockSection() {
 
         {/* The homelab this very site runs on */}
         <SpotlightCard
-          className="group/homelab space-y-2.5 p-5"
+          className="group/homelab flex flex-col gap-2.5 p-5"
           spotlightColor={SPOTLIGHT}
         >
           <div className="flex items-center gap-2">
