@@ -54,10 +54,10 @@ export default function ServiceLink({
                 ? { duration: 0 }
                 : { type: "spring", stiffness: 460, damping: 34, mass: 0.5 }
             }
-            className="inline-flex items-center overflow-hidden align-middle"
+            className="inline-flex -translate-y-px items-center overflow-hidden align-middle"
           >
             <span
-              className="ml-1 flex shrink-0 -translate-y-px items-center justify-center"
+              className="ml-1 flex shrink-0 items-center justify-center"
               style={{ width: LOGO, height: LOGO }}
             >
               <Image
