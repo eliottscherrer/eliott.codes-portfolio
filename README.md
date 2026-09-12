@@ -23,7 +23,7 @@ My personal portfolio built from scratch to showcase both frontend and full-stac
 ### **CI/CD & Hosting**
 
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2671E5?style=for-the-badge&logo=githubactions&logoColor=white)
-![Dokploy](https://img.shields.io/badge/Dokploy-0B0B0C?style=for-the-badge&logoColor=white)
+![Dokploy](.github/badges/dokploy.svg)
 ![Infomaniak](https://img.shields.io/badge/infomaniak-%230098FF?style=for-the-badge&logo=infomaniak&logoColor=white)
 
 ### Others
