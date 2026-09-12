@@ -17,8 +17,6 @@ const LEARNING = [
   { key: "cpp", icon: <SiCplusplus />, label: "C++", color: "#00599C" },
 ] as const;
 
-const CARD_CLASS =
-  "ds-surface-card rounded-2xl bg-[var(--surface-glass)] p-5 transition-colors duration-500 hover:border-foreground/20";
 const SPOTLIGHT = "rgba(14, 100, 180, 0.15)" as const;
 
 export default function OffTheClockSection() {
@@ -42,7 +40,7 @@ export default function OffTheClockSection() {
           {LEARNING.map(({ key, icon, label, color }) => (
             <SpotlightCard
               key={key}
-              className={`${CARD_CLASS} group/tech flex h-full flex-col gap-2`}
+              className="group/tech flex h-full flex-col gap-2 p-5"
               spotlightColor={SPOTLIGHT}
             >
               <div className="flex items-center gap-2">
@@ -63,7 +61,7 @@ export default function OffTheClockSection() {
 
         {/* The homelab this very site runs on */}
         <SpotlightCard
-          className={`${CARD_CLASS} group/homelab space-y-2.5`}
+          className="group/homelab space-y-2.5 p-5"
           spotlightColor={SPOTLIGHT}
         >
           <div className="flex items-center gap-2">

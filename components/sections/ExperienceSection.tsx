@@ -229,7 +229,7 @@ export default function ExperienceSection() {
 
                   <article className="group relative grow pt-0.5 pb-8">
                     <SpotlightCard
-                      className="flex flex-col w-full h-full p-0 bg-[var(--surface-glass)] hover:bg-[var(--surface-elevated)] transition-[background-color,border-color,box-shadow] duration-500 border border-[var(--surface-border)] hover:border-foreground/20 backdrop-blur-xl overflow-hidden rounded-2xl"
+                      className="flex flex-col w-full h-full p-0"
                       spotlightColor="rgba(14, 100, 180, 0.15)"
                     >
                       <div className="relative p-4 sm:p-5 space-y-3.5">
