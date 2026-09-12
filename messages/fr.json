@@ -53,14 +53,14 @@
     "subtitle": "Ce que j'apprends en ce moment, et ce que je fais tourner à côté.",
     "learning": {
       "go": "Je commence tout juste, plutôt pour du backend et de l'outillage.",
-      "rust": "Débutant, je me forme sur des projets bas niveau autour de la mémoire, de la virtualisation et du matériel.",
-      "cpp": "Le langage où je suis le plus à l'aise des trois, sans être expert, pour du natif sur desktop."
+      "rust": "Débutant, je m'en sers sur des projets bas niveau : mods de jeux, manipulation de mémoire et dialogue avec des périphériques USB.",
+      "cpp": "À peu près les mêmes projets qu'en Rust, et le langage où je suis le plus à l'aise des trois."
     },
     "homelab": {
       "label": "Homelab",
-      "description": "Un VPS qui fait tourner une vingtaine de services auto-hébergés, déployés avec <dokploy>Dokploy</dokploy>, routés par <traefik>Traefik</traefik> et gardés privés via <tailscale>Tailscale</tailscale>.",
-      "runs": "Des apps web, une forge Git, du média, des mots de passe, du monitoring et quelques serveurs de jeu.",
-      "meta": "Par exemple, ce site tourne dessus, et chaque pull request a sa propre URL de prévisualisation."
+      "description": "Un VPS qui fait tourner une vingtaine de services auto-hébergés, routés par <traefik>Traefik</traefik> et gardés privés via <tailscale>Tailscale</tailscale>.",
+      "runs": "Des apps web, un Git auto-hébergé qui mirrore mes repos, du média, des mots de passe, du monitoring et quelques serveurs de jeu.",
+      "meta": "<dokploy>Dokploy</dokploy> automatise les déploiements dessus, dont celui de ce site : il se redéploie à chaque merge, et chaque pull request obtient sa propre URL de prévisualisation."
     }
   },
   "Timeline": {

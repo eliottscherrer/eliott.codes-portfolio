@@ -1,10 +1,11 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { Server } from "lucide-react";
 import { SiCplusplus, SiGo, SiRust } from "react-icons/si";
 import { useTranslations } from "next-intl";
 
 import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
+import ServiceLink from "@/components/ServiceLink";
 import SpotlightCard from "@/components/SpotlightCard";
 import TechLogo from "@/components/TechLogo";
 
@@ -16,24 +17,9 @@ const LEARNING = [
   { key: "cpp", icon: <SiCplusplus />, label: "C++", color: "#00599C" },
 ] as const;
 
-function ExternalLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="ds-inline-link ds-focus-ring text-foreground"
-    >
-      {children}
-    </a>
-  );
-}
+const CARD_CLASS =
+  "ds-surface-card rounded-2xl bg-[var(--surface-glass)] p-5 transition-colors duration-500 hover:border-foreground/20";
+const SPOTLIGHT = "rgba(14, 100, 180, 0.15)" as const;
 
 export default function OffTheClockSection() {
   const t = useTranslations("OffTheClock");
@@ -56,8 +42,8 @@ export default function OffTheClockSection() {
           {LEARNING.map(({ key, icon, label, color }) => (
             <SpotlightCard
               key={key}
-              className="ds-surface-card group/tech flex h-full flex-col gap-2 rounded-2xl bg-[var(--surface-glass)] p-5"
-              spotlightColor="rgba(14, 100, 180, 0.15)"
+              className={`${CARD_CLASS} group/tech flex h-full flex-col gap-2`}
+              spotlightColor={SPOTLIGHT}
             >
               <div className="flex items-center gap-2">
                 <TechLogo
@@ -76,30 +62,45 @@ export default function OffTheClockSection() {
         </div>
 
         {/* The homelab this very site runs on */}
-        <div className="ds-surface-card space-y-2.5 rounded-2xl bg-[var(--surface-glass)] p-5">
-          <p className="ds-eyebrow">{t("homelab.label")}</p>
+        <SpotlightCard
+          // overflow-visible so a link's logo can pop out past the card's top edge
+          className={`${CARD_CLASS} group/homelab space-y-2.5 overflow-visible`}
+          spotlightColor={SPOTLIGHT}
+        >
+          <div className="flex items-center gap-2">
+            <Server
+              className="size-5 text-muted-foreground transition-colors duration-300 group-hover/homelab:text-foreground"
+              aria-hidden="true"
+            />
+            <p className="text-sm font-medium">{t("homelab.label")}</p>
+          </div>
           <p className="text-sm leading-relaxed text-muted-foreground">
             {t.rich("homelab.description", {
-              dokploy: (chunks) => (
-                <ExternalLink href="https://dokploy.com">{chunks}</ExternalLink>
-              ),
               traefik: (chunks) => (
-                <ExternalLink href="https://traefik.io">{chunks}</ExternalLink>
+                <ServiceLink href="https://traefik.io" logo="traefik">
+                  {chunks}
+                </ServiceLink>
               ),
               tailscale: (chunks) => (
-                <ExternalLink href="https://tailscale.com">
+                <ServiceLink href="https://tailscale.com" logo="tailscale">
                   {chunks}
-                </ExternalLink>
+                </ServiceLink>
               ),
             })}
           </p>
           <p className="text-sm leading-relaxed text-muted-foreground">
             {t("homelab.runs")}
           </p>
-          <p className="text-sm leading-relaxed text-foreground/90">
-            {t("homelab.meta")}
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {t.rich("homelab.meta", {
+              dokploy: (chunks) => (
+                <ServiceLink href="https://dokploy.com" logo="dokploy">
+                  {chunks}
+                </ServiceLink>
+              ),
+            })}
           </p>
-        </div>
+        </SpotlightCard>
       </div>
     </section>
   );

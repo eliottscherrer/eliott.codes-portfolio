@@ -53,14 +53,14 @@
     "subtitle": "What I'm learning right now, and what I run on the side.",
     "learning": {
       "go": "Just getting started, mostly for backend and tooling.",
-      "rust": "Beginner, learning it on low level projects around memory, virtualisation and hardware.",
-      "cpp": "The one I'm most comfortable with of the three, without being an expert, for native desktop work."
+      "rust": "Beginner, using it on low level projects: game mods, memory manipulation and talking to USB devices.",
+      "cpp": "Much the same projects as Rust, and the language I'm most comfortable with of the three."
     },
     "homelab": {
       "label": "Homelab",
-      "description": "One VPS running around twenty self-hosted services, deployed with <dokploy>Dokploy</dokploy>, routed by <traefik>Traefik</traefik> and kept private over <tailscale>Tailscale</tailscale>.",
-      "runs": "Web apps, a Git forge, media, passwords, monitoring and a few game servers.",
-      "meta": "For example, this site runs on it, and every pull request gets its own preview URL."
+      "description": "One VPS running around twenty self-hosted services, routed by <traefik>Traefik</traefik> and kept private over <tailscale>Tailscale</tailscale>.",
+      "runs": "Web apps, a self-hosted Git that mirrors my repos, media, passwords, monitoring and a few game servers.",
+      "meta": "<dokploy>Dokploy</dokploy> automates the deployments on it, including this site: it redeploys itself on every merge, and every pull request gets its own preview URL."
     }
   },
   "Timeline": {
