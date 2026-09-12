@@ -2,7 +2,7 @@
 
 import { Heart } from "lucide-react";
 import Link from "next/link";
-import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
+import { DOMAIN, EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import { useTranslations } from "next-intl";
 
 import CommitStamp from "@/components/CommitStamp";
@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
             {/* Brand */}
             <div className="space-y-1">
-              <p className="font-semibold">eliott.codes</p>
+              <p className="font-semibold">{DOMAIN}</p>
               <p className="text-sm text-muted-foreground">{t("role")}</p>
             </div>
 

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import SmoothScroll from "@/components/SmoothScroll";
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/site";
+import { DOMAIN, SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -38,7 +38,7 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
-      siteName: "eliott.codes",
+      siteName: DOMAIN,
       url,
       title,
       description,

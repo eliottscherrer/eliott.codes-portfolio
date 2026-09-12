@@ -13,6 +13,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { motion, useSpring } from "motion/react";
 
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { DOMAIN } from "@/lib/site";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { Button } from "@/components/ui/button";
 
@@ -193,7 +194,7 @@ export default function HomeNavigation() {
               href="/"
               className="text-sm md:text-base font-medium ml-3 tracking-tight ds-focus-ring rounded-sm"
             >
-              eliott.codes
+              {DOMAIN}
             </Link>
           </div>
           <div className="flex gap-1.5 sm:gap-2 md:gap-2.5 items-center">
