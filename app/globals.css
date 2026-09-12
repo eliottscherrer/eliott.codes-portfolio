@@ -89,6 +89,8 @@
   --surface-elevated: oklch(0.97 0 0 / 84%);
   --surface-glass: oklch(1 0 0 / 62%);
   --surface-border: oklch(0.84 0.01 250 / 38%);
+  /* Colour the spotlight cards trace along their border under the cursor */
+  --spotlight-border: rgb(0 0 0 / 28%);
 }
 
 .dark {
@@ -129,6 +131,7 @@
   --surface-elevated: oklch(0.25 0.01 250 / 82%);
   --surface-glass: oklch(0.3 0.01 250 / 48%);
   --surface-border: oklch(0.78 0.01 250 / 24%);
+  --spotlight-border: rgb(255 255 255 / 45%);
 }
 
 :root {
