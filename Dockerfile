@@ -1,6 +1,9 @@
 FROM oven/bun:1.4.2-alpine AS builder
 WORKDIR /app
 
+# The footer stamps the commit it was built from, which is read with git
+RUN apk add --no-cache git
+
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
