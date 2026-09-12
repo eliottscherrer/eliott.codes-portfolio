@@ -5,6 +5,7 @@ import Link from "next/link";
 import { EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import { useTranslations } from "next-intl";
 
+import CommitStamp from "@/components/CommitStamp";
 import { Button } from "@/components/ui/button";
 import {
   AnimatedLinkedin,
@@ -20,6 +21,7 @@ export default function Footer() {
   const links = [
     { href: "#experience", label: t("experience") },
     { href: "#projects", label: t("projects") },
+    { href: "#off-the-clock", label: t("offTheClock") },
     { href: "#contact", label: t("contact") },
   ];
 
@@ -43,7 +45,7 @@ export default function Footer() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="ds-focus-ring relative w-fit rounded-sm text-sm text-muted-foreground transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:text-foreground hover:after:scale-x-100 focus-visible:after:scale-x-100"
+                      className="ds-inline-link ds-focus-ring w-fit text-sm text-muted-foreground"
                     >
                       {link.label}
                     </Link>
@@ -111,6 +113,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Eliott Scherrer.{" "}
               {t("allRightsReserved")}
             </p>
+            <CommitStamp />
             <p className="flex items-center gap-1.5">
               {t.rich("madeWithLoveIn", {
                 heart: () => (

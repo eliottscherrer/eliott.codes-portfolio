@@ -243,8 +243,9 @@ body,
     @apply text-base sm:text-lg leading-relaxed text-muted-foreground;
   }
 
+  /* Link that draws its underline on hover instead of carrying one all the time */
   .ds-inline-link {
-    @apply underline decoration-border underline-offset-4 transition-colors hover:text-foreground;
+    @apply relative rounded-sm transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:text-foreground hover:after:scale-x-100 focus-visible:after:scale-x-100;
   }
 
   .ds-surface-card {

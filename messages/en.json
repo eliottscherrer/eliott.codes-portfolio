@@ -48,6 +48,21 @@
     },
     "subtitle": "A selection of things I've built."
   },
+  "OffTheClock": {
+    "title": "Off the clock",
+    "subtitle": "What I'm learning right now, and what I run on the side.",
+    "learning": {
+      "go": "Just getting started, mostly for backend and tooling.",
+      "rust": "Beginner, using it on low level projects: game mods, memory manipulation and talking to USB devices.",
+      "cpp": "Much the same projects as Rust, and the language I'm most comfortable with of the three."
+    },
+    "homelab": {
+      "label": "Homelab",
+      "description": "One VPS running around twenty self-hosted services, routed by <traefik>Traefik</traefik> and kept private over <tailscale>Tailscale</tailscale>.",
+      "runs": "Web apps, a self-hosted Git that mirrors my repos, media, passwords, monitoring and a few game servers.",
+      "meta": "<dokploy>Dokploy</dokploy> automates the deployments on it, including this site: it redeploys itself on every merge, and every pull request gets its own preview URL."
+    }
+  },
   "Timeline": {
     "title": "Experience",
     "current": "Current",
@@ -98,6 +113,7 @@
     "quickLinks": "Navigate",
     "experience": "Experience",
     "projects": "Projects",
+    "offTheClock": "Off the clock",
     "contact": "Contact",
     "connect": "Connect",
     "allRightsReserved": "All rights reserved.",

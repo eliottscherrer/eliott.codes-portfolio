@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -14,15 +14,15 @@ interface SpotlightCardProps extends React.PropsWithChildren {
 
 const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
-  className = '',
-  spotlightColor = 'rgba(255, 255, 255, 0.25)'
+  className = "",
+  spotlightColor = "rgba(255, 255, 255, 0.25)",
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState<number>(0);
 
-  const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = e => {
+  const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (!divRef.current || isFocused) return;
 
     const rect = divRef.current.getBoundingClientRect();
@@ -56,15 +56,15 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative rounded-3xl border border-border bg-card overflow-hidden p-8",
-        className
+        "relative overflow-hidden rounded-2xl border border-[var(--surface-border)] bg-[var(--surface-glass)] backdrop-blur-xl transform-gpu transition-[background-color,border-color] duration-500 hover:bg-[var(--surface-elevated)] hover:border-foreground/20",
+        className,
       )}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
         style={{
           opacity,
-          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
         }}
       />
       {children}
