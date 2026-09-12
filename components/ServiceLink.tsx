@@ -4,9 +4,14 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { useState, type ReactNode } from "react";
 
+// Gap plus tile, the width the sentence opens up to make room for the logo
+const TILE = 18;
+const SLOT = TILE + 4;
+
 /**
- * External link that pops the service's logo above itself on hover, as a small rounded
- * tile. The logo comes in a pair, `<name>.svg` for dark and `<name>-light.svg` for light.
+ * External link whose service logo slides out of the word on hover, inline, pushing the
+ * rest of the sentence along. The logo comes in a pair, `<name>.svg` for dark and
+ * `<name>-light.svg` for light.
  */
 export default function ServiceLink({
   href,
@@ -22,55 +27,57 @@ export default function ServiceLink({
   const reduceMotion = useReducedMotion();
 
   return (
-    <span className="relative inline-flex">
-      <AnimatePresence>
-        {open && (
-          <motion.span
-            aria-hidden="true"
-            initial={{ opacity: 0, y: 6, scale: 0.7 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{
-              opacity: 0,
-              y: 4,
-              scale: 0.8,
-              transition: { duration: 0.12 },
-            }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { type: "spring", stiffness: 420, damping: 22, mass: 0.6 }
-            }
-            className="ds-surface-card pointer-events-none absolute bottom-full left-1/2 z-20 mb-1.5 flex size-9 -translate-x-1/2 items-center justify-center rounded-[10px] bg-background p-2 shadow-lg"
-          >
-            <Image
-              src={`/logos/${logo}.svg`}
-              alt=""
-              width={20}
-              height={20}
-              className="hidden size-full object-contain dark:block"
-            />
-            <Image
-              src={`/logos/${logo}-light.svg`}
-              alt=""
-              width={20}
-              height={20}
-              className="block size-full object-contain dark:hidden"
-            />
-          </motion.span>
-        )}
-      </AnimatePresence>
+    <span
+      className="inline"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         className="ds-inline-link ds-focus-ring text-foreground"
       >
         {children}
       </a>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.span
+            aria-hidden="true"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: SLOT, opacity: 1 }}
+            exit={{ width: 0, opacity: 0, transition: { duration: 0.14 } }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 460, damping: 34, mass: 0.5 }
+            }
+            className="inline-flex items-center overflow-hidden align-middle"
+          >
+            <span
+              className="ds-surface-card ml-1 flex shrink-0 items-center justify-center rounded-[5px] bg-background p-[3px]"
+              style={{ width: TILE, height: TILE }}
+            >
+              <Image
+                src={`/logos/${logo}.svg`}
+                alt=""
+                width={12}
+                height={12}
+                className="hidden size-full object-contain dark:block"
+              />
+              <Image
+                src={`/logos/${logo}-light.svg`}
+                alt=""
+                width={12}
+                height={12}
+                className="block size-full object-contain dark:hidden"
+              />
+            </span>
+          </motion.span>
+        )}
+      </AnimatePresence>
     </span>
   );
 }

@@ -63,8 +63,7 @@ export default function OffTheClockSection() {
 
         {/* The homelab this very site runs on */}
         <SpotlightCard
-          // overflow-visible so a link's logo can pop out past the card's top edge
-          className={`${CARD_CLASS} group/homelab space-y-2.5 overflow-visible`}
+          className={`${CARD_CLASS} group/homelab space-y-2.5`}
           spotlightColor={SPOTLIGHT}
         >
           <div className="flex items-center gap-2">
