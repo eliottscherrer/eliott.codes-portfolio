@@ -5,6 +5,7 @@ import { SiCplusplus, SiGo, SiRust } from "react-icons/si";
 import { useTranslations } from "next-intl";
 
 import SectionAnchorHeading from "@/components/ui/section-anchor-heading";
+import SpotlightCard from "@/components/SpotlightCard";
 import TechLogo from "@/components/TechLogo";
 
 // Brand colors from Simple Icons (https://simpleicons.org/), Rust in its usual orange
@@ -49,62 +50,55 @@ export default function OffTheClockSection() {
         {t("title")}
       </SectionAnchorHeading>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        {/* Languages I'm picking up: an honest line each, no skill bars */}
-        <div className="ds-surface-card flex flex-col gap-4 rounded-2xl p-5">
-          <p className="ds-eyebrow">{t("learning.label")}</p>
-          {/* Spread the rows so the card fills whatever height its neighbour sets */}
-          <ul className="flex flex-1 flex-col justify-between gap-4">
-            {LEARNING.map(({ key, icon, label, color }) => (
-              <li key={key} className="group/tech flex gap-3">
+      <div className="space-y-4">
+        {/* One small card per language, so nothing has to stretch to match a neighbour */}
+        <div className="grid gap-4 sm:grid-cols-3">
+          {LEARNING.map(({ key, icon, label, color }) => (
+            <SpotlightCard
+              key={key}
+              className="ds-surface-card group/tech flex h-full flex-col gap-2 rounded-2xl bg-[var(--surface-glass)] p-5"
+              spotlightColor="rgba(14, 100, 180, 0.15)"
+            >
+              <div className="flex items-center gap-2">
                 <TechLogo
                   icon={icon}
                   brandColor={color}
                   size="lg"
-                  className="mt-0.5 shrink-0 self-start text-muted-foreground"
+                  className="text-muted-foreground"
                 />
-                <div className="space-y-0.5">
-                  <p className="text-sm font-medium leading-none">{label}</p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {t(`learning.${key}`)}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+                <p className="text-sm font-medium">{label}</p>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {t(`learning.${key}`)}
+              </p>
+            </SpotlightCard>
+          ))}
         </div>
 
         {/* The homelab this very site runs on */}
-        <div className="ds-surface-card flex flex-col gap-4 rounded-2xl p-5">
+        <div className="ds-surface-card space-y-2.5 rounded-2xl bg-[var(--surface-glass)] p-5">
           <p className="ds-eyebrow">{t("homelab.label")}</p>
-          {/* Same as the other card: spread rather than pool the slack at the bottom */}
-          <div className="flex flex-1 flex-col justify-between gap-4">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {t.rich("homelab.description", {
-                dokploy: (chunks) => (
-                  <ExternalLink href="https://dokploy.com">
-                    {chunks}
-                  </ExternalLink>
-                ),
-                traefik: (chunks) => (
-                  <ExternalLink href="https://traefik.io">
-                    {chunks}
-                  </ExternalLink>
-                ),
-                tailscale: (chunks) => (
-                  <ExternalLink href="https://tailscale.com">
-                    {chunks}
-                  </ExternalLink>
-                ),
-              })}
-            </p>
-            <p className="text-sm leading-relaxed text-muted-foreground/80">
-              {t("homelab.runs")}
-            </p>
-            <p className="border-t border-[var(--surface-border)] pt-4 text-sm leading-relaxed text-muted-foreground">
-              {t("homelab.meta")}
-            </p>
-          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {t.rich("homelab.description", {
+              dokploy: (chunks) => (
+                <ExternalLink href="https://dokploy.com">{chunks}</ExternalLink>
+              ),
+              traefik: (chunks) => (
+                <ExternalLink href="https://traefik.io">{chunks}</ExternalLink>
+              ),
+              tailscale: (chunks) => (
+                <ExternalLink href="https://tailscale.com">
+                  {chunks}
+                </ExternalLink>
+              ),
+            })}
+          </p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {t("homelab.runs")}
+          </p>
+          <p className="text-sm leading-relaxed text-foreground/90">
+            {t("homelab.meta")}
+          </p>
         </div>
       </div>
     </section>

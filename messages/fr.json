@@ -50,17 +50,16 @@
   },
   "OffTheClock": {
     "title": "Hors du travail",
-    "subtitle": "Ce que j'apprends en ce moment, et la machine sur laquelle je casse des choses.",
+    "subtitle": "Ce que j'apprends en ce moment, et ce que je fais tourner à côté.",
     "learning": {
-      "label": "J'apprends",
-      "go": "Je commence tout juste, plutôt backend et outillage.",
-      "rust": "Débutant, sur un projet plus gros que moi — lecture mémoire à travers une frontière QEMU/KVM avec memflow, une app desktop Tauri et un périphérique USB à piloter.",
-      "cpp": "Celui où je suis le plus à l'aise, sans être expert — internals Win32, hooks et overlays, scan mémoire, le tout buildé avec CMake."
+      "go": "Je commence tout juste, plutôt pour du backend et de l'outillage.",
+      "rust": "Débutant, je me forme sur des projets bas niveau autour de la mémoire, de la virtualisation et du matériel.",
+      "cpp": "Le langage où je suis le plus à l'aise des trois, sans être expert, pour du natif sur desktop."
     },
     "homelab": {
       "label": "Homelab",
       "description": "Un VPS qui fait tourner une vingtaine de services auto-hébergés, déployés avec <dokploy>Dokploy</dokploy>, routés par <traefik>Traefik</traefik> et gardés privés via <tailscale>Tailscale</tailscale>.",
-      "runs": "Apps web · forge Git · média · mots de passe · monitoring · serveurs de jeu",
+      "runs": "Des apps web, une forge Git, du média, des mots de passe, du monitoring et quelques serveurs de jeu.",
       "meta": "Par exemple, ce site tourne dessus, et chaque pull request a sa propre URL de prévisualisation."
     }
   },

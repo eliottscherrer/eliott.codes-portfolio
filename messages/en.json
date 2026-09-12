@@ -50,17 +50,16 @@
   },
   "OffTheClock": {
     "title": "Off the clock",
-    "subtitle": "What I'm learning right now, and the machine I break things on.",
+    "subtitle": "What I'm learning right now, and what I run on the side.",
     "learning": {
-      "label": "Learning",
-      "go": "Just getting started, aiming at backend and tooling.",
-      "rust": "Beginner, on a project bigger than me — memory reading across a QEMU/KVM boundary with memflow, a Tauri desktop app and a USB input device to drive.",
-      "cpp": "The one I am most at ease with, without being an expert — Win32 internals, hooks and overlays, memory scanning, all built with CMake."
+      "go": "Just getting started, mostly for backend and tooling.",
+      "rust": "Beginner, learning it on low level projects around memory, virtualisation and hardware.",
+      "cpp": "The one I'm most comfortable with of the three, without being an expert, for native desktop work."
     },
     "homelab": {
       "label": "Homelab",
       "description": "One VPS running around twenty self-hosted services, deployed with <dokploy>Dokploy</dokploy>, routed by <traefik>Traefik</traefik> and kept private over <tailscale>Tailscale</tailscale>.",
-      "runs": "Web apps · a Git forge · media · password vault · monitoring · a few game servers",
+      "runs": "Web apps, a Git forge, media, passwords, monitoring and a few game servers.",
       "meta": "For example, this site runs on it, and every pull request gets its own preview URL."
     }
   },
