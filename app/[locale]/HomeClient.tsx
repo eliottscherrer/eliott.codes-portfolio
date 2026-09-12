@@ -10,6 +10,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import TechnologiesSection from "@/components/sections/TechnologiesSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import OffTheClockSection from "@/components/sections/OffTheClockSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function HomeClient() {
@@ -67,6 +68,7 @@ export default function HomeClient() {
         <div className="mt-24 sm:mt-28 space-y-24 sm:space-y-28">
           <ExperienceSection />
           <ProjectsSection />
+          <OffTheClockSection />
           <ContactSection />
         </div>
 
