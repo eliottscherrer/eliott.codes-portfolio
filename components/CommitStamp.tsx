@@ -48,9 +48,9 @@ export default function CommitStamp() {
             <Image
               src="/avatar.png"
               alt=""
-              width={24}
-              height={24}
-              className="size-6 shrink-0 rounded-full"
+              width={36}
+              height={36}
+              className="size-9 shrink-0 rounded-full"
             />
             <span className="block min-w-0">
               <span className="block truncate text-sm font-medium text-foreground">
