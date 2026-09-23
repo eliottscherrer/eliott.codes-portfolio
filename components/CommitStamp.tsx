@@ -93,13 +93,13 @@ export default function CommitStamp() {
           dismissed.current = true;
           close();
         }}
-        className="ds-focus-ring inline-flex items-center gap-1 rounded-sm transition-colors hover:text-foreground"
+        className="ds-focus-ring inline-flex items-center gap-1 rounded-sm text-sm transition-colors hover:text-foreground"
       >
         <GitPullRequestArrow
-          className="size-3 shrink-0 -translate-y-px"
+          className="size-3.5 shrink-0 -translate-y-px"
           aria-hidden="true"
         />
-        <span className="font-mono text-xs">{SHA}</span>
+        <span className="font-mono">{SHA}</span>
       </Link>
     </span>
   );

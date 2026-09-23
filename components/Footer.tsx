@@ -26,19 +26,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-24 sm:mt-28 pb-24">
+    <footer className="mt-24 pb-24 sm:mt-28 sm:pb-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
         <div className="border-t border-border pt-8 sm:pt-10">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-8 sm:flex sm:items-start sm:justify-between">
             {/* Brand */}
             <div className="space-y-1">
               <p className="font-semibold">{DOMAIN}</p>
               <p className="text-sm text-muted-foreground">{t("role")}</p>
             </div>
 
-            <div className="flex gap-12 sm:gap-16">
+            <div className="contents sm:flex sm:gap-16">
               {/* Links */}
-              <div className="space-y-3">
+              <div className="col-start-1 row-start-2 space-y-3">
                 <p className="text-sm font-semibold">{t("quickLinks")}</p>
                 <nav className="flex flex-col gap-2">
                   {links.map((link) => (
@@ -54,9 +54,9 @@ export default function Footer() {
               </div>
 
               {/* Social */}
-              <div className="space-y-3">
+              <div className="col-start-2 row-span-2 row-start-1 justify-self-end space-y-3 text-right sm:text-left">
                 <p className="text-sm font-semibold">{t("connect")}</p>
-                <div className="flex gap-2">
+                <div className="flex flex-col items-end gap-2 sm:flex-row">
                   <Button
                     variant="glass"
                     size="icon"
@@ -108,7 +108,7 @@ export default function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-8 flex flex-col gap-2 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-8 flex flex-col items-center gap-2 border-t border-border pt-6 text-center text-sm text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
             <p>
               © {new Date().getFullYear()} Eliott Scherrer.{" "}
               {t("allRightsReserved")}
